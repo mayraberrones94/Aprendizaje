@@ -1,5 +1,5 @@
 # Automated learning
-Repository for my automated learning's course. The course can be found [here](https://github.com/satuelisa/StatisticalLearning) 
+Repository for my automated learning's course. The course description and activities can be found [here](https://github.com/satuelisa/StatisticalLearning) 
 
 ---
 
