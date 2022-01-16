@@ -33,5 +33,34 @@ And finally, we have discussed more recently that a separation of the data set b
 
 **Ex. 2.8:** Compare the classification performance of linear regression and k-nearest neighbor classification on the ZIP-code data. In particular, consider only the 2's and 3's and k = 1, 3, 5, 7 and 15. show both training and test error for each choice. The zipcode data are available from the book [website](https://hastie.su.domains/ElemStatLearn/datasets/).
 
+For this example, we use the ZIP-code dataset for [training](https://github.com/mayraberrones94/Aprendizaje/blob/main/Datasets/zip.train) and [testing](https://github.com/mayraberrones94/Aprendizaje/blob/main/Datasets/zip.test). We begin by separating the data, focusing on elements 2 and 3, as indicated in the instructions.
+
+```python
+import pandas as pd
+import numpy as np
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+def filtered_data(path):
+    data_all = np.loadtxt(path)
+    mask = np.in1d(data_all[:, 0], (2, 3))
+    data_x = data_all[mask, 1: ]
+    data_y = data_all[mask, 0]
+    return data_x, data_y
+
+train_x, train_y = filtered_data('/content/drive/MyDrive/Datasets/zip.train')
+test_x, test_y = filtered_data('/content/drive/MyDrive/Datasets/zip.test')
+```
+
+Then we determine the k points we are going to be using:
+
+```python
+k_points = [1, 3, 5, 7, 15]      
+```
+
+### Linear model:
+
+
 
 
