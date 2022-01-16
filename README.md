@@ -61,6 +61,41 @@ k_points = [1, 3, 5, 7, 15]
 
 ### Linear model:
 
+First we import all the libraries:
+
+```python
+from pandas import read_csv
+
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import top_k_accuracy_score
+from sklearn.metrics import median_absolute_error
+from sklearn.metrics import r2_score    
+```
+
+Then we call the LinearRegresion function to train our model:
+
+```python
+#https://www.analyticsvidhya.com/blog/2018/08/k-nearest-neighbor-introduction-regression-python/
+
+rmse_val = [] #to store rmse values for different k
+rmse_valtrain = []
+for K in k_points:
+    model = LinearRegression()
+
+    model.fit(train_x, train_y)  #fit the model
+    pred_train=model.predict(train_x) #make prediction on train set
+    pred=model.predict(test_x) #make prediction on test set
+    error_train = sqrt(mean_squared_error(train_y,pred_train)) #calculate rmse
+    error = sqrt(mean_squared_error(test_y,pred)) #calculate rmse
+    rmse_val.append(error) #store rmse values
+    rmse_valtrain.append(error_train)
+    print('RMSE value for train set k = ', K, 'is:', error_train)
+    print('RMSE value fortest set k= ' , K , 'is:', error)
+    print('\n')     
+```
 
 
 
