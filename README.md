@@ -189,3 +189,4 @@ for imagePath in imagePaths:
       print("Not found {}".format(img))
 ```
 
+We repeat this procedure with the file for the images with anomalies. Now that they are smaller, is faster to turn them into csv files (and the files do not take forever to load afterwards)
