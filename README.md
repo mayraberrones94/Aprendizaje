@@ -96,6 +96,8 @@ for K in k_points:
     print('RMSE value fortest set k= ' , K , 'is:', error)
     print('\n')     
 ```
+The value of K does not really interviene at this point, but we have them in the [Notebook]() for this exercise, algonside the corresponding plot.
 
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Linearplot_1.png)
 
 
