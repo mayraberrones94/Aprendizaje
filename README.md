@@ -98,6 +98,61 @@ for K in k_points:
 ```
 The value of K does not really interviene at this point, but we have them in the [Notebook]() for this exercise, algonside the corresponding plot.
 
+```python
+fig = plt.figure(figsize = (8, 8))
+axes = fig.add_subplot(1, 1, 1)
+
+axes.plot(k_points, rmse_val, '-', color = 'orange', label = 'linear-train')
+axes.plot(k_points, rmse_valtrain, '-', color = 'green', label = 'linear-test')
+
+axes.legend()
+axes.set_xlabel("k")
+axes.set_ylabel("Error")
+plt.show()
+```
+
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Linearplot_1.png)
 
+### K-Nearest neighboor model:
+
+Following a similar procedure as in the LinearRegresion, we use the sklearn library to call KNeighborsRegresion. In this case, the K points are going to change the results.
+
+```python
+from sklearn import neighbors
+from sklearn.metrics import mean_squared_error 
+from math import sqrt
+import matplotlib.pyplot as plt
+
+rmse_val = [] #to store rmse values for different k
+rmse_valtrain = []
+for K in k_points:
+    model = neighbors.KNeighborsRegressor(n_neighbors = K)
+
+    model.fit(train_x, train_y)  #fit the model
+    pred_train=model.predict(train_x) #make prediction on train set
+    pred=model.predict(test_x) #make prediction on test set
+    error_train = sqrt(mean_squared_error(train_y,pred_train)) #calculate rmse
+    error = sqrt(mean_squared_error(test_y,pred)) #calculate rmse
+    rmse_val.append(error) #store rmse values
+    rmse_valtrain.append(error_train)
+    print('RMSE value for train set k = ', K, 'is:', error_train)
+    print('RMSE value fortest set k= ' , K , 'is:', error)
+    print('\n')
+```
+And in our plot we see how it is not just a line:
+
+```python
+fig = plt.figure(figsize = (8, 8))
+axes = fig.add_subplot(1, 1, 1)
+
+axes.plot(k_points, rmse_val, '-', color = 'orange', label = 'knn-train')
+axes.plot(k_points, rmse_valtrain, '-', color = 'green', label = 'knn-test')
+
+axes.legend()
+axes.set_xlabel("k")
+axes.set_ylabel("Error")
+plt.show()
+```
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/knnplot1.png)
 
