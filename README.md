@@ -160,3 +160,32 @@ plt.show()
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/knnplot1.png)
 
+### Linear model for our data:
+
+In this examples we are going to use the dataset MiniMias, which is the smallest dataset and a public one. It can be downloaded from [here](https://www.kaggle.com/kmader/mias-mammography). Since we are dealing with images, we wanted to try something we had considered before to reduce the file size of our datasets, and that is to convert our images into csv files. 
+
+In our first try, with the images of size 1024x1024 pixels, the code to turn images to csv took too much time and RAM resources (using google colab), so we decided to first change the size of the images to a smaller one.
+
+```python
+import cv2
+from imutils import paths
+import os
+
+Hg = 200
+Lng = 80
+
+imagePaths = list(paths.list_images('/content/drive/MyDrive/BD/Minimias/MIAS_Normal'))
+data = []
+labels = []
+i = 0
+for imagePath in imagePaths:
+    i = i + 1
+    label = imagePath.split(os.path.sep)[-2]
+    image = cv2.imread(imagePath)
+    image = cv2.resize(image, (Hg, Lng))
+    try:
+      cv2.imwrite('/content/drive/MyDrive/BD/Minimias/MIAS_sa/{}mias.png'.format(i), image)
+    except AttributeError:
+      print("Not found {}".format(img))
+```
+
