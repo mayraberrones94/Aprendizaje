@@ -1,5 +1,9 @@
 # Automated learning
 Repository for my automated learning's course. The course description and activities can be found [here](https://github.com/satuelisa/StatisticalLearning) 
+---
+
++ [Chapter 1: Introduction](#homework-1-introduction)
++ [Chapter 2: Supervised learning](#homework-2-supervised-learning)
 
 ---
 
@@ -98,6 +102,91 @@ for K in k_points:
 ```
 The value of K does not really interviene at this point, but we have them in the [Notebook]() for this exercise, algonside the corresponding plot.
 
+```python
+fig = plt.figure(figsize = (8, 8))
+axes = fig.add_subplot(1, 1, 1)
+
+axes.plot(k_points, rmse_val, '-', color = 'orange', label = 'linear-train')
+axes.plot(k_points, rmse_valtrain, '-', color = 'green', label = 'linear-test')
+
+axes.legend()
+axes.set_xlabel("k")
+axes.set_ylabel("Error")
+plt.show()
+```
+
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Linearplot_1.png)
 
+### K-Nearest neighboor model:
 
+Following a similar procedure as in the LinearRegresion, we use the sklearn library to call KNeighborsRegresion. In this case, the K points are going to change the results.
+
+```python
+from sklearn import neighbors
+from sklearn.metrics import mean_squared_error 
+from math import sqrt
+import matplotlib.pyplot as plt
+
+rmse_val = [] #to store rmse values for different k
+rmse_valtrain = []
+for K in k_points:
+    model = neighbors.KNeighborsRegressor(n_neighbors = K)
+
+    model.fit(train_x, train_y)  #fit the model
+    pred_train=model.predict(train_x) #make prediction on train set
+    pred=model.predict(test_x) #make prediction on test set
+    error_train = sqrt(mean_squared_error(train_y,pred_train)) #calculate rmse
+    error = sqrt(mean_squared_error(test_y,pred)) #calculate rmse
+    rmse_val.append(error) #store rmse values
+    rmse_valtrain.append(error_train)
+    print('RMSE value for train set k = ', K, 'is:', error_train)
+    print('RMSE value fortest set k= ' , K , 'is:', error)
+    print('\n')
+```
+And in our plot we see how it is not just a line:
+
+```python
+fig = plt.figure(figsize = (8, 8))
+axes = fig.add_subplot(1, 1, 1)
+
+axes.plot(k_points, rmse_val, '-', color = 'orange', label = 'knn-train')
+axes.plot(k_points, rmse_valtrain, '-', color = 'green', label = 'knn-test')
+
+axes.legend()
+axes.set_xlabel("k")
+axes.set_ylabel("Error")
+plt.show()
+```
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/knnplot1.png)
+
+### Linear model for our data:
+
+In this examples we are going to use the dataset MiniMias, which is the smallest dataset and a public one. It can be downloaded from [here](https://www.kaggle.com/kmader/mias-mammography). Since we are dealing with images, we wanted to try something we had considered before to reduce the file size of our datasets, and that is to convert our images into csv files. 
+
+In our first try, with the images of size 1024x1024 pixels, the code to turn images to csv took too much time and RAM resources (using google colab), so we decided to first change the size of the images to a smaller one.
+
+```python
+import cv2
+from imutils import paths
+import os
+
+Hg = 200
+Lng = 80
+
+imagePaths = list(paths.list_images('/content/drive/MyDrive/BD/Minimias/MIAS_Normal'))
+data = []
+labels = []
+i = 0
+for imagePath in imagePaths:
+    i = i + 1
+    label = imagePath.split(os.path.sep)[-2]
+    image = cv2.imread(imagePath)
+    image = cv2.resize(image, (Hg, Lng))
+    try:
+      cv2.imwrite('/content/drive/MyDrive/BD/Minimias/MIAS_sa/{}mias.png'.format(i), image)
+    except AttributeError:
+      print("Not found {}".format(img))
+```
+
+We repeat this procedure with the file for the images with anomalies. Now that they are smaller, is faster to turn them into csv files (and the files do not take forever to load afterwards)
