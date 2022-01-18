@@ -4,7 +4,7 @@ Repository for my automated learning's course. The course description and activi
 
 + [Chapter 1: Introduction](#homework-1-introduction)
 + [Chapter 2: Supervised learning](#homework-2-supervised-learning)
-
++ [Chapter 3: Linear Regresion](#homework-3-linear-regresion)
 ---
 
 ## **Homework 1: Introduction**
@@ -232,3 +232,14 @@ Linear error
 Knn error:
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/knn2.png)
+
+### Comments and conclusions:
+
+For this second homework we were tasked to complete one exercise, but also to try and recreate it with one of the problems we discussed in the first homework. For this, we wanted to experiment with one of the projects we had in mind, and that was to turn images into csv sets. We decided to try it with the Mini MIAS data set because is public and the smallest one. (A small dataset was important because of the processing needed to turn the images).
+
+The regular scoring for all the problems discussed in HW1 just focus on the accuracy score, but it would be interesting to go back to these messurements of error for the results of the regular model training we do (CNN). 
+
+## **Homework 3: Linear Regresion:**
+
+> **Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection. 
+
