@@ -4,7 +4,7 @@ Repository for my automated learning's course. The course description and activi
 
 + [Chapter 1: Introduction](#homework-1-introduction)
 + [Chapter 2: Supervised learning](#homework-2-supervised-learning)
-
++ [Chapter 3: Linear Regresion](#homework-3-linear-regresion)
 ---
 
 ## **Homework 1: Introduction**
@@ -100,7 +100,7 @@ for K in k_points:
     print('RMSE value fortest set k= ' , K , 'is:', error)
     print('\n')     
 ```
-The value of K does not really interviene at this point, but we have them in the [Notebook]() for this exercise, algonside the corresponding plot.
+The value of K does not really interviene at this point, but we have them in the [Notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/Homework2_ex2_8.ipynb) for this exercise, algonside the corresponding plot.
 
 ```python
 fig = plt.figure(figsize = (8, 8))
@@ -160,7 +160,7 @@ plt.show()
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/knnplot1.png)
 
-### Linear model for our data:
+### Linear and knn models for our data:
 
 In this examples we are going to use the dataset MiniMias, which is the smallest dataset and a public one. It can be downloaded from [here](https://www.kaggle.com/kmader/mias-mammography). Since we are dealing with images, we wanted to try something we had considered before to reduce the file size of our datasets, and that is to convert our images into csv files. 
 
@@ -189,4 +189,57 @@ for imagePath in imagePaths:
       print("Not found {}".format(img))
 ```
 
-We repeat this procedure with the file for the images with anomalies. Now that they are smaller, is faster to turn them into csv files (and the files do not take forever to load afterwards)
+We repeat this procedure with the file for the images with anomalies. Now that they are smaller, is faster to turn them into csv files (and the files do not take forever to load afterwards).
+
+```python
+
+#https://stackoverflow.com/questions/49070242/converting-images-to-csv-file-in-python
+from PIL import Image
+import numpy as np
+import sys
+import os
+import csv
+
+#Useful function
+def createFileList(myDir, format='.png'):
+  fileList = []
+  print(myDir)
+  for root, dirs, files in os.walk(myDir, topdown=False):
+    for name in files:
+      if name.endswith(format):
+        fullName = os.path.join(root, name)
+        fileList.append(fullName)
+  return fileList
+```
+The full code can be found [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/Aprendizaje_2.ipynb). Parallel to converting the images to a csv file, we created a list where we appended a 0 for the normal images and a 1 for the images with anomalies.
+
+Using the sklearn library we separated the data into training and test sets:
+
+```python
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(read_file, y_label, test_size=0.33, random_state=1)
+print(X_train.shape, X_test.shape, len(y_train), len(y_test))
+
+```
+
+Then using the codes we used for the exercise we have the following plots:
+
+Linear error
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/linear2.png)
+
+Knn error:
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/knn2.png)
+
+### Comments and conclusions:
+
+For this second homework we were tasked to complete one exercise, but also to try and recreate it with one of the problems we discussed in the first homework. For this, we wanted to experiment with one of the projects we had in mind, and that was to turn images into csv sets. We decided to try it with the Mini MIAS data set because is public and the smallest one. (A small dataset was important because of the processing needed to turn the images).
+
+The regular scoring for all the problems discussed in HW1 just focus on the accuracy score, but it would be interesting to go back to these messurements of error for the results of the regular model training we do (CNN). 
+
+## **Homework 3: Linear Regresion:**
+
+> **Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection. 
+
