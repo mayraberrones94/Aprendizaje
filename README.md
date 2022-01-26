@@ -317,3 +317,79 @@ sns.pairplot(dataset)
 ```
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/sns_plot.png)
+
+Then for table 3.2, they fit a linear model to the lpsa after first standarizing the predictors to have unit variance.
+
+```python
+#https://scikit-learn.org/stable/modules/preprocessing.html
+
+from sklearn import preprocessing
+import numpy as np
+
+scaler = preprocessing.StandardScaler().fit(X)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
+
+#https://www.statsmodels.org/0.6.1/examples/notebooks/generated/ols.html
+import statsmodels.api as sm
+
+model = sm.OLS(y_train, sm.add_constant(X_train)).fit()
+ls_params = model.params
+
+result = zip(['Intercept'] + features, ls_params, model.bse, model.tvalues)
+print('      Term   Coefficient   Std. Error   Z Score')
+print('-----------------------------------------------')
+for term, coefficient, std_err, z_score in result:
+    print(f'{term:>10}{coefficient:>14.2f}{std_err:>13.2f}{z_score:>10.2f}')
+```
+
+The resulting table shows the coefficient, std. error and Z score of each feature.
+
+|Term  | Coefficient  | Std. Error  | Z Score|
+|-------|-------------|-------------|--------------|
+ |Intercept |         2.46  |       0.09 |    27.60|
+ |   lcavol |         0.68 |        0.13 |     5.37|
+ |  lweight |         0.26 |        0.10 |     2.75|
+ |      age |        -0.14 |        0.10 |    -1.40|
+ |     lbph |         0.21 |        0.10 |     2.06|
+  |     svi |         0.30 |        0.12 |     2.47|
+  |     lcp |        -0.29 |        0.15  |   -1.87|
+  | gleason  |       -0.02  |       0.14  |   -0.15|
+   |  pgg45  |        0.27  |       0.15  |    1.74|
+   
+In the book they mention that the Z-scores mesure the effect that the model will have if we drop a variable. A Z-score greater than 2 in absolute value is approx. significant at 5% level. Based on the Z-score we can consider `age`, `lcp`, `gleason`, and pgg45 as variables we can get rid off.
+
+They mention the F-statistic to test for the exclusion of several features at the same time. The F-statistic mesures the change in residual sum of squares per aditional parameter in the bigger model. 
+
+We have as F-statistic:
+
+$F = \frac{(RSS_0 - RSS_1) / (p_1 - p_0)}{RSS_1/(N-p_1-1)}$   
+
+Repeating the code from above but only with the features that have significance in the Z score we have the resulting table (complete code in notebook):
+
+|Term   |Coefficient  | Std. Error  | Z Score|
+|---------|-------------|------------|-------------|
+| Intercept|          2.46  |       0.09 |    27.60|
+|    lcavol |         0.68 |        0.13  |    5.37|
+|   lweight |         0.26  |       0.10  |    2.75|
+|      lbph |        -0.14  |       0.10  |   -1.40|
+|       svi  |        0.21  |       0.10  |    2.06|
+
+We can now calculate the residual sum for both of this results and use the F-statistic formula.
+
+```python
+rss0 = sum((model1.predict(sm.add_constant(X_train1)) - y_train1) ** 2)
+p1 = len(features) + 1
+p0 = len(features1) + 1
+N = len(y_train)
+f_statistic = ((rss0 - rss1)/ (p1 - p0))/(rss1 / (N - p1 - 1))
+prob = 1 - stats.f.cdf(f_statistic, (p1 - p0), (N - p1) )
+```
+
+```
+RSS01 =  29.4263844599084
+RSS0 =  32.81499474881555
+F =  1.6409660073161834
+p-value =  0.1762476548551386
+```
+
