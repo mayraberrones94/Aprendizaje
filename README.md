@@ -424,3 +424,32 @@ df
 |6	|lcp	|-0.594727	|0.020724|
 |7	|gleason|	-0.310436|	0.268046|
 |8	|pgg45	|-0.040326|	0.571478|
+
+Lastly, the instructions asks us to experiment a little bit with libraries and subset selection. Thanks to the page provided in the courses page, we have very good examples to start with. All the experimentations where made in the notebook, as we think we did not have too much variables. The subset selection comes in handy on the next part of the experiment, when we are using our own data.
+
+### Breast cancer dataset:
+
+For our data (all our image datasets) we did not find features that would match the things asked for this experimentation, so we turn to a similar data set that could actually help us understand better the correlations between certain features. In this case this data set is usally used for classification and prediction processes. 
+
+The data set can be found in [Kaggle](https://www.kaggle.com/uciml/breast-cancer-wisconsin-data). Same as before, we start by setting up our data set.
+
+Here is a brief description of the data:
+
+Column name | Description
+-------------------|------------------
+radius       | Mean of distances from center to points on the perimeter
+texture    | Standard deviation of gray scale values
+perimeter     | Perimeter of anomaly
+area     | Area of anomaly
+smoothness     | Local variation in radius lenght
+compactness     | perimeter^2 /area - 1.0
+concavity     | Severity of concave portions of the contour
+concave points     | Number of concave portions of the countour
+symmetry  | Symmetry of anomaly
+fractal dimension | Costline aproximation - 1
+
+The mean, standard error and "worst" or largest (mean of the three largest values) of these features were computed for each image, resulting in 30 features.
+
+
+
+In order to be able to use it with the same propose as the data set form the book, we took other variable as the target variable. Instead on focusing on the diagnosis we focus on the 
