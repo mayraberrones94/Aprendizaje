@@ -452,7 +452,7 @@ The mean, standard error and "worst" or largest (mean of the three largest value
 
 
 
-In order to be able to use it with the same propose as the data set form the book, we took other variable as the target variable. Instead on focusing on the diagnosis we focus on the `radius_mean`. What can this variable help us in our data set?
+In order to be able to use it with the same propose as the data set form the book, we took other variable as the target variable. Instead on focusing on the diagnosis we focus on the `radius_mean`. The reason why we did not use diagnosis as our target was because, after some [research](https://towardsdatascience.com/the-difference-between-classification-and-regression-in-machine-learning-4ccdb5b18fd3) we realized that we where seeing the problem as a classification problem, and not a regression one. What can this variable help us in our data set?
 
 The Mini-MIAS data set has a companion [document](http://peipa.essex.ac.uk/info/mias.html) where they detail the center of the anomaly, and the aproximate radius of the circle that encompases the abnormality. With this analysis we expect to find which other features can be necesary to develop a similar file to the breast cancer of wisconsin, but with the Mini-Mias images. This could give us an idea also in the segmentation part of our task.
 
