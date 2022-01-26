@@ -304,3 +304,16 @@ df_corr = dataset[train_st].corr()
 |pgg45	|0.483	  |0.074   |0.276 |	-0.03  |0.481 |	0.663  |	0.757  |	|
 |lpsa	|0.733	  |0.485   |0.228 |	0.263  |0.557 |	0.489  |	0.342  |	0.448|
 
+Table 3.1 in the book shows the correlation of predictors in the dataset. We wanted it to look similar to what we had in the book, so we print it as a traingle correlation matrix. For the entire code, refer to the [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW_3_Univariant_example.ipynb) 
+
+Seeing this table we can already tell which variables are strongly correlated. In the book they mention a scatterplot matrix that show that the svi variable is binary, and gleason is an ordered categorical value. So we plot this matrix with the help of seaborn.
+
+```python
+import seaborn as sns
+
+sns.set_theme(style = "ticks")
+sns.set(font_scale=1.6)
+sns.pairplot(dataset)
+```
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/sns_plot.png)
