@@ -471,3 +471,37 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 We keep diagnosis as a feature in the data set, so we can plot a correlation plot with the added tool of the diagnosis separation with seaborn with only the core parameters.
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/sns_diagnosis.png)
+
+Following the same steps as before we get the coeficients, Std error and Z score of our remaining features. (Complete code in notebook)
+
+|                   Term|   Coefficient  | Std. Error|   Z Score|
+|------------------------|--------------|--------------|-----------|
+ |            Intercept  |        0.13   |      0.15  |    0.86|
+|             diagnosis |         0.04    |     0.01  |    2.84|
+|          texture_mean |        -0.00   |      0.00  |   -0.50|
+ |       perimeter_mean  |        0.16   |      0.00  |   61.72|
+|             area_mean |        -0.00   |      0.00 |    -4.05|
+|       smoothness_mean  |        1.91  |       0.70  |    2.72|
+|      compactness_mean  |       -4.59   |      0.42   | -10.94|
+|        concavity_mean  |       -2.42  |       0.35   |  -6.88|
+|   concave points_mean  |        0.69  |       0.73  |    0.95|
+|         symmetry_mean  |        0.24  |       0.26   |   0.93|
+|fractal_dimension_mean  |        2.54   |      1.98   |   1.28|
+|            texture_se  |       -0.01  |       0.01   |  -0.74|
+|          perimeter_se  |        0.00   |      0.01   |   0.08|
+|               area_se  |       -0.00   |      0.00  |   -1.56|
+|         smoothness_se  |        1.50   |      2.25   |   0.67|
+|        compactness_se  |       -0.96  |       0.72   |  -1.32|
+|          concavity_se  |        2.84  |       0.43   |   6.63|
+|     concave points_se  |       -4.09  |       1.91   |  -2.14|
+|           symmetry_se   |       2.05  |       0.98   |   2.08|
+|  fractal_dimension_se   |      -1.05   |      3.77    | -0.28|
+|         texture_worst   |       0.00  |       0.00    |  0.44|
+|       perimeter_worst   |      -0.01  |       0.00  |   -4.23|
+|            area_worst   |       0.00  |       0.00   |   5.26|
+|      smoothness_worst   |      -0.43  |       0.49  |   -0.86|
+|     compactness_worst   |       0.21  |       0.13   |   1.60|
+|       concavity_worst   |      -0.05  |       0.09  |   -0.49|
+|  concave points_worst   |       0.68  |       0.33   |   2.08|
+|        symmetry_worst   |      -0.04 |        0.17  |   -0.26|
+|fractal_dimension_worst   |       0.23  |       0.85  |    0.28|
