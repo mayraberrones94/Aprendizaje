@@ -505,3 +505,16 @@ Following the same steps as before we get the coeficients, Std error and Z score
 |  concave points_worst   |       0.68  |       0.33   |   2.08|
 |        symmetry_worst   |      -0.04 |        0.17  |   -0.26|
 |fractal_dimension_worst   |       0.23  |       0.85  |    0.28|
+
+Seeing this results, we can see which features we can use 
+
+|    Term  | Coefficient  | Std. Error   |Z Score|
+|-----------|--------------|-------------|---------------------|
+ |          Intercept  |        0.13 |        0.15 |     0.86|
+ |          diagnosis  |        0.04  |       0.01 |     2.84|
+|      perimeter_mean  |       -0.00  |       0.00 |    -0.50|
+ |    smoothness_mean  |        0.16  |       0.00 |    61.72|
+ |       concavity_se  |       -0.00  |       0.00  |   -4.05|
+|         symmetry_se  |        1.91 |        0.70 |     2.72|
+|          area_worst  |       -4.59  |       0.42 |   -10.94|
+|concave points_worst  |       -2.42  |       0.35 |    -6.88|
