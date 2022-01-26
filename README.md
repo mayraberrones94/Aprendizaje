@@ -243,3 +243,34 @@ The regular scoring for all the problems discussed in HW1 just focus on the accu
 
 > **Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection. 
 
+For this problem we are using the prostate cancer dataset. The data came from a study that examines the correlation between the level of prostate specific antigen (PSA) and number of mesures. The goal is to predict the log of PSA (lpsa).
+
+Here is a brief description of the data:
+
+Column name | Description
+-------------------|------------------
+lpsa       | Log of prostate specific antigen
+lcavol     | Log cancer volume
+lweight     | Log prostate weight
+age     | Age of patient
+lbph     | Log of benign prostatic hyperplasia
+svi     | Seminal vesicle invarion
+lcp     | Log of capsular penetration
+gleason     | Gleason score
+pgg45  |Percent of Gleason scores 4 or 5
+
+
+
+First we load our [dataset](https://github.com/mayraberrones94/Aprendizaje/blob/main/Datasets/prostate.data):
+
+```
+import numpy as np
+import pandas as pd
+
+from scipy import stats
+
+dataset = pd.read_csv('/content/drive/MyDrive/Datasets/prostateData.csv')
+print(dataset.shape)
+
+dataset.drop('id', axis=1, inplace=True)
+```
