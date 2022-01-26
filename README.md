@@ -506,7 +506,7 @@ Following the same steps as before we get the coeficients, Std error and Z score
 |        symmetry_worst   |      -0.04 |        0.17  |   -0.26|
 |fractal_dimension_worst   |       0.23  |       0.85  |    0.28|
 
-Seeing this results, we can see which features we can use 
+Seeing this results, we can see which features we can get rid of some features that do not have enough significance. Then, repeating the procedure of the first part, we separate the features and get the F-statistic score:
 
 |    Term  | Coefficient  | Std. Error   |Z Score|
 |-----------|--------------|-------------|---------------------|
@@ -518,3 +518,48 @@ Seeing this results, we can see which features we can use
 |         symmetry_se  |        1.91 |        0.70 |     2.72|
 |          area_worst  |       -4.59  |       0.42 |   -10.94|
 |concave points_worst  |       -2.42  |       0.35 |    -6.88|
+
+```python
+from scipy import stats
+
+rss1 = sum((model.predict(sm.add_constant(X_train)) - y_train) ** 2)
+rss0 = sum((model1.predict(sm.add_constant(X_train1)) - y_train1) ** 2)
+p1 = len(features) + 1
+p0 = len(features1) + 1
+N = len(y_train)
+
+f_statistic = ((rss0 - rss1)/ (p1 - p0))/(rss1 / (N - p1 - 1))
+prob = 1 - stats.f.cdf(f_statistic, (p1 - p0), (N - p1) )
+```
+
+```
+RSS01 =  2.3867283504900967
+RSS0 =  10.44504733766965
+F =  68.32994927470597
+p-value =  1.1102230246251565e-16
+```
+
+We tried the code of the best subset regression from the page recomended in the homework, just to check if it matched what we did so far, but with all the variables we gave the code 30 min and it did not finish, so we gave only the last significant variables and this is the result:
+
+|index |num_features   |            features   |    MAE|
+|------|----------------|----------------------|-----------|
+|0      0  |          6 |    [1, 2, 3, 4, 5, 6] | 0.104859|
+|1      0 |           7 | [0, 1, 2, 3, 4, 5, 6] | 0.105014|
+|2      0  |          5 |       [1, 2, 3, 4, 6] | 0.105133|
+|3      0  |          6  |   [0, 1, 2, 3, 4, 5] | 0.105610|
+|4      0   |         6  |   [0, 1, 2, 3, 4, 6]|  0.105637|
+
+```
+Best Subset Regression MAE: 0.105
+Best Subset Regression coefficients:
+{'Intercept': 1.264,
+ 'area_mean': 0.0,
+ 'diagnosis': 0.148,
+ 'perimeter_mean': -3.346,
+ 'radius_mean': -4.975,
+ 'smoothness_mean': -1.92,
+ 'texture_mean': -1.927}
+ ```
+
+
+Looking closer at the variables that are more influential and the description of each one we 
