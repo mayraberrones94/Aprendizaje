@@ -561,5 +561,8 @@ Best Subset Regression coefficients:
  'texture_mean': -1.927}
  ```
 
+In the end we also tested some other libaries and compared the different shrinking and subset methods. We compared OLS, Ridgde, Lasso and Elastic net, all of them having a very small error on the test set. (Code in notebook)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/rmse.png)
 
 Looking closer at the variables that are more influential and the description of each one we 
