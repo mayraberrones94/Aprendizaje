@@ -565,4 +565,8 @@ In the end we also tested some other libaries and compared the different shrinki
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/rmse.png)
 
-Looking closer at the variables that are more influential and the description of each one we 
+## Conclusions:
+
+Looking closer at the variables that are more influential and the description of each one we can see why they perform so well together. In this case we have `diagnosis`, `perimeter_mean`, `smoothness_mean`, `concavity_se`, `symmetry_se`, `area_worst` and `concave points_worst` as the most influential features. Perimeter and area seem the most apropiate since we had seen in the scatterplot how strongly they where correlated. Smoothness refers to the shape of the anomaly. Normally anomalies do not resemble a perfect circle, so the smothness and concavity tell us about the imperfections in the encircling area. 
+
+Now that we know all of this parameters, we can try to compose our own dataset with the mini-MIAS, filling the missing values with the original image, which could give us an idea in how to perfect the segmentation process that we had in mind.
