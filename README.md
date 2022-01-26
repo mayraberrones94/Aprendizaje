@@ -243,3 +243,64 @@ The regular scoring for all the problems discussed in HW1 just focus on the accu
 
 > **Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection. 
 
+For this problem we are using the prostate cancer dataset. The data came from a study that examines the correlation between the level of prostate specific antigen (PSA) and number of mesures. The goal is to predict the log of PSA (lpsa).
+
+Here is a brief description of the data:
+
+Column name | Description
+-------------------|------------------
+lpsa       | Log of prostate specific antigen
+lcavol     | Log cancer volume
+lweight     | Log prostate weight
+age     | Age of patient
+lbph     | Log of benign prostatic hyperplasia
+svi     | Seminal vesicle invarion
+lcp     | Log of capsular penetration
+gleason     | Gleason score
+pgg45  |Percent of Gleason scores 4 or 5
+
+
+
+First we load our [dataset](https://github.com/mayraberrones94/Aprendizaje/blob/main/Datasets/prostate.data):
+
+```python
+import numpy as np
+import pandas as pd
+
+from scipy import stats
+
+dataset = pd.read_csv('/content/drive/MyDrive/Datasets/prostateData.csv')
+print(dataset.shape)
+
+dataset.drop('id', axis=1, inplace=True)
+```
+
+Reading further into the example of prostate cancer we realize, since the goal is to examine the correlation of `lpsa`, so this becomes our target variable. All the other columns are the features that we need to analyse in order to see which ones will help us in our models. The `train` coulmn marks the division between our training and data set. 
+
+Next up we divide and name our training and test sets and we begin with the correlations of the variables .
+
+```python
+target = 'lpsa'
+# based on the following features
+features = ['lcavol', 'lweight', 'age', 'lbph',
+            'svi', 'lcp', 'gleason', 'pgg45']
+
+train_st = dataset.train == 'T'
+X, y = dataset[features].values, dataset[target].values
+X_train, y_train = X[train_st], y[train_st]
+X_test, y_test = X[~train_st], y[~train_st]
+
+df_corr = dataset[train_st].corr()
+```
+
+|        |	lcavol| lweight|   age|	lbph   |svi	  |lcp	   |gleason	   |pgg45|
+|--------|---------|--------|------|--------|------|--------|-----------|--------|
+|lweight |	0.300 |	       |	  |	       |	  |	       |           |   |
+|age     |	0.286 |	0.317 |	  |		   |	  |        |           |	|		|	
+|lbph	| 0.063   |	0.437  | 0.287|		   |	  |		   |           ||
+|svi     |	0.593 |	0.181  |0.129 |	-0.139 |	  |		   |	       ||
+|lcp	    |0.692	  |0.157   |0.173 |	-0.089 |0.671 |		   |	       ||
+|gleason	|0.426	  |0.024   |0.366 |	0.033  |0.307 |	0.476  |		   ||
+|pgg45	|0.483	  |0.074   |0.276 |	-0.03  |0.481 |	0.663  |	0.757  |	|
+|lpsa	|0.733	  |0.485   |0.228 |	0.263  |0.557 |	0.489  |	0.342  |	0.448|
+
