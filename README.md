@@ -452,4 +452,22 @@ The mean, standard error and "worst" or largest (mean of the three largest value
 
 
 
-In order to be able to use it with the same propose as the data set form the book, we took other variable as the target variable. Instead on focusing on the diagnosis we focus on the 
+In order to be able to use it with the same propose as the data set form the book, we took other variable as the target variable. Instead on focusing on the diagnosis we focus on the `radius_mean`. What can this variable help us in our data set?
+
+The Mini-MIAS data set has a companion [document](http://peipa.essex.ac.uk/info/mias.html) where they detail the center of the anomaly, and the aproximate radius of the circle that encompases the abnormality. With this analysis we expect to find which other features can be necesary to develop a similar file to the breast cancer of wisconsin, but with the Mini-Mias images. This could give us an idea also in the segmentation part of our task.
+
+As described in the table above, all the features have mean, standard error and worst or largest as aditional features. Fow this, in our data set we use `radius_mean` as target value, and `radius_se`, and `radius_worst`.
+
+```python
+X1 = dataset.drop(columns=['radius_mean', 'radius_se', 'radius_worst'])
+columns = X1.columns
+from sklearn.model_selection import train_test_split 
+target = 'radius_mean'
+
+X, y = dataset[features].values, dataset[target].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+
+We keep diagnosis as a feature in the data set, so we can plot a correlation plot with the added tool of the diagnosis separation with seaborn with only the core parameters.
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/sns_diagnosis.png)
