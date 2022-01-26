@@ -472,7 +472,7 @@ We keep diagnosis as a feature in the data set, so we can plot a correlation plo
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/sns_diagnosis.png)
 
-Following the same steps as before we get the coeficients, Std error and Z score of our remaining features. (Complete code in notebook)
+Following the same steps as before we get the coeficients, Std error and Z score of our remaining features. (Complete code in [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW3_Breastcancer.ipynb))
 
 |                   Term|   Coefficient  | Std. Error|   Z Score|
 |------------------------|--------------|--------------|-----------|
