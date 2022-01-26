@@ -393,3 +393,34 @@ F =  1.6409660073161834
 p-value =  0.1762476548551386
 ```
 
+Now that we have all the examples from the book and the p-values, we see the coeficient intervals of our model.
+
+```python
+coef_intervals = model.conf_int(0.05)
+low = []
+high = []
+for (x, y) in coef_intervals:
+  low.append(x)
+  high.append(y)
+
+data = {'Term':  ['Intercept','lcavol', 'lweight', 'age', 'lbph',
+            'svi', 'lcp', 'gleason', 'pgg45'],
+        'Low coef': low,
+        'High coef': high}
+
+df = pd.DataFrame(data)
+df
+```
+ And we have the following table as a result:
+ 
+| 	|Term|	Low coef	|High coef|
+|---|-----|-----------|----------------- |   
+|0	|Intercept|	2.286150|	2.643716|
+|1	|lcavol	|0.423851|	0.928182|
+|2	|lweight|	0.071262|	0.452125|
+|3	|age|	-0.342544|	0.061077|
+|4	|lbph|	0.005504	|0.412617|
+|5	|svi|	0.057489|	0.549758|
+|6	|lcp	|-0.594727	|0.020724|
+|7	|gleason|	-0.310436|	0.268046|
+|8	|pgg45	|-0.040326|	0.571478|
