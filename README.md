@@ -5,7 +5,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 1: Introduction](#homework-1-introduction)
 + [Chapter 2: Supervised learning](#homework-2-supervised-learning)
 + [Chapter 3: Linear Regresion](#homework-3-linear-regresion)
-+ [Chapter 4: Linear methods for Classification](#homework-4-linear-methods-classification)
++ [Chapter 4: Linear methods for Classification](#homework-4-linear-methods-for-classification)
 ---
 
 ## **Homework 1: Introduction**
@@ -574,7 +574,7 @@ Now that we know all of this parameters, we can try to compose our own dataset w
 
 NOTE: We tried but failed to fully comprehend and form a multivariate problem with our original dataset of images with the loss and accuracy as our pedicting variables, mainly because we did not understad which features could we represent to be able to do all of the experiments above. Most of the variables we had where categorical (big, small, names of optimizers, activation funtions) so instead we tried to do something that worked in our favor with different data.
 
-## **Homework 4: Linear Methods for Classification:**
+## **Homework 4: Linear methods for Classification:**
 
 > **Instructions:** Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data. 
 
