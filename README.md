@@ -829,11 +829,42 @@ Classification Report:
  |  macro avg   |    0.73   |   0.74   |   0.73    |   102|
 |weighted avg   |    0.76    |  0.75   |   0.75  |     102|
 
-
+Next we print the plots that will show us the Roc curve:
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4roc1.png)
 
-![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4rocc2.png)
+And the confusion matrix of our data:
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4matrix2.png)
 
+Finally, we can see which are the best parameters and the best accuracy of our model:
+
+```python
+from sklearn.model_selection import GridSearchCV
+parameters_lr = [{'penalty':['l1','l2'],'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000]}]
+grid_search_lr = GridSearchCV(estimator = model,
+                           param_grid = parameters_lr,
+                           scoring = 'accuracy',
+                           cv = 10,
+                           n_jobs = -1)
+grid_search_lr.fit(X_train, y_train)
+best_accuracy_lr = grid_search_lr.best_score_
+best_paramaeter_lr = grid_search_lr.best_params_  
+print("Best Accuracy of LR: {:.2f} %".format(best_accuracy_lr.mean()*100))
+print("Best Parameter of LR:", best_paramaeter_lr)
+```
+
+And the final result is:
+
+```
+Best Accuracy of LR: 83.05 %
+Best Parameter of LR: {'C': 1, 'penalty': 'l1'}
+```
+
+Where we can se that the best accuracy is 83.05, the best alpha is 1 and the best penalty the `l1`.
+
+### Conclusions:
+
+For this work, we got an accuracy that matches the best CNN models we have for this dataset, which in turn are far more complex. For google colab I think is a bit computational expensive to turn all the images of my various datasets into text, but if I translate to my computer and my console, it would be worth it to see what is the result of this same experiment with the bigger datasets, because the time it takes to train this model is significantly smaller than what it takes to train a CNN. 
+
+The thing we want to try later on is to explore the use of tensorflow with this type of classification, or if there is a more effcient way to use logistic regresion to images, since we saw that it could also be used for segmentation.
