@@ -578,7 +578,7 @@ NOTE: We tried but failed to fully comprehend and form a multivariate problem wi
 
 > **Instructions:** Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data. 
 
-The example we are going to use is the South African heart disease. Same as other homeworks, we download our [dataset]() into our [notebook]() and see the desctiption of our variables.
+The example we are going to use is the South African heart disease. Same as other homeworks, we download our [dataset](https://github.com/mayraberrones94/Aprendizaje/blob/main/Datasets/sahd.csv) into our [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW4_SAHD_example.ipynb) and see the desctiption of our variables.
 
 ```python
 import pandas as pd
@@ -611,4 +611,43 @@ First we see in Figure 4.12 in the book that they ploted a similar pairplot than
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4-scatter_sahd1.png)
 
-As we can see the variable `famhist` is not present in this plot because is the only one that has text instead of numbers, so we can analize it a bit further.
+As we can see the variable `famhist` is not present in this plot because is the only one that has text instead of numbers. We then convert the words inside. Present now is 1, and absent is 0.
+
+```python
+dataset['famhist'] = (dataset['famhist'] == 'Present').astype(int)
+```
+
+Now for the logistic regression, we do something similar to what we did in homework 3, where we use the library of `statsmodels` to train our model. 
+
+```python
+import statsmodels.api as sm
+from scipy import stats
+#https://www.statsmodels.org/dev/discretemod.html
+
+target = 'chd'
+
+features = ['sbp', 'tobacco', 'ldl', 'famhist', 'obesity', 'alcohol', 'age']
+X, y = dataset[features].values, dataset[target].values
+X_data = sm.add_constant(X)
+lr = sm.Logit(y, X_data).fit(disp=False)
+
+result = zip(['(Intercept)'] + features, lr.params, lr.bse, lr.tvalues)
+print('               Coefficient   Std. Error   Z Score')
+print('-------------------------------------------------')
+for term, coefficient, std_err, z_score in result:
+    print(f'{term:>12}{coefficient:>14.3f}{std_err:>13.3f}{z_score:>10.3f}')
+```
+As a result of this we have the folowing table:
+
+|            |Coefficient  | Std. Error  | Z Score|
+|------------|--------------|-------------|----------|
+ |(Intercept)|        -4.130 |       0.964|    -4.283|
+ |        sbp |        0.006 |       0.006 |    1.023|
+|     tobacco |        0.080 |       0.026 |    3.034|
+ |        ldl  |       0.185 |       0.057 |    3.218|
+ |    famhist |        0.939 |       0.225 |    4.177|
+|     obesity |       -0.035 |       0.029 |   -1.187|
+|     alcohol |        0.001 |       0.004 |    0.136|
+  |       age |        0.043 |       0.010 |    4.181|
+
+
