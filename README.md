@@ -867,6 +867,7 @@ Where we can se that the best accuracy is 83.05, the best alpha is 1 and the bes
 
 ### Conclusions:
 
-For this work, we got an accuracy that matches the best CNN models we have for this dataset, which in turn are far more complex. For google colab I think is a bit computational expensive to turn all the images of my various datasets into text, but if I translate to my computer and my console, it would be worth it to see what is the result of this same experiment with the bigger datasets, because the time it takes to train this model is significantly smaller than what it takes to train a CNN. 
-
+For this work, we got an accuracy that matches the best CNN models we have for this dataset, which in turn are far more complex.I had seen several times that logistic regression is very similar to the behaviour that neural networks have, so it was a pleasent suprise to see that it has good accuracy results.
+ For google colab I think is a bit computational expensive to turn all the images of my various datasets into text, but if I translate to my computer and my console, it would be worth it to see what is the result of this same experiment with the bigger datasets, because the time it takes to train this model is significantly smaller than what it takes to train a CNN. 
+ 
 The thing we want to try later on is to explore the use of tensorflow with this type of classification, or if there is a more effcient way to use logistic regresion to images, since we saw that it could also be used for segmentation.
