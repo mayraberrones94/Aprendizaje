@@ -705,4 +705,135 @@ Here are the results:
 |-------|------|-------|-----|------|------|------|------|-----------|----------|
 | 10 |  1.23147379e-04 | 9.41743090e-02 | 1.59695109e-01 | 8.12604169e-01|-3.44760156e-02 |-9.37890006e-04 | 4.50527046e-02| 0.6531 |  0.6559|
 | 1 | -3.80861093e-03|  9.55747083e-02 | 1.53761739e-01 | 7.41565324e-01 |-4.91484204e-02| -7.23104371e-04 | 4.41939756e-02| 0.6531| 0.6559 |
+| 0.1 |-1.32202221e-02 | 9.58820956e-02 | 1.16129088e-01|  1.90052755e-01| -6.86888787e-02 | 8.82939644e-05|  4.47487507e-02| 0.6449 |  0.7311 |
+|0.001 | -0.00359871 | 0.      |    0.    |      0.      |    0.       |   0. | 0.     |  0.4227 |  0.3225 |
+
+Notice that as C decreases the model coefficients become smaller, until at C=0.001 almost all the coefficients are zero.
+
+### Logistic regression dataset breast cancer:
+
+For the next step we wanted to use the same data we used in the last homework, because it has the same structure as the one we saw in the example. (We where curious about this one from homework 3, when we saw the difference between linear and logistic regresion) Next, we try to replicate it with our image dataset.
+
+Similar to the last homework, we read and discard the columns in the dataset that we are not going to use. Then we use the same code used here to model a logistic regression. (Full code in the [notebook]())
+
+```python
+from sklearn.model_selection import train_test_split 
+target = 'diagnosis'
+
+features = ['radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean',
+       'smoothness_mean', 'compactness_mean', 'concavity_mean',
+       'concave points_mean', 'symmetry_mean', 'fractal_dimension_mean', 'radius_se', 
+       'texture_se', 'perimeter_se', 'area_se', 'smoothness_se',
+       'compactness_se', 'concavity_se', 'concave points_se', 'symmetry_se',
+       'fractal_dimension_se', 'radius_worst', 'texture_worst', 'perimeter_worst',
+       'area_worst', 'smoothness_worst', 'compactness_worst',
+       'concavity_worst', 'concave points_worst', 'symmetry_worst',
+       'fractal_dimension_worst']
+
+
+X, y = dataset[features].values, dataset[target].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+from sklearn.linear_model import LogisticRegression
+classifier7 = LogisticRegression()
+classifier7.fit(X_train, y_train)
+```
+
+Now as a result we have the following metrics:
+
+```python
+import sklearn.metrics as metrics
+print(metrics.classification_report(y_test, y_pred7))
+```
+| | precision |   recall|  f1-score |  support|
+|---|---------|----------|----------|---------|
+|         0.0  |     0.97   |   0.99  |    0.98 |       70|
+ |        1.0     |  0.98   |   0.95 |     0.96  |      41|
+
+ |   accuracy     |           |       |    0.97   |    114|
+ |  macro avg     |  0.97    |  0.97    |  0.97    |   114|
+|weighted avg     |  0.97  |    0.97    |  0.97    |   114|
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4_matrix1.png)
+
+Following the first example, we take the penalties and search for the best parameter and best accuracy of the final model:
+
+```python
+from sklearn.model_selection import GridSearchCV
+parameters_lr = [{'penalty':['l1','l2'],'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000]}]
+grid_search_lr = GridSearchCV(estimator = classifier7,
+                           param_grid = parameters_lr,
+                           scoring = 'accuracy',
+                           cv = 10,
+                           n_jobs = -1)
+grid_search_lr.fit(X_train, y_train)
+best_accuracy_lr = grid_search_lr.best_score_
+best_paramaeter_lr = grid_search_lr.best_params_  
+print("Best Accuracy of LR: {:.2f} %".format(best_accuracy_lr.mean()*100))
+print("Best Parameter of LR:", best_paramaeter_lr)
+```
+
+The result of this is:
+```
+Best Accuracy of LR: 97.36 %
+Best Parameter of LR: {'C': 0.1, 'penalty': 'l2'}
+```
+We have then as the best parameter of alpha 0.1, the best penalty as `l2` and the best accuracy of the model as 97.36.
+
+Now that we have this, we wanted to try the datasets of the images. At first we tried with the images themselves, but because of a minor inconvinience with my RAM memory, we repeated the process we made in homework 2, where we turned our images into text. For the entire code see [notebook]().
+
+Following the steps from before, we have our logistic regresion model:
+
+```python
+import pandas as pd
+import numpy as np
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import log_loss, roc_auc_score, recall_score, precision_score, average_precision_score, f1_score, classification_report, accuracy_score, plot_roc_curve, plot_precision_recall_curve, plot_confusion_matrix
+
+print('Log loss = {:.5f}'.format(log_loss(y_test, test_prob)))
+print('AUC = {:.5f}'.format(roc_auc_score(y_test, test_prob)))
+print('Average Precision = {:.5f}'.format(average_precision_score(y_test, test_prob)))
+print('\nUsing 0.5 as threshold:')
+print('Accuracy = {:.5f}'.format(accuracy_score(y_test, test_pred)))
+print('Precision = {:.5f}'.format(precision_score(y_test, test_pred)))
+print('Recall = {:.5f}'.format(recall_score(y_test, test_pred)))
+print('F1 score = {:.5f}'.format(f1_score(y_test, test_pred)))
+
+print('\nClassification Report')
+print(classification_report(y_test, test_pred))
+```
+
+The result was:
+
+```
+Log loss = 2.59377
+AUC = 0.83667
+Average Precision = 0.70296
+
+Using 0.5 as threshold:
+Accuracy = 0.74510
+Precision = 0.60465
+Recall = 0.74286
+F1 score = 0.66667
+```
+Classification Report:
+
+|             | precision  |  recall  |f1-score  | support|
+|-------------|------------|-----------|----------|--------|
+|           0  |     0.85   |   0.75   |   0.79  |      67|
+ |          1  |     0.60    |  0.74   |   0.67   |     35|
+|    accuracy  |              |        |   0.75     |  102|
+ |  macro avg   |    0.73   |   0.74   |   0.73    |   102|
+|weighted avg   |    0.76    |  0.75   |   0.75  |     102|
+
+
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4roc1.png)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4rocc2.png)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4matrix2.png)
 
