@@ -714,7 +714,7 @@ Notice that as C decreases the model coefficients become smaller, until at C=0.0
 
 For the next step we wanted to use the same data we used in the last homework, because it has the same structure as the one we saw in the example. (We where curious about this one from homework 3, when we saw the difference between linear and logistic regresion) Next, we try to replicate it with our image dataset.
 
-Similar to the last homework, we read and discard the columns in the dataset that we are not going to use. Then we use the same code used here to model a logistic regression. (Full code in the [notebook]())
+Similar to the last homework, we read and discard the columns in the dataset that we are not going to use. Then we use the same code used here to model a logistic regression. (Full code in the [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW4_Breastcancer.ipynb))
 
 ```python
 from sklearn.model_selection import train_test_split 
@@ -780,7 +780,9 @@ Best Parameter of LR: {'C': 0.1, 'penalty': 'l2'}
 ```
 We have then as the best parameter of alpha 0.1, the best penalty as `l2` and the best accuracy of the model as 97.36.
 
-Now that we have this, we wanted to try the datasets of the images. At first we tried with the images themselves, but because of a minor inconvinience with my RAM memory, we repeated the process we made in homework 2, where we turned our images into text. For the entire code see [notebook]().
+### Using the Minimias dataset:
+
+Now that we have this, we wanted to try the datasets of the images. At first we tried with the images themselves, but because of a minor inconvinience with my RAM memory, we repeated the process we made in homework 2, where we turned our images into text. Again, we use the dataset of minimias, because is the smallest one of all the others I have. For the entire code see [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW4_Mias_2.ipynb).
 
 Following the steps from before, we have our logistic regresion model:
 
