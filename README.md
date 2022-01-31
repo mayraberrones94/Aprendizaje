@@ -663,3 +663,43 @@ Now if we repeat the experiment with only the features that have significance, t
  |        age  |       0.044  |      0.010  |   4.520|
  
  ### Logistic Regression with L1 Regularization
+ 
+ We use now the library of `sklearn` to use regularization. Regularization is a technique used to prevent overfitting problem. If we are using the L1 regularization is called Lasso regression, and L2 is the Ridge regresion (both explored in previos work). Here we are going to use the L1 regularization. The same as before, we need to standarize our data:
+ 
+ ```python
+ import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# Create a scaler object
+sc = StandardScaler()
+
+# Fit the scaler to the training data and transform
+X_train_std = sc.fit_transform(X_train)
+
+# Apply the scaler to the test data
+X_test_std = sc.transform(X_test)
+```
+
+And then we call for the logistic regresion with the L1 penalty.
+
+```python
+C = [10, 1, .1, .001]
+
+for c in C:
+    clf = LogisticRegression(penalty='l1', C=c, solver='liblinear')
+    clf.fit(X_train, y_train)
+    print('C:', c)
+    print('Coefficient of each feature:', clf.coef_)
+    print('Training accuracy:', clf.score(X_train_std, y_train))
+    print('Test accuracy:', clf.score(X_test_std, y_test))
+    print('')
+```
+
+Here are the results:
+
+| Alpha | Co 1 | Co 2 | Co 3 | Co 4 | Co 5| Co 6 | Co 7 | Train acc | Test Acc |
+| 10 |  1.23147379e-04 | 9.41743090e-02 | 1.59695109e-01 | 8.12604169e-01|-3.44760156e-02 |-9.37890006e-04 | 4.50527046e-02|
