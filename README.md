@@ -650,4 +650,16 @@ As a result of this we have the folowing table:
 |     alcohol |        0.001 |       0.004 |    0.136|
   |       age |        0.043 |       0.010 |    4.181|
 
+If we follow the same steps we did in the example from chapter 3, we know that any Z score value that is greater than two is approximatly significant at 5%, so we can discard the values of `sbp`, `obesity`, and `alcohol`.
 
+Now if we repeat the experiment with only the features that have significance, then we get the table 4.3 from the book. (For the complete code, refer to the notebook)
+
+|              | Coefficient  | Std. Error  | Z Score|
+|--------------|--------------|-------------|--------|
+| (Intercept)  |      -4.204  |      0.498  |  -8.436|
+ |    tobacco  |       0.081  |      0.026  |   3.163|
+|         ldl  |       0.168   |     0.054  |   3.093|
+ |    famhist  |       0.924   |     0.223  |   4.141|
+ |        age  |       0.044  |      0.010  |   4.520|
+ 
+ ### Logistic Regression with L1 Regularization
