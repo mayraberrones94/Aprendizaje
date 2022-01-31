@@ -578,4 +578,37 @@ NOTE: We tried but failed to fully comprehend and form a multivariate problem wi
 
 > **Instructions:** Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data. 
 
+The example we are going to use is the South African heart disease. Same as other homeworks, we download our [dataset]() into our [notebook]() and see the desctiption of our variables.
 
+```python
+import pandas as pd
+import numpy as np
+
+dataset = pd.read_csv('/content/drive/MyDrive/Datasets/sahd.csv')
+dataset = dataset.drop('row.names', axis=1)
+```
+
+Here we can see some of the variables. 
+
+|Name of variable | Description |
+|-----------------|-------------|
+|sbp              |Systolic blood presure|
+|tobacco | Cumulative tobacco (kg) |
+|ldl | Low density lipoprotein cholesterol|
+|adiposity | |
+|famhist | Family history of heart disease |
+|typea | Type-A behavior |
+|obesity | |
+|alcohol | Current alcohol consumption |
+|age | Age at onset |
+|chd | Response coronary heart disease (1 is positive and 0 is negative)|
+
+This information was gathered [here](https://www.kaggle.com/c/SAheart/data).
+
+
+
+First we see in Figure 4.12 in the book that they ploted a similar pairplot than we did in our last homework. We import the library seaborn and plot a pairplot with the `chd` variable as target value. 
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h4-scatter_sahd1.png)
+
+As we can see the variable `famhist` is not present in this plot because is the only one that has text instead of numbers, so we can analize it a bit further.
