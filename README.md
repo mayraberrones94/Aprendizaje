@@ -871,3 +871,11 @@ For this work, we got an accuracy that matches the best CNN models we have for t
  For google colab I think is a bit computational expensive to turn all the images of my various datasets into text, but if I translate to my computer and my console, it would be worth it to see what is the result of this same experiment with the bigger datasets, because the time it takes to train this model is significantly smaller than what it takes to train a CNN. 
  
 The thing we want to try later on is to explore the use of tensorflow with this type of classification, or if there is a more efficient way to use logistic regression to images, since we saw that it could also be used for segmentation.
+
+### Extra: Remove the random state from the model, and see how much it changes with each iteration.
+
+For this experiment, we took `AUC`,	`Average_Precision`, `Accuracy`, `Precision`, `Recall`,	`F1_score`, and	`Best_accuracy` with the Plotly library.
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/total_accs.png)
+
+`Accuracy` and `best_accuracy` change very little in each iteration. `Average precision`, `Precision` and `Recall` are the ones that fluctuate the most. Next goes `F1_score`, but that is to be expected, when it uses the precision and recall to calculate it.
