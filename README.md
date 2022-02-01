@@ -879,3 +879,7 @@ For this experiment, we took `AUC`,	`Average_Precision`, `Accuracy`, `Precision`
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/total_accs.png)
 
 `Accuracy` and `best_accuracy` change very little in each iteration. `Average precision`, `Precision` and `Recall` are the ones that fluctuate the most. Next goes `F1_score`, but that is to be expected, when it uses the precision and recall to calculate it.
+
+And finally, we have the percentage of times that `L1` or `L2` regularization was chosen for the best accuracy. Next to it, the most selected alpha value as well.
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/pie_plot.png)
