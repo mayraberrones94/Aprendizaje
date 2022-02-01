@@ -578,7 +578,7 @@ NOTE: We tried but failed to fully comprehend and form a multivariate problem wi
 
 > **Instructions:** Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data. 
 
-The example we are going to use is the South African heart disease. Same as other homeworks, we download our [dataset](https://github.com/mayraberrones94/Aprendizaje/blob/main/Datasets/sahd.csv) into our [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW4_SAHD_example.ipynb) and see the desctiption of our variables.
+The example we are going to use is the South African heart disease. Same as other homeworks, we download our [dataset](https://github.com/mayraberrones94/Aprendizaje/blob/main/Datasets/sahd.csv) into our [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW4_SAHD_example.ipynb) and see the description of our variables.
 
 ```python
 import pandas as pd
@@ -637,7 +637,7 @@ print('-------------------------------------------------')
 for term, coefficient, std_err, z_score in result:
     print(f'{term:>12}{coefficient:>14.3f}{std_err:>13.3f}{z_score:>10.3f}')
 ```
-As a result of this we have the folowing table:
+As a result of this we have the following table:
 
 |            |Coefficient  | Std. Error  | Z Score|
 |------------|--------------|-------------|----------|
@@ -652,7 +652,7 @@ As a result of this we have the folowing table:
 
 If we follow the same steps we did in the example from chapter 3, we know that any Z score value that is greater than two is approximatly significant at 5%, so we can discard the values of `sbp`, `obesity`, and `alcohol`.
 
-Now if we repeat the experiment with only the features that have significance, then we get the table 4.3 from the book. (For the complete code, refer to the notebook)
+Now if we repeat the experiment with only the features that have significance, then we get Table 4.3 from the book. (For the complete code, refer to the notebook)
 
 |              | Coefficient  | Std. Error  | Z Score|
 |--------------|--------------|-------------|--------|
@@ -664,7 +664,7 @@ Now if we repeat the experiment with only the features that have significance, t
  
  ### Logistic Regression with L1 Regularization
  
- We use now the library of `sklearn` to use regularization. Regularization is a technique used to prevent overfitting problem. If we are using the L1 regularization is called Lasso regression, and L2 is the Ridge regresion (both explored in previos work). Here we are going to use the L1 regularization. The same as before, we need to standarize our data:
+ We use now the library of `sklearn` to use regularization. Regularization is a technique used to prevent overfitting problem. If we are using the L1 regularization is called Lasso regression, and L2 is the Ridge regresion (both explored in previos work). Here we are going to use the L1 regularization. The same as before, we need to standardize our data:
  
  ```python
  import numpy as np
@@ -684,7 +684,7 @@ X_train_std = sc.fit_transform(X_train)
 X_test_std = sc.transform(X_test)
 ```
 
-And then we call for the logistic regresion with the L1 penalty.
+And then we call for the logistic regression with the L1 penalty.
 
 ```python
 C = [10, 1, .1, .001]
@@ -712,7 +712,7 @@ Notice that as C decreases the model coefficients become smaller, until at C=0.0
 
 ### Logistic regression dataset breast cancer:
 
-For the next step we wanted to use the same data we used in the last homework, because it has the same structure as the one we saw in the example. (We where curious about this one from homework 3, when we saw the difference between linear and logistic regresion) Next, we try to replicate it with our image dataset.
+For the next step we wanted to use the same data we used in the last homework, because it has the same structure as the one we saw in the example. (We where curious about this one from homework 3, when we saw the difference between linear and logistic regression) Next, we try to replicate it with our image dataset.
 
 Similar to the last homework, we read and discard the columns in the dataset that we are not going to use. Then we use the same code used here to model a logistic regression. (Full code in the [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW4_Breastcancer.ipynb))
 
@@ -784,7 +784,7 @@ We have then as the best parameter of alpha 0.1, the best penalty as `l2` and th
 
 Now that we have this, we wanted to try the datasets of the images. At first we tried with the images themselves, but because of a minor inconvinience with my RAM memory, we repeated the process we made in homework 2, where we turned our images into text. Again, we use the dataset of minimias, because is the smallest one of all the others I have. For the entire code see [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW4_Mias_2.ipynb).
 
-Following the steps from before, we have our logistic regresion model:
+Following the steps from before, we have our logistic regression model:
 
 ```python
 import pandas as pd
@@ -867,7 +867,7 @@ Where we can se that the best accuracy is 83.05, the best alpha is 1 and the bes
 
 ### Conclusions:
 
-For this work, we got an accuracy that matches the best CNN models we have for this dataset, which in turn are far more complex.I had seen several times that logistic regression is very similar to the behaviour that neural networks have, so it was a pleasent suprise to see that it has good accuracy results.
+For this work, we got an accuracy that matches the best CNN models we have for this dataset, which in turn are far more complex. I had seen several times that logistic regression is very similar to the behaviour that neural networks have, so it was a pleasent suprise to see that it has good accuracy results.
  For google colab I think is a bit computational expensive to turn all the images of my various datasets into text, but if I translate to my computer and my console, it would be worth it to see what is the result of this same experiment with the bigger datasets, because the time it takes to train this model is significantly smaller than what it takes to train a CNN. 
  
-The thing we want to try later on is to explore the use of tensorflow with this type of classification, or if there is a more effcient way to use logistic regresion to images, since we saw that it could also be used for segmentation.
+The thing we want to try later on is to explore the use of tensorflow with this type of classification, or if there is a more efficient way to use logistic regression to images, since we saw that it could also be used for segmentation.
