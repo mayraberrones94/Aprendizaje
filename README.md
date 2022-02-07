@@ -952,3 +952,38 @@ H = model.fit_generator(train_datagen.flow(trainX, trainY, batch_size=BS),
 For this model we use a train data generator that makes some changes to the image (rotations, height and widht shifts, etc). First we experimented on the Minimias data set, since is the one we have been using for most of our work.
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/mias-alex.png)
+
+The final accuracy of our model was 0.69 for the training set, and 0.62 for the test set. And in the loss function we have 0.57 in training to 0.62 in testing.
+
+
+Now, we look for a way to implement the wavelet scattering to our model. In this [link]() we found the code for an article about 
+Wavelet scattering, where they implement it on a dummy dataset about cats and dogs. They use a very complex CNN architecture, and since we are using the Alexnet for this comparision, we took only the wavelet transform functions, modifing the inputs and outputs to tone down the complexity to match an architecture like Alexnet.
+
+They use a the pywavelet library from [python](https://pywavelets.readthedocs.io/en/latest/), and make it so it has several layers of image decomposition before we integrate it to the CNN.
+
+```python
+# batch operation usng tensor slice
+def WaveletTransformAxisY(batch_img):
+    odd_img  = batch_img[:,0::2]
+    even_img = batch_img[:,1::2]
+    L = (odd_img + even_img) / 2.0
+    H = K.abs(odd_img - even_img)
+    return L, H
+
+def WaveletTransformAxisX(batch_img):
+    # transpose + fliplr
+    tmp_batch = K.permute_dimensions(batch_img, [0, 2, 1])[:,:,::-1]
+    _dst_L, _dst_H = WaveletTransformAxisY(tmp_batch)
+    # transpose + flipud
+    dst_L = K.permute_dimensions(_dst_L, [0, 2, 1])[:,::-1,...]
+    dst_H = K.permute_dimensions(_dst_H, [0, 2, 1])[:,::-1,...]
+    return dst_L, dst_H
+```
+
+The rest of the code can be seen [here](). Then we modify the Alexnet architecture to be able to recieve as an input the images that went through wavelet transformations.
+
+In the wavelet function it takes into consideration the chanel of color rgb, so we need to make modifications in case we are using images in black and white. Another important thing to have in mind is the size of the image, because in this function you also have to keep in mind that each decomposition requires a different image size (smaller with each iteration). It was recomended to use an initial image size that allowed to have this resizing without running out of pixels. In our case, since we only have two decompositions, we could still begin with a small size (to avoid very large computational load at the beginin of our training).
+
+In the end, the code still uses almost the same libraries so it was easy to understand which parts we wanted to modify. The result in accuracy can be seen in the next plot:
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/mias-wave.png)
