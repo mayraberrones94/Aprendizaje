@@ -949,4 +949,6 @@ H = model.fit_generator(train_datagen.flow(trainX, trainY, batch_size=BS),
                                     steps_per_epoch=1000, 
                                     epochs=EPOCHS)
 ```
+For this model we use a train data generator that makes some changes to the image (rotations, height and widht shifts, etc). First we experimented on the Minimias data set, since is the one we have been using for most of our work.
 
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/mias-alex.png)
