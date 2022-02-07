@@ -885,7 +885,7 @@ And finally, we have the percentage of times that `L1` or `L2` regularization wa
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/pie_plot.png)
 
-## **Homework 5: Basis expansions and regularization:**
+## **Homework 5: Basis expansion and regularization:**
 > **Instructions:** Fit splines into single features in your project data. Explore options to obtain the best fit.
 
 In this work, we wanted to explore the option of using Wavelets. In the book they mention the possible uses for wavelet smoothing for splines, and that they are very popular in signal processing and compression. 
@@ -906,8 +906,22 @@ This concept brought us back to the idea that we were up to something good with 
 ...
 "Wavelet scattering works by cascading the image through a series of wavelet transforms, nonlinearities, and averaging"
 
-This article in particular was really helpful, since it gave us the idea we needed to fully understand how could we use the concept of wavlets for ous classification problem.
+This article in particular was really helpful since it gave us the idea we needed to fully understand how could we use the concept of wavelets for our classification problem.
 
-The original idea was to use different architectures to be able to find out what fitted best our target dataset. This however proved to be a major setback, since we found that the public datasets were perfoming well, and our target dataset was having issues going outside of the random accuracy (from 0.4 to 0.5).
+What could be the advantages of using wavelets:
+
+Wavelet scattering is basically the equivalent of a deep convolutional network. Seeing some of the examples that we investigated, is very similar to the method of pooling since it takes some of the features of the images to take forward.
+It has proved to yield representations that are stable against deformations and robust to noise.
+
+Now, since we have seen many comments and proofs of what the wavelets can do, we wonder what makes them different from neural networks, specifically, convolutional neural networks.
+
+We are then introduced to the Wavelet Scattering Network (WSN). This model in itself can't do classification, but its outputs can be used as inputs to another type of classifier. 
+
+In MATHLAB there is already software that takes advantage of these types of transformations. The wavelet is implemented alongside a deep convolutional network. 
+
+The original idea was to use different architectures to be able to find out what fitted best our target dataset. This however proved to be a major setback, since we found that the public datasets were performing well, and our target dataset was having issues going outside of the random accuracy (from 0.4 to 0.5). 
+
+The best architecture generally for our experimentation was the Alexnet model. 
+
 
 
