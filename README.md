@@ -908,4 +908,6 @@ This concept brought us back to the idea that we were up to something good with 
 
 This article in particular was really helpful, since it gave us the idea we needed to fully understand how could we use the concept of wavlets for ous classification problem.
 
-The original idea was to use different architectures to be able to find out what fitted best our target dataset. This however proved to be a major setback, since we found that 
+The original idea was to use different architectures to be able to find out what fitted best our target dataset. This however proved to be a major setback, since we found that the public datasets were perfoming well, and our target dataset was having issues going outside of the random accuracy (from 0.4 to 0.5).
+
+
