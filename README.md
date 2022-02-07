@@ -1000,6 +1000,11 @@ As expected, the accuracy and loss of both datasets gets stuck in the random poi
 
  ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/incan-wavelet.png)
  
- 
+ | Score | First experiment | Second Experiment|
+ |-------|------------------|------------------|
+ |Train_acc | 0.91| 0.92 |
+ |Train_loss| 0.22| 0.19 |
+ |Test_acc| 0.69| 0.70 |
+ |Test_loss| 0.80| 0.96 |
 
 
