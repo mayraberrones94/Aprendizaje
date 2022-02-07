@@ -987,3 +987,19 @@ In the wavelet function it takes into consideration the chanel of color rgb, so 
 In the end, the code still uses almost the same libraries so it was easy to understand which parts we wanted to modify. The result in accuracy can be seen in the next plot:
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/mias-wave.png)
+
+The final score was for the training set we had 0.84 of accuracy and 0.35 of loss, and for the test set we had 0.73 of accuracy and 0.53 of loss. It shows a good improvement from just using the CNN. We also noted that we had a very "spiky" plot, which made us think of the optimization problems we have seen before, where sometimes the result can get stuck in a local optimal solution, and that maybe, the wavelet transforms helped our optimizer to get out of those locals.
+
+Since we saw good results and we were feeling optimistic, we wanted to try with our objective dataset. Like we mentioned, one of our biggest setbacks was that this dataset did not perform well at all in any of the architectures we used. We have confirmation that the dataset is separated correctly, so we where looking for options to see how could we make our model perform better.
+
+ In this case, we followed the same process as before, and started with the Alexnet CNN architecture to see the results, which are not good at all. 
+ 
+ ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/incan-alex-plot.png)
+
+As expected, the accuracy and loss of both datasets gets stuck in the random point, which means that it is a 50/50 chance it would classify correctly in real life.We have a score of 0.56 on accuracy and 0.72 on loss for the training set, and in the test set we have a 0.51 in accuracy and 0.87 in loss. Then, we train our model with our modified Wavelet Convolutional Network.
+
+ ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/incan-wavelet.png)
+ 
+ 
+
+
