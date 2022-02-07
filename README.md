@@ -917,11 +917,36 @@ Now, since we have seen many comments and proofs of what the wavelets can do, we
 
 We are then introduced to the Wavelet Scattering Network (WSN). This model in itself can't do classification, but its outputs can be used as inputs to another type of classifier. 
 
-In MATHLAB there is already software that takes advantage of these types of transformations. The wavelet is implemented alongside a deep convolutional network. 
+In MATHLAB there is already software that takes advantage of these types of transformations. The wavelet is implemented alongside a deep convolutional network,
 
-The original idea was to use different architectures to be able to find out what fitted best our target dataset. This however proved to be a major setback, since we found that the public datasets were performing well, and our target dataset was having issues going outside of the random accuracy (from 0.4 to 0.5). 
+The original idea to solve our classification problem was to use different architectures to be able to find out what fitted best our target dataset. This however proved to be a major setback, since we found that the public datasets were performing well, and our target dataset was having issues going outside of the random accuracy (from 0.4 to 0.5). 
 
-The best architecture generally for our experimentation was the Alexnet model. 
+The best architecture generally for our experimentation with the other data sets (Mini-MIAS and DDSM) was the Alexnet model. Below we have some important parts of the adaptation we made for the Alexnet architecture. 
 
+```python
+import tensorflow as tf
+from tensorflow import keras
+import matplotlib
+```
 
+The most important libraries for us are the TensorFlow and Keras libraries. All the other imports can be seen in the full code. (In this case, we did not use a notebook, because we use our computer console to run these codes)
+
+```python
+model = Sequential()
+model.add(Conv2D(16, (11, 11), input_shape=(Lng, Hg, 3),
+        padding='same', kernel_regularizer=l2(INIT_LR)))
+model.add(BatchNormalization())
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+```
+Here is a small excerpt of one of the 7 layers of convolution and pooling of our model. 
+
+```python
+print("[INFO] Tr {} epochs...".format(EPOCHS))
+H = model.fit_generator(train_datagen.flow(trainX, trainY, batch_size=BS), 
+                                    validation_data=(testX, testY), callbacks=[reduce_lr], 
+                                    validation_steps = 1000,
+                                    steps_per_epoch=1000, 
+                                    epochs=EPOCHS)
+```
 
