@@ -6,6 +6,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 2: Supervised learning](#homework-2-supervised-learning)
 + [Chapter 3: Linear Regresion](#homework-3-linear-regresion)
 + [Chapter 4: Linear methods for Classification](#homework-4-linear-methods-for-classification)
++ [Chapter 5: Basis expansion and regularization](#homework-5-basis-expansion-and-regularization)
 ---
 
 ## **Homework 1: Introduction**
@@ -883,3 +884,28 @@ For this experiment, we took `AUC`,	`Average_Precision`, `Accuracy`, `Precision`
 And finally, we have the percentage of times that `L1` or `L2` regularization was chosen for the best accuracy. Next to it, the most selected alpha value as well.
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/pie_plot.png)
+
+## **Homework 5: Basis expansions and regularization:**
+> **Instructions:** Fit splines into single features in your project data. Explore options to obtain the best fit.
+
+In this work, we wanted to explore the option of using Wavelets. In the book they mention the possible uses for wavelet smoothing for splines, and that they are very popular in signal processing and compression. 
+
+The explanation for wavelets from the book was a bit dense, and we wanted to explore a bit more in the subject of image processing and compression, and if we could use it for any of the problems we described since homework 1.   For this, we compiled some information that helped us understand better the subject before we applied it to our models.
+
+First, here are some handy concepts that helped:
+
+> **Wavelet:** 
+"A Wavelet is a wave-like oscillation that is localized in time, an example is given below. Wavelets have two basic properties: scale and location. Scale (or dilation) defines how “stretched” or “squished” a wavelet is. This property is related to frequency as defined for waves. Location defines where the wavelet is positioned in time (or space)."
+...
+"The basic idea is to compute how much of a wavelet is in a signal for a particular scale and location. For those familiar with convolutions, that is exactly what this is. A signal is convolved with a set of wavelets at a variety of scales."
+
+This concept brought us back to the idea that we were up to something good with our analysis since we first understood splines and wavelets as signal processing over a period of time. Since our data are images, we could not relate the two different types of data, but at the explanation that it has a similar behavior as convolutions, we wanted to search for something more specific. So we landed on the next concept:
+
+> **Wavelet Image Scattering:**
+"In a digital image, texture provides information about the spatial arrangement of color or pixel intensities. Particular spatial arrangements of color or pixel intensities correspond to different appearances and consistencies of the physical material being imaged."
+...
+"Wavelet scattering works by cascading the image through a series of wavelet transforms, nonlinearities, and averaging"
+
+This article in particular was really helpful, since it gave us the idea we needed to fully understand how could we use the concept of wavlets for ous classification problem.
+
+The original idea was to use different architectures to be able to find out what fitted best our target dataset. This however proved to be a major setback, since we found that 
