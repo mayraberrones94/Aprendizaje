@@ -1006,6 +1006,8 @@ As expected, the accuracy and loss of both datasets gets stuck in the random poi
  |Train_loss| 0.22| 0.19 |
  |Test_acc| 0.69| 0.70 |
  |Test_loss| 0.80| 0.96 |
+ 
+ 
 As we can see, we now have better results, and the training and testing sets are out of the random zone. We ran the experiment twice just to make sure it was just a random result. 
 
  In the end we have a better performance in the training set than we have in the test set. In this case we know that the reason for this could be the training and test spliting. We are going to work now on the features and variables that we know can help our model to see if we can balance them out.
