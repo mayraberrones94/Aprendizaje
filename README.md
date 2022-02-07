@@ -910,8 +910,8 @@ This article in particular was really helpful since it gave us the idea we neede
 
 What could be the advantages of using wavelets:
 
-Wavelet scattering is basically the equivalent of a deep convolutional network. Seeing some of the examples that we investigated, is very similar to the method of pooling since it takes some of the features of the images to take forward.
-It has proved to yield representations that are stable against deformations and robust to noise.
+- Wavelet scattering is basically the equivalent of a deep convolutional network. Seeing some of the examples that we investigated, is very similar to the method of pooling since it takes some of the features of the images to take forward.
+- It has proved to yield representations that are stable against deformations and robust to noise.
 
 Now, since we have seen many comments and proofs of what the wavelets can do, we wonder what makes them different from neural networks, specifically, convolutional neural networks.
 
