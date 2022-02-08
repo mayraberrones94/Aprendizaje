@@ -929,7 +929,7 @@ from tensorflow import keras
 import matplotlib
 ```
 
-The most important libraries for us are the TensorFlow and Keras libraries. All the other imports can be seen in the full code. (In this case, we did not use a notebook, because we use our computer console to run these codes)
+The most important libraries for us are the TensorFlow and Keras libraries. All the other imports can be seen in the [full code](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/redv4_alex.py). (In this case, we did not use a notebook, because we use our computer console to run these codes)
 
 ```python
 model = Sequential()
@@ -956,7 +956,7 @@ For this model we use a train data generator that makes some changes to the imag
 The final accuracy of our model was 0.69 for the training set, and 0.62 for the test set. And in the loss function we have 0.57 in training to 0.62 in testing.
 
 
-Now, we look for a way to implement the wavelet scattering to our model. In this [link]() we found the code for an article about 
+Now, we look for a way to implement the wavelet scattering to our model. In this [link](https://github.com/menon92/WaveletCNN/blob/master/Wavelet%20Convolutional%20Neural%20Networks.pdf) we found the code for an article about 
 Wavelet scattering, where they implement it on a dummy dataset about cats and dogs. They use a very complex CNN architecture, and since we are using the Alexnet for this comparision, we took only the wavelet transform functions, modifing the inputs and outputs to tone down the complexity to match an architecture like Alexnet.
 
 They use a the pywavelet library from [python](https://pywavelets.readthedocs.io/en/latest/), and make it so it has several layers of image decomposition before we integrate it to the CNN.
@@ -980,7 +980,7 @@ def WaveletTransformAxisX(batch_img):
     return dst_L, dst_H
 ```
 
-The rest of the code can be seen [here](). Then we modify the Alexnet architecture to be able to recieve as an input the images that went through wavelet transformations.
+The rest of the code can be seen [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/wavelet.py). Then we modify the Alexnet architecture to be able to recieve as an input the images that went through wavelet transformations.
 
 In the wavelet function it takes into consideration the chanel of color rgb, so we need to make modifications in case we are using images in black and white. Another important thing to have in mind is the size of the image, because in this function you also have to keep in mind that each decomposition requires a different image size (smaller with each iteration). It was recomended to use an initial image size that allowed to have this resizing without running out of pixels. In our case, since we only have two decompositions, we could still begin with a small size (to avoid very large computational load at the beginin of our training).
 
