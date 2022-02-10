@@ -7,6 +7,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 3: Linear Regresion](#homework-3-linear-regresion)
 + [Chapter 4: Linear methods for Classification](#homework-4-linear-methods-for-classification)
 + [Chapter 5: Basis expansion and regularization](#homework-5-basis-expansion-and-regularization)
++ [Chapter 6: Kernel smoothing methods](#homework-6-kernel-smoothing-methods)
 ---
 
 ## **Homework 1: Introduction**
@@ -1014,4 +1015,8 @@ As we can see, we now have better results, and the training and testing sets are
 
 ### Conclusions:
 This work was a bit hard to understand at first, because the information in the book about wavelets was a bit dense, but once we realized what we could do, and see the experimental results turn out better than we expected gave us a boost to continue to explore the wavelet transform, so we can keep improving our classification model. A major bonus was that we are now in a good path to understand why our target data set was not working to begin with, and we can now begin to form more hypothesis as to what features we can modify to improve our results.
+
+## **Homework 6: Kernel smoothing methods:**
+> **Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
+
 
