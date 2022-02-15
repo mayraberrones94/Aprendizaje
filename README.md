@@ -1019,4 +1019,143 @@ This work was a bit hard to understand at first, because the information in the 
 ## **Homework 6: Kernel smoothing methods:**
 > **Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
 
+For this work we had very different ideas. Since we work with convolutional networks, kernels is something that is mentioned constantly. In our experience, kernels is used as a part of the convulutional process to extract features from the input images. The size of the kernel is one of the parameters we always left fixed in a matrix of 3x3, since our understanding was that this matrix was used to extract little chunks of the image to analize (and we wanted a small computational load for our models).
 
+In this weeks work we would like to explore the different uses we can give kernels, starting with the ones we know, and then getting into the ones they mention in the book, such as kernel density estimation.
+
+As always, we begin by importing some of the main libraries we are going to be using:
+
+```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+import seaborn as sns; sns.set()
+```
+
+The first use we found of kernels was to enhance our dataset, and augment data. Before we had knowledge of a more simple and efective way to augment our data (without compromising quality or storage) we practiced with some kernels that are widely used for image transformations. For this experiment, we are using one of the images from our free dataset.
+
+```python
+image = cv2.imread('mdb001.png')
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+fig, ax = plt.subplots(1, figsize=(12,8))
+plt.imshow(image)
+plt.savefig('breast1.png')
+```
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breast1.png)
+
+Here we see the original image. For some transformations, we can construct and develop our own kernels, which helps us determine what kind of kernel could be more beneficial for our images.
+
+```python
+kernel_sharpen = np.array([[0, -1, 0],
+                   [-1, 5, -1],
+                   [0, -1, 0]])
+
+laplacian = np.array((
+	[0, 1, 0],
+	[1, -4, 1],
+	[0, 1, 0]), dtype="int")
+
+# construct the Sobel x-axis kernel
+sobelX = np.array((
+	[-1, 0, 1],
+	[-2, 0, 2],
+	[-1, 0, 1]), dtype="int")
+
+# construct the Sobel y-axis kernel
+sobelY = np.array((
+	[-1, -2, -1],
+	[0, 0, 0],
+	[1, 2, 1]), dtype="int")
+
+
+img_sharp = cv2.filter2D(image, -1, kernel_sharpen)
+img_laplace = cv2.filter2D(image, -1, laplacian)
+img_sox = cv2.filter2D(image, -1, sobelX)
+img_soy = cv2.filter2D(image, -1, sobelY)
+
+```
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img_sharp.png)
+
+For the sharpening transformation, there is a slight change that we can apreciate in the upper part of the image. If we compare it with the original, we can actually see some of the lines (the veins) are a little more pronounced.
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img-laplace.png)
+
+For the laplace transormation we can not get much out of it, but that is how its supposed to work for this type of images.
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img-sox.png)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img-soy.png)
+
+Finally, the sobel transformation we have something similar as to what we discovered in the wavelet transformation python library from homework 5. They take into consideration different sides of the image, so they look like two different shadings.
+
+There are other gaussian and median blur kernels that we can see in the full [notebook](). A very interesting one that we foun in the library of opencv that we had not seen before is the dilation and erosion function. 
+
+```python
+image = cv2.imread('mdb001.png')
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) 
+r ,image = cv2.threshold(image, 150, 255, cv2.THRESH_BINARY)
+# create kernel
+kernel = np.ones((5,5), np.uint8)
+fig, ax = plt.subplots(1, figsize=(16,12))
+# original
+ax = plt.subplot(232)
+plt.imshow(image)
+plt.title('original')
+# erosion
+e = cv2.erode(image, kernel)
+ax = plt.subplot(234)
+plt.imshow(e)
+plt.title('erosion')
+# dilation
+d = cv2.dilate(image, kernel)
+ax = plt.subplot(235)
+plt.imshow(d)
+plt.title('dilation')
+# morphological gradient (dilation - erosion)
+m = cv2.morphologyEx(image, cv2.MORPH_GRADIENT, kernel)
+ax = plt.subplot(236)
+plt.imshow(m)
+plt.title('dilation - erosion')\
+
+plt.savefig('dilation-erosion.png')
+```
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/dilation-erosion.png)
+
+Both of the filters combined can help us when we reach the step of feature extraction, and we have to make our own ground truth data.
+
+In the notebook we also mention the library PIL, which was the one we used to augment our data in our masters thesis experimentation. We had to make some changes to the augmentation process, because we had some problems with some images, since it was not consistent when we used it in all the datasets.
+
+Now we wanted to explore a bit more of the experiments and explanations we saw in the book. Again, we had to think a little bit different, since the examples shown in the book use a different type of dataset that the one we have. We took one image and transform it to a histogram. 
+
+```python
+from skimage import io
+import matplotlib.pyplot as plt
+
+image = io.imread('mdb001.png')
+ax = plt.hist(image.ravel(), bins = 256)
+plt.savefig('breast-ravel.png')
+plt.show()
+
+```
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breast-ravel.png)
+
+For this first plot, we used a full `binsize` of 256. The bars are too close together, so we ploted some more histograms with decreasing `binsize`.
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breast-bins150.png)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breast-bins75.png)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breast-bins30.png)
+
+As we can see, all of them have similar behavior, but the one with 75 and 30 bin sizes, we can recognize the pattern much better.
+
+Reading further into this behavior, we looked into other python libraries. In this case, we found the sklearn library and seaborn. With seaborn, we could actually plot a KDE with the default bandwidth for the gaussian distribution.
+
+Then, same as we did before, we compare the smoothness of the KDE with different bandwidth estimates. 
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kdeplot-bandwith-estim.png)
