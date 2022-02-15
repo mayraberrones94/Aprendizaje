@@ -1019,9 +1019,9 @@ This work was a bit hard to understand at first, because the information in the 
 ## **Homework 6: Kernel smoothing methods:**
 > **Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
 
-For this work we had very different ideas. Since we work with convolutional networks, kernels is something that is mentioned constantly. In our experience, kernels is used as a part of the convulutional process to extract features from the input images. The size of the kernel is one of the parameters we always left fixed in a matrix of 3x3, since our understanding was that this matrix was used to extract little chunks of the image to analize (and we wanted a small computational load for our models).
+For this work, we had very different ideas. Since we work with convolutional networks, kernels are something that is mentioned constantly. In our experience, kernels are used as a part of the convolutional process to extract features from the input images. The size of the kernel is one of the parameters we always left fixed in a matrix of 3x3 since our understanding was that this matrix was used to extract little chunks of the image to analyze (and we wanted a small computational load for our models).
 
-In this weeks work we would like to explore the different uses we can give kernels, starting with the ones we know, and then getting into the ones they mention in the book, such as kernel density estimation.
+In this week's work, we would like to explore the different uses we can give kernels, starting with the ones we know, and then getting into the ones they mention in the book, such as kernel density estimation.
 
 As always, we begin by importing some of the main libraries we are going to be using:
 
@@ -1034,7 +1034,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
 ```
 
-The first use we found of kernels was to enhance our dataset, and augment data. Before we had knowledge of a more simple and efective way to augment our data (without compromising quality or storage) we practiced with some kernels that are widely used for image transformations. For this experiment, we are using one of the images from our free dataset.
+The first use we found of kernels was to enhance our dataset and augment data. Before we had knowledge of a more simple and effective way to augment our data (without compromising quality or storage) we practiced with some kernels that are widely used for image transformations. For this experiment, we are using one of the images from our free dataset.
 
 ```python
 image = cv2.imread('mdb001.png')
@@ -1079,19 +1079,19 @@ img_soy = cv2.filter2D(image, -1, sobelY)
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img_sharp.png)
 
-For the sharpening transformation, there is a slight change that we can apreciate in the upper part of the image. If we compare it with the original, we can actually see some of the lines (the veins) are a little more pronounced.
+For the sharpening transformation, there is a slight chance that we can appreciate it in the upper part of the image. If we compare it with the original, we can actually see some of the lines (the veins) are a little more pronounced.
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img-laplace.png)
 
-For the laplace transormation we can not get much out of it, but that is how its supposed to work for this type of images.
+For the Laplace transormation, we can not get much out of it, but that is how it is supposed to work for this type of image.
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img-sox.png)
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img-soy.png)
 
-Finally, the sobel transformation we have something similar as to what we discovered in the wavelet transformation python library from homework 5. They take into consideration different sides of the image, so they look like two different shadings.
+Finally, the Sobel transformation we have something similar to what we discovered in the wavelet transformation python library from homework 5. They take into consideration different sides of the image, so they look like two different shadings.
 
-There are other gaussian and median blur kernels that we can see in the full [notebook](). A very interesting one that we foun in the library of opencv that we had not seen before is the dilation and erosion function. 
+There are other Gaussian and median blur kernels that we can see in the full [notebook](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW6_KDE.ipynb). A very interesting one that we found in the library of OpenCV that we had not seen before is the dilation and erosion function. 
 
 ```python
 image = cv2.imread('mdb001.png')
@@ -1127,9 +1127,9 @@ plt.savefig('dilation-erosion.png')
 
 Both of the filters combined can help us when we reach the step of feature extraction, and we have to make our own ground truth data.
 
-In the notebook we also mention the library PIL, which was the one we used to augment our data in our masters thesis experimentation. We had to make some changes to the augmentation process, because we had some problems with some images, since it was not consistent when we used it in all the datasets.
+In the notebook, we also mention the library PIL, which was the one we used to augment our data in our master's thesis experimentation. We had to make some changes to the augmentation process, because we had some problems with some images since it was not consistent when we used it in all the datasets.
 
-Now we wanted to explore a bit more of the experiments and explanations we saw in the book. Again, we had to think a little bit different, since the examples shown in the book use a different type of dataset that the one we have. We took one image and transform it to a histogram. 
+Now we wanted to explore a bit more of the experiments and explanations we saw in the book. Again, we had to think a little bit differently, since the examples shown in the book use a different type of dataset than the one we have. We took one image and transform it into a histogram. 
 
 ```python
 from skimage import io
@@ -1144,7 +1144,7 @@ plt.show()
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breast-ravel.png)
 
-For this first plot, we used a full `binsize` of 256. The bars are too close together, so we ploted some more histograms with decreasing `binsize`.
+For this first plot, we used a full `binsize` of 256. The bars are too close together, so we plotted some more histograms with decreasing `binsize`.
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breast-bins150.png)
 
@@ -1201,3 +1201,11 @@ print("optimal bandwidth: " + "{:.2f}".format(kde.bandwidth))
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/optimal-band.png)
 
 In the end, we have this plot and have that the best bandwidth for this data is `1.95`.
+
+### Conclusions:
+
+For this work, we wanted to focus only on the images, and see what the kernel density estimation could bring us, especially since we saw this post about the MNIST data set, and how they generated their own images from the original data. This idea was especially appealing to us since we have a limited amount of data from our target dataset, but after several tries, we realized that the computational load was going to be too much. The experiments we saw also yielded very poor images as a result. We also tried to apply the best bandwidth estimator for the small image experiment we first have, but it took way too much time to compile, so we moved on to the next one.
+
+In some articles, we also saw how kernel density estimation works poorly with images (https://arxiv.org/pdf/2110.12644.pdf).
+
+In the end, it was very interesting to see what kernels actually do outside of convolutions, where we just took them as another parameter. 
