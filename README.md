@@ -1159,3 +1159,45 @@ Reading further into this behavior, we looked into other python libraries. In th
 Then, same as we did before, we compare the smoothness of the KDE with different bandwidth estimates. 
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kdeplot-bandwith-estim.png)
+
+
+Further than this, we wanted to use a similar dataset from the book, so we took the data from the breast cancer Wisconsin that we have been using in previous homework. 
+
+Seaborn also has a function where we can use the standard Gaussian function, or alter the bandwidth of the plot. We took the mean features of our dataset and compared the bandwidth for normal Gaussian distribution, 0.05 and 0.1 bandwidth.
+
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/bcw-normal-kde.png)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/bcw-kde-0.05.png)
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/bcw-kde-0.1.png)
+
+Although is fun to change the bandwidth to see the different aspects of our data, sklearn actually has some functions that would help us determine the best bandwidth for our data. 
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KernelDensity
+from sklearn.model_selection import GridSearchCV
+
+model = KernelDensity()
+model.fit(x_train)
+log_dens = model.score_samples(x_test)
+
+bandwidth = np.arange(0.05, 2, .05)
+kde = KernelDensity(kernel='gaussian')
+grid = GridSearchCV(kde, {'bandwidth': bandwidth})
+grid.fit(x_train)
+
+kde = grid.best_estimator_
+log_dens = kde.score_samples(x_test)
+plt.fill(x_test, np.exp(log_dens), c='green')
+plt.title('Optimal estimate with Gaussian kernel')
+plt.savefig('optimal-band.png')
+plt.show()
+print("optimal bandwidth: " + "{:.2f}".format(kde.bandwidth))
+```
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/optimal-band.png)
+
+In the end, we have this plot and have that the best bandwidth for this data is `1.95`.
