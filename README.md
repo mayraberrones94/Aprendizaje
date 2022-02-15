@@ -1191,9 +1191,9 @@ grid.fit(x_train)
 
 kde = grid.best_estimator_
 log_dens = kde.score_samples(x_test)
-plt.fill(x_test, np.exp(log_dens), c='green')
+plt.plot(x_test)
 plt.title('Optimal estimate with Gaussian kernel')
-plt.savefig('optimal-band.png')
+plt.savefig('optimal-band1.png')
 plt.show()
 print("optimal bandwidth: " + "{:.2f}".format(kde.bandwidth))
 ```
