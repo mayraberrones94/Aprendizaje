@@ -1198,7 +1198,7 @@ plt.show()
 print("optimal bandwidth: " + "{:.2f}".format(kde.bandwidth))
 ```
 
-![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/optimal-band.png)
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/optimal-band1.png)
 
 In the end, we have this plot and have that the best bandwidth for this data is `1.95`.
 
