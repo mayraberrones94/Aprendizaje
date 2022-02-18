@@ -1209,3 +1209,6 @@ For this work, we wanted to focus only on the images, and see what the kernel de
 In some articles, we also saw how kernel density estimation works poorly with images (https://arxiv.org/pdf/2110.12644.pdf).
 
 In the end, it was very interesting to see what kernels actually do outside of convolutions, where we just took them as another parameter. 
+
+## **Homework 7: : Model assesment and selection**
+> **Instructions:**  Apply both cross-validation and bootstrap to your project data to study how variable your results are when you switch the test set around.
