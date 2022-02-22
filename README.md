@@ -1374,7 +1374,61 @@ for train, test in skf.split(X, np.zeros(shape=(X.shape[0], 1))):
 
 Our code also gives us the presision and recall factors, and in all the folds, the dataset containg anomalies had the highest percentage. In here we do not really see a big improvement in the loss function of the test set, which was the problem that we wanted to solve from homework 5. So now we try the bootstrap.
 
+## Bootstrap.
 
+When we searched in the `sklearn` library for a method that contained bootstrap, we found out that it was discontinued, so we learned the process that takes place in the methodology of "bootstraping" and searched for the function closest to it.
+
+> **Bootstrap:** Bootstrap Sampling is a method that involves drawing of sample data repeatedly with replacement from a data source to estimate a population parameter.
+
+The `resample()` scikit-learn function can be used for this. It takes as arguments the data array, whether or not to sample with replacement, the size of the sample, and the seed.
+
+So now we have the wavelet-CNN with the following code (the rest of the code can be found [here]()):
+
+```python
+B = 5
+errors = []
+
+VALIDATION_ACCURACY = []
+
+VALIDAITON_LOSS = []
+for i in range(B):
+    X_bootstrap, y_bootstrap = resample(X, y)
+    trainX, testX, trainY, testY = train_test_split(X_bootstrap, y_bootstrap, test_size=0.25, random_state=42)
+    model = get_wavelet_cnn_model()
+    model.compile(loss="binary_crossentropy", optimizer= "adam", metrics=["acc"])
+    checkpoint = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=1e-5)
+    callbacks_list = [checkpoint]
+
+    history = model.fit_generator(train_datagen.flow(trainX, trainY, batch_size=BS), 
+                                    validation_data=(testX, testY), 
+                                    callbacks=callbacks_list, 
+                                    validation_steps = 1000,
+                                    steps_per_epoch=1000, 
+                                    epochs=EPOCHS)
+
+    predictions = model.predict(testX, batch_size=BS)
+    print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1), target_names=le.classes_))
+    model.save("modelboot_"+str(i)+".h5")
+    model.load_weights("modelboot_"+str(i)+".h5")
+```
+ 
+ This are the results of using the bootstrap method:
+ 
+ ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/boot-allplot.png)
+ 
+ | Iteration | Train acc | Train loss | Test acc | Test loss |
+|------|-----------|------------|----------|-----------|
+| 1 | 0.89 | 0.25 | 0.79 | 0.79|
+|2 |0.86 | 0.33 | 0.67 | 0.81|
+|3 | 0.87 | 0.28 | 0.76 | 0.59|
+|4 | 0.87 | 0.30 | 0.78 | 0.61|
+|5 | 0.86 | 0.31 | 0.64 | 0.81|
+
+### Conclusions:
+
+In general, the bootstrap method worked faster than the stratified Kfold, and the results are also better. In three of the five iterations, we saw that the loss function of both datasets was not so far apart, which is also a really good result.
+
+Another thing we noticed when comparing the stratified Kfolds and the bootstrap results was that in the precision and recall the results were not so far apart from normal and abnormal images in the bootstrap method, which makes it the more stable option.
  
 
 
