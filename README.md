@@ -1334,7 +1334,14 @@ for train, test in kf.split(X):
                                     epochs=EPOCHS)
 ```
 
-For the `KFold`
+
+For the `KFold` results, we struggled a little bit to adapt it to the code, because the examples we found were usually for low dimension data and other algorithms such as RandomForest and SVM. In the end, the model takes a bit more time to compile, and each iteration in the training model goes up in time elapsed. 
+
+The results of 3 folds are as follows:
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kfolds_plot.png)
+
+
 
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/shuffleplot.png)
