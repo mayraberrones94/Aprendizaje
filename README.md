@@ -1211,7 +1211,7 @@ In some articles, we also saw how kernel density estimation works poorly with im
 
 In the end, it was very interesting to see what kernels actually do outside of convolutions, where we just took them as another parameter. 
 
-## **Homework 7: : Model assesment and selection**
+## **Homework 7: Model assesment and selection**
 > **Instructions:**  Apply both cross-validation and bootstrap to your project data to study how variable your results are when you switch the test set around.
 
 Since our last work from homework 5, we have been trying to find something that would help us improve the results shown in the accuracy and loss functions of our model. 
@@ -1236,3 +1236,21 @@ This dropout parameter is already considered inside all of the CNN architectures
 
 Dropout proved to be a good parameter to avoid overfitting even when our architecture was in its simpler form. So now that we know that we are using this parameter, we can start looking for others that can help us improve the accuracy of our model and avoid overfitting.
 
+
+
+
+## Cross validation
+
+We have established now some of the characteristics of an overfitted model. We are already using dropout to help alleviate some of these results. So now we move to cross-validation.
+
+> **Cross-validation:** This is a very important concept in machine learning. It can help our model by reducing the size of the data and ensuring our model is robust.
+
+Most of the time, the way we solved the overfitting problem on datasets was to change the size of the training and test sets, but this also can turn out to be problematic if we do not have enough data in our training set that helps our model generalize the image features correctly.
+
+As we mentioned, one of the advantages of using cross-validation is that helps us reduce this problem of imbalanced data.
+
+Normally in our training process, we will have three sets. Training, validation, and test sets. If we do not have enough data (as seen in the YERAL and MINI MIAS datasets) these kinds of divisions can be contra-productive. 
+
+Introducing cross-validation to our process can help reduce the need to have a validation set because it is already embedded in the train and test sets.
+
+An example of how does this works can be seen in the example below, where we have an example of a 5 fold cross-validation data split.
