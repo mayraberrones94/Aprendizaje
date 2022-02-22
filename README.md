@@ -1269,4 +1269,20 @@ Some of the most common and popular methods are:
 
 We begin by importing the necessary libraries:
 
+```python
+from sklearn.model_selection import KFold, StratifiedKFold, train_test_split, cross_validate, cross_val_score
+from sklearn.datasets import load_iris, load_boston
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
 
+# import libraries for charting and manipulations with datasets
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import random
+```
+
+The library of sklearn
+
+![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kfolds.png)
