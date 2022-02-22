@@ -8,6 +8,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 4: Linear methods for Classification](#homework-4-linear-methods-for-classification)
 + [Chapter 5: Basis expansion and regularization](#homework-5-basis-expansion-and-regularization)
 + [Chapter 6: Kernel smoothing methods](#homework-6-kernel-smoothing-methods)
++ [Chapter 7: Model assesment and selection](#homework-7-model-assesment-and-selection)
 ---
 
 ## **Homework 1: Introduction**
@@ -1212,3 +1213,26 @@ In the end, it was very interesting to see what kernels actually do outside of c
 
 ## **Homework 7: : Model assesment and selection**
 > **Instructions:**  Apply both cross-validation and bootstrap to your project data to study how variable your results are when you switch the test set around.
+
+Since our last work from homework 5, we have been trying to find something that would help us improve the results shown in the accuracy and loss functions of our model. 
+
+We had a major discovery when we could finally take our target dataset from the randomness it seemed to be stuck in. The only problem with those results was that the difference between the training and test set was showing signs of overfitting.
+
+> **Overfitting** This occurs when we have a model that fits exactly against the training data points, which would make the training accuracy appear near perfect, but when we test the model, we can see that it is not performing as well as the training.
+
+What are some signals we need to be looking after when we want to avoid overfitting:
+
+- Low error rates and high variance are good indicators of overfitting. 
+- If the training data has a low error rate and the test data has a high error rate, it signals to overfit.
+- When the model trains for too long on sample data or when the model is too complex, it can start to learn the “noise,” or irrelevant information.
+- When the model memorizes the noise and fits too closely to the training set, the model becomes “overfitted,” and it is unable to generalize well to new data. 
+
+There is a variety of things we can try to avoid falling into an overfitted model. One of them is the use of Dropout.
+
+> **Dropout** Dropout is referring to the data or noise that is intentionally dropped from a neural network to improve the processing and time of the results.
+
+This dropout parameter is already considered inside all of the CNN architectures that we have used so far. Our favorite way to explain it is like a traffic quota that needs to be filled between neuron connections. If there is not enough traffic from neuron to neuron 
+(depending on the threshold we assign), then that connection gets deprecated, so in the end, only the most-used connections are left.
+
+Dropout proved to be a good parameter to avoid overfitting even when our architecture was in its simpler form. So now that we know that we are using this parameter, we can start looking for others that can help us improve the accuracy of our model and avoid overfitting.
+
