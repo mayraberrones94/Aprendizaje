@@ -1342,6 +1342,12 @@ The results of 3 folds are as follows:
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kfolds_plot.png)
 
 
+| Fold | Train acc | Train loss | Test acc | Test loss |
+|------|-----------|------------|----------|-----------|
+| 1 | 0.85 | 0.31 | 0.58 | 1.60|
+|2 | 0.87 | 0.29 | 0.70 | 0.97 |
+|3 | 0.84 | 0.35 | 0.68 | 0.74 |
+
 
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/shuffleplot.png)
