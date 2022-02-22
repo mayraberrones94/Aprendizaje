@@ -1254,3 +1254,19 @@ Normally in our training process, we will have three sets. Training, validation,
 Introducing cross-validation to our process can help reduce the need to have a validation set because it is already embedded in the train and test sets.
 
 An example of how does this works can be seen in the example below, where we have an example of a 5 fold cross-validation data split.
+
+
+Seeing some of the libraries that use this type of cross-validation we find that the `Sklearn` library uses a type of stratified split when we use the `train_test_split` method. This means that our data is well distributed to our target variables (normal and anomalies).
+
+Now, as we mentioned, `Sklearn` already helps with the stratified separation of the datasets, but there are also other methods for splitting data that allow us to solve different types of problems.
+
+Some of the most common and popular methods are:
+
+- `train_test_split` - creates single split into train and test set.
+- `Kfold` - creates k-fold splits allowing cross validation
+- `StratifiedKFold` - creates k-fold splits considering the distribution of the target variable
+- `cross_val_score` - evaluates model's score through cross validation
+
+We begin by importing the necessary libraries:
+
+
