@@ -1282,7 +1282,59 @@ import pandas as pd
 import numpy as np
 import random
 ```
-
-The library of sklearn
+The library of Sklearn has a little experiment to represent what happens to our dataset when we use the cross-validation folds. In the first plot, we can see a kind of ordered way of taking data.
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kfolds.png)
+
+We made some modifications to our original code for wavelet transformations, so we can apply these methods of sampling and see if we can improve the accuracy and loss we presented in homework 5.
+
+```python
+def get_model_name(k):
+    return 'model_'+str(k)+'.h5'
+
+kf = KFold(n_splits = 5)
+                         
+skf = StratifiedKFold(n_splits = 3, random_state = 7, shuffle = True) 
+
+VALIDATION_ACCURACY = []
+
+VALIDAITON_LOSS = []
+from numpy import array
+#save_dir = '/Users/MayraBerrones/Documents/VisualCode/'
+fold_var = 1
+X = np.asarray(X)
+y = np.asarray(y)
+
+```
+
+
+The first thing we establish is the two imports we are going to use `KFold` and `StratifiedKFold`.
+
+```python
+for train, test in kf.split(X):
+    trainX, testX, trainY, testY = X[train], X[test], y[train], y[test]
+	
+	# CREATE NEW MODEL
+    model = get_wavelet_cnn_model()
+	# COMPILE NEW MODEL
+    model.compile(loss="binary_crossentropy", optimizer= "adam", metrics=["acc"])
+
+	
+	# CREATE CALLBACKS
+    checkpoint = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=1e-5)
+    callbacks_list = [checkpoint]
+	# There can be other callbacks, but just showing one because it involves the model name
+	# This saves the best model
+	# FIT THE MODEL
+    history = model.fit_generator(train_datagen.flow(trainX, trainY, batch_size=BS), 
+                                    validation_data=(testX, testY), 
+                                    callbacks=callbacks_list, 
+                                    validation_steps = 100,
+                                    steps_per_epoch=100, 
+                                    epochs=EPOCHS)
+```
+
+For the `KFold`
+
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/shuffleplot.png)
