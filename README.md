@@ -1286,7 +1286,7 @@ The library of Sklearn has a little experiment to represent what happens to our 
 
 ![alt text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kfolds.png)
 
-We made some modifications to our original code for wavelet transformations, so we can apply these methods of sampling and see if we can improve the accuracy and loss we presented in homework 5.
+We made some modifications to our original code for wavelet transformations, so we can apply these methods of sampling and see if we can improve the accuracy and loss we presented in homework 5. In this case we wanted to focus only on the target data set of YERAL. Depending on our results, we are going to continue the experimentation with the other datasets.
 
 ```python
 def get_model_name(k):
@@ -1337,7 +1337,23 @@ for train, test in kf.split(X):
 
 For the `KFold` results, we struggled a little bit to adapt it to the code, because the examples we found were usually for low dimension data and other algorithms such as RandomForest and SVM. In the end, the model takes a bit more time to compile, and each iteration in the training model goes up in time elapsed. 
 
-The results of 3 folds are as follows:
+In this case, we did not let the model finish the three intended folds, because it was taking too long, and the results for the first and second fold where not good at all:
+
+| Fold | Train acc | Train loss | Test acc | Test loss |
+|------|-----------|------------|----------|-----------|
+| 1 | 0.90 | 0.21 | 0.20 | 2.78|
+|2 | 0.85 | 0.31 | 0.14 | 5.19 |
+
+As we can see in the results, `KFolds` does not improve our training or loss results. Since the results took too much time and the results were not very positive, we wanted to move on to the bootstrap method. But first, we tried the stratified k folds, since in the beginning, we mentioned that the `train_test_split` function already helped us with that.
+
+When we ran the dummy model of the `sklearn` library, we ended up with a division like so:
+
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/shuffleplot.png)
+
+As we can see, the splt is different than we only used KFolds.
+
+These are the results of the 3 folds of `StratifiedKFold`:
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kfolds_plot.png)
 
@@ -1348,6 +1364,17 @@ The results of 3 folds are as follows:
 |2 | 0.87 | 0.29 | 0.70 | 0.97 |
 |3 | 0.84 | 0.35 | 0.68 | 0.74 |
 
+Here are the changes we had to make to the code in order to run it:
+
+```python
+for train, test in skf.split(X, np.zeros(shape=(X.shape[0], 1))):
+    trainX, testX, trainY, testY = X[train], X[test], y[train], y[test]
+	
+```
+
+Our code also gives us the presision and recall factors, and in all the folds, the dataset containg anomalies had the highest percentage. In here we do not really see a big improvement in the loss function of the test set, which was the problem that we wanted to solve from homework 5. So now we try the bootstrap.
 
 
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/shuffleplot.png)
+ 
+
+
