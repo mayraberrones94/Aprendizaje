@@ -1583,6 +1583,47 @@ In publications and examples we saw when looking for information about this algo
 First we use the sharpening and detail tool from the library PILLOW.
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Sharp-mal1.png)
-*image_caption*
+*Sharpening tool*
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/detail-m1.png)
+*Detalied tool*
+
+Now that we have our transformed images, we turn them to black and white settings, and use our old function to eliminate the pixels that are further away from each other.
+
+```python
+import ssl
+import requests
+from PIL import Image, ImageDraw
+if getattr(ssl, '_create_unverified_context', None):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+negro = (0, 0, 0)
+blanco = (255, 255, 255)
+umbral = 150 #90 era el primero
+n = Image.open("/Users/MayraBerrones/Documents/VisualCode/Prueba/detail-m1.png") 
+w, h = n.size
+P = n.load()
+for f in range(h): # bordes verticales
+    if P[0, f] == blanco:
+        ImageDraw.floodfill(n, (0, f), negro)
+    if P[w - 1, f] == blanco:
+        ImageDraw.floodfill(n, (w - 1, f), negro)
+for c in range(w): # bordes horizontales
+    if P[c, 0] == blanco:
+        ImageDraw.floodfill(n, (c, 0), negro)
+    if P[c, h - 1] == blanco:
+        ImageDraw.floodfill(n, (c, h - 1), negro) 
+for f in range(h): 
+    for c in range(w):
+        rgb = P[c, f]
+        if max(rgb) - min(rgb) > umbral: # tiene un color que no es gris 
+            P[c, f] = negro
+b = n.convert('1') # binaricemos lo que queda
+b.save('/Users/MayraBerrones/Documents/VisualCode/Prueba/rgb-m1.png')
+b
+```
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/detail_convert.png)
+*Tranform to B&W*
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/rgb-m1.png)
+*Eliminate farthest pixels*
+
 
