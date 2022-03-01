@@ -1626,4 +1626,10 @@ b
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/rgb-m1.png)
 *Eliminate farthest pixels*
 
+Lastly, we do a function to pull together the closest pixels to eachother. This way, the bigest clusters of pixels will show better on the images. And finaly, we contour the image, so that the segmented parts are shown.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/vecinos-m1.png)
+*Pull pixels together*
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/vecinossegmented-m1.png)
+*Eliminate farthest pixels*
 
