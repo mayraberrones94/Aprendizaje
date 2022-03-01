@@ -1547,3 +1547,30 @@ fig.savefig('kmeans_images.pdf')
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kmeans-segmented.png)
 
+If we compare the original images with these segmented ones, we will see that the segmentation is too broad, but still good taking the brightest pixels into consideration. Now we call for the EM algorithm. In the end, we print the images on the converging iteration, as well as the density estimate and the evolution over every iteration.
+
+```python
+# Init container
+likelihood_arr_list = []
+means_arr_list = []
+cov_arr_list = []
+pis_arr_list = []
+em_img_list = []
+means_list = []
+
+for img, dim in zip(img_list, dim_img_list):
+    labels, means, cov, pis, likelihood_arr, means_arr = EM_cluster(img, 2, error = 0.001)
+    means = np.array([element[0] for element in means])
+    cov = [element[0][0] for element in cov]
+    em_img = means[labels]
+    recover_img = em_img.reshape(dim[0], dim[1])
+    # store required stat
+    likelihood_arr_list.append(likelihood_arr)
+    means_arr_list.append(means_arr)
+    cov_arr_list.append(cov)
+    pis_arr_list.append(pis)
+    em_img_list.append(recover_img)
+    means_list.append(means)
+```
+
+[!alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/em_kmeans_init.png)
