@@ -1573,4 +1573,4 @@ for img, dim in zip(img_list, dim_img_list):
     means_list.append(means)
 ```
 
-[!alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/em_kmeans_init.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/em_kmeans_init.png)
