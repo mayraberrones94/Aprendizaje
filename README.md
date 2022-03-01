@@ -1450,7 +1450,7 @@ For EM applications, clustering with a mixture model is one of the most popular 
 
 One of the applications that we saw for this algorithm that caught our attention was the use of the EM algorithm for image segmentation. Image segmentation is an image processing procedure to label pixels of similar kinds into the same cluster groups. The most often compared methodology was the k-nearest neighbors, so we do the same here.
 
-First, we load up the libraries. In this work, we are going to be using mostly `sklearn`, `scipy`, and `numpy` to build the EM algorithm. This code was adapted from a [project](https://github.com/tmclouisluk/Expectation-maximization-Algorithm-on-Image-Segmentation/blob/master/EM.py) where we changed it to be able to use our images and use the libraries updated functions mentioned below, the full code can be seen [here]().
+First, we load up the libraries. In this work, we are going to be using mostly `sklearn`, `scipy`, and `numpy` to build the EM algorithm. This code was adapted from a [project](https://github.com/tmclouisluk/Expectation-maximization-Algorithm-on-Image-Segmentation/blob/master/EM.py) where we changed it to be able to use our images and use the libraries updated functions mentioned below, the full code can be seen [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW8_colorgmm.ipynb).
 
 ```python
 import datetime
