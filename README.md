@@ -1574,3 +1574,14 @@ for img, dim in zip(img_list, dim_img_list):
 ```
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/em_kmeans_init.png)
+
+
+The results for this part, behave as they should on the last image, but it still had a decent representation on the first image. In this case, we would not use this methodology if only for the fact that the iterations for just three images took up to 15 minutes to converge.
+
+In publications and examples we saw when looking for information about this algorithm, we found that the best contender for image segmentation of the EM algorithm is the KNN. There are some examples on the internet, but we dug up an old assignment from our master's teachings of data science and we found some examples of segmentation using KNN. The results are shown below, and the complete experimentation can be found [here](https://github.com/mayraberrones94/Ciencia_de_Datos/blob/master/Pr%C3%A1ctica%2013.ipynb).
+
+First we use the sharpening and detail tool from the library PILLOW.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Sharp-mal1.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/detail-m1.png)
+
