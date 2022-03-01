@@ -1431,7 +1431,7 @@ In general, the bootstrap method worked faster than the stratified Kfold, and th
 
 Another thing we noticed when comparing the stratified Kfolds and the bootstrap results was that in the precision and recall the results were not so far apart from normal and abnormal images in the bootstrap method, which makes it the more stable option.
 
-## **Homework 8: Model imference and averaging** 
+## **Homework 8: Model inference and averaging** 
 
 > **Instructions:**  Do EM (expectation-maximization) with your data following the from-scratch steps of Causevic.
 
