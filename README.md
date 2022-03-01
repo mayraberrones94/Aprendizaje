@@ -1656,4 +1656,10 @@ These bootstrap samples are trained independently, to finally average a more acc
 
 Our final results can be seen in the table below:
 
-
+| Model | Train Loss | Train Acc | Val Loss | Val Acc | Test Abnormal | Test Normal |
+|-------|------------|-----------|----------|---------|---------------|-------------|
+| 1     | 0.21	     | 0.92	 | 0.59	    | 0.76    |  0.77         | 0.75        |
+| 2	| 0.16	     | 0.94	 | 0.74     | 0.70    | 0.59          | 0.77        |
+| 3	| 0.06	     | 0.98	 | 0.17     | 0.93    | 0.93          | 0.94        |
+| 4	| 0.05	     | 0.98	 | 0.25     | 0.94    | 0.95          | 0.93        |
+| 5	| 0.02	     | 0.99	 | 0.09     | 0.93    | 0.92	      | 0.94        |
