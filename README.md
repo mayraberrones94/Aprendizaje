@@ -9,6 +9,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 5: Basis expansion and regularization](#homework-5-basis-expansion-and-regularization)
 + [Chapter 6: Kernel smoothing methods](#homework-6-kernel-smoothing-methods)
 + [Chapter 7: Model assesment and selection](#homework-7-model-assesment-and-selection)
++ [Chapter 8: Model inference and averaging](#homework-8-model-inference-and-averaging)
 ---
 
 ## **Homework 1: Introduction**
@@ -1429,6 +1430,23 @@ for i in range(B):
 In general, the bootstrap method worked faster than the stratified Kfold, and the results are also better. In three of the five iterations, we saw that the loss function of both datasets was not so far apart, which is also a really good result.
 
 Another thing we noticed when comparing the stratified Kfolds and the bootstrap results was that in the precision and recall the results were not so far apart from normal and abnormal images in the bootstrap method, which makes it the more stable option.
- 
 
+## **Homework 8: Model imference and averaging** 
+
+> **Instructions:**  Do EM (expectation-maximization) with your data following the from-scratch steps of Causevic.
+
+
+For this homework, like homework 7, we wanted to explore the concepts of the work a little bit more outside of the book. Here are some concepts that helped us understand the assignment better:
+
+> What is the EM algorithm: This algorithm is called EM for expectation-maximization, and in this case, those are the primary steps that the algorithm is known for. The E-step uses the dataset to try to estimate or guess the values of the missing data.  Then on the M step, we use the complete data and update the parameters. These two steps repeat until we converge in a solution.
+
+The main advantage of this algorithm is that simple to implement, and it is always guaranteed that the value of the likelihood will increase after each iteration. 
+
+As for disadvantages we have that the time of convergence can be very slow and it only converges to local minima. 
+
+Gaussian mixture models are an approach to density estimation where the parameters of the distributions are fit using the expectation-maximization algorithm. In this case, density estimation involves the selection of a probability distribution function to try to explain the joint probability of the data. 
+
+For EM applications, clustering with a mixture model is one of the most popular ones. The Gaussian Mixture Model, or GMM for short, is a mixture model that uses a combination of Gaussian (Normal) probability distributions and requires the estimation of the mean and standard deviation parameters for each.
+
+One of the applications that we saw for this algorithm that caught our attention was the use of the EM algorithm for image segmentation. Image segmentation is an image processing procedure to label pixels of similar kinds into the same cluster groups. The most often compared methodology was the k-nearest neighbors, so we do the same here.
 
