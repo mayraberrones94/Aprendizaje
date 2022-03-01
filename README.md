@@ -1583,5 +1583,6 @@ In publications and examples we saw when looking for information about this algo
 First we use the sharpening and detail tool from the library PILLOW.
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Sharp-mal1.png)
+*image_caption*
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/detail-m1.png)
 
