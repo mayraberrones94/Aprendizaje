@@ -1525,5 +1525,5 @@ plt.tight_layout()
 fig.savefig('orig_images.pdf')
 ```
 
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/original_img.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img_original.png)
 
