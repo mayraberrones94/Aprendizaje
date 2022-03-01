@@ -1450,3 +1450,80 @@ For EM applications, clustering with a mixture model is one of the most popular 
 
 One of the applications that we saw for this algorithm that caught our attention was the use of the EM algorithm for image segmentation. Image segmentation is an image processing procedure to label pixels of similar kinds into the same cluster groups. The most often compared methodology was the k-nearest neighbors, so we do the same here.
 
+First, we load up the libraries. In this work, we are going to be using mostly `sklearn`, `scipy`, and `numpy` to build the EM algorithm. This code was adapted from a [project](https://github.com/tmclouisluk/Expectation-maximization-Algorithm-on-Image-Segmentation/blob/master/EM.py) where we changed it to be able to use our images and use the libraries updated functions mentioned below, the full code can be seen [here]().
+
+```python
+import datetime
+from dateutil.relativedelta import relativedelta
+
+import numpy as np
+from numpy.random import randint, random
+import scipy.stats
+import math
+import cv2
+import imageio
+
+from sklearn import cluster
+from scipy.cluster.vq import kmeans2
+import matplotlib.pyplot as plt
+from scipy import ndimage
+%matplotlib inline
+```
+
+Now we need a function to receive the input images. In this function, we can see we have a downsample of the image, as well as a blurring transform that we are going to denoise.
+
+```python
+def read_img(filename, mode, size):
+    if mode == 'RGB':
+        img_3d = imageio.imread(filename, pilmode = 'RGB')
+    elif mode == 'L':
+        img_3d = imageio.imread(filename, pilmode = 'L')
+    # Downsample the image
+    small = cv2.resize(img_3d, (0, 0), fx = size[0], fy = size[1])
+    # Blurring effect to denoise
+    blur = cv2.blur(small, (4, 4))
+    return blur
+
+```
+
+We first have the parameter for the E-step, using the multivariate_normal function of `scipy` to update the conditional probability of pixel `i` given class` j`. Here one of the main thigs we changed was to allow for singular matrix, since the example we had was for a different type of image, and this was a constant error that was raised in the code.
+
+```python
+def update_responsibility(img, means, cov, pis, k):
+    responsibilities = np.array([pis[j] * scipy.stats.multivariate_normal.pdf(img, allow_singular=True, mean=means[j], cov=cov[j]) for j in range(k)]).T
+    norm = np.sum(responsibilities, axis = 1)
+    norm = np.reshape(norm, (len(norm), 1))
+    responsibilities = responsibilities / norm
+    return responsibilities
+```
+
+Another change we had to make, was to establish how many iterations we were going to allow the model, since our first tryout, the model got stuck in the first image having over 400 iterations.
+
+Before modeling, we take a look at how our images are looking.
+
+```python
+# Visualize demo images
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize = (15,15))
+ax_list = [ax1, ax2, ax3]
+rgb_img_list = []
+dim_img_list = []
+i = 1
+for filename, ax in zip(FILENAME_LIST, ax_list):
+    rgb_img = read_img(filename = filename, mode = 'RGB', size = (0.5, 0.5))
+    x, y, z = rgb_img.shape
+    # Store dimension for each image
+    dim_img_list.append((x,y,z))
+    # Store img 
+    rgb_img_list.append(rgb_img)
+    ax.imshow(rgb_img)
+    ax.set_title('[Image {}] Original Image'.format(i))
+    ax.axes.set_xlabel('x-coordinate')
+    ax.axes.set_ylabel('y-coordinate')
+    i += 1
+
+plt.tight_layout()
+fig.savefig('orig_images.pdf')
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/original_img.png)
+
