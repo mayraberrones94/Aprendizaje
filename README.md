@@ -1527,3 +1527,23 @@ fig.savefig('orig_images.pdf')
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/img_original.png)
 
+
+As we can see in the images, the blurring effect makes them look a slight bit off. Now, using the functions of the EM algorithm, we segment the images. First, we see the effect of using `kmeans` in the image. It is important to mention that we had to use the Yeral dataset because the Minimias is not RGB and all the images went white. 
+
+```python
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize = (15,15))
+ax_list = [ax1, ax2, ax3]
+i = 1
+for kmeans_img, ax, dim in zip(kmeans_img_list, ax_list, dim_img_list):
+    ax.imshow(kmeans_img)
+    ax.set_title('[Image {}] Segmentation first by k-means'.format(i))
+    ax.axes.set_xlabel('x-coordinate')
+    ax.axes.set_ylabel('y-coordinate')
+    i += 1
+    
+plt.tight_layout()
+fig.savefig('kmeans_images.pdf')
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/kmeans-segmented.png)
+
