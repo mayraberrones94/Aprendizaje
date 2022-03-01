@@ -1663,3 +1663,5 @@ Our final results can be seen in the table below:
 | 3	| 0.06	     | 0.98	 | 0.17     | 0.93    | 0.93          | 0.94        |
 | 4	| 0.05	     | 0.98	 | 0.25     | 0.94    | 0.95          | 0.93        |
 | 5	| 0.02	     | 0.99	 | 0.09     | 0.93    | 0.92	      | 0.94        |
+
+The current results are really good news, since bootstrap with wavelets was a little bit computationally heavy and we wanted to explore results with more complex architectures of CNNs, but we are still in the process of trying to train a model with all the other datasets combined, just to make sure it is not a good result only because is a small dataset.
