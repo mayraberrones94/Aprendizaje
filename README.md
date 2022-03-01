@@ -1638,3 +1638,22 @@ Lastly, we do a function to pull together the closest pixels to eachother. This 
 ## Conclusions: 
 
 For this week's work, we tried the EM algorithm for image segmentation. EM algorithm is very helpful when you have missing data on your dataset, but it mentioned that it has some uses in the computer vision area, so that is why we wanted to explore that aspect. In the end, comparing the results and complexity of this algorithm with what we saw with our old KNN implementation, we think the KNN is more efficient and accurate.
+
+## Extra:
+
+
+In section 8.7 of the book, we read about bagging in bootstrap. One of the things we left pending on the last assignment was to test the models of the bootstrap training with a test dataset (images that were not used in the training or validation set) but we had a problem with the wavelet function. 
+
+Apparently, in order to use the model we needed to use the wavelets function in our test images as well. This is no problem for me since I know how the code works and the computational load is now something manageable for my computer, but if I were to implement the model for use, my medical contra part would most likely have an issue with it.
+
+That is why we decided to look for an alternative. In our last experimentation, we used again the Alexnet architecture and added the bootstrap function without the wavelets. We were intrigued by the concept of bootstrap aggregating or bagging, and we looked further into it.
+
+> Bagging: Also known as bootstrap aggregation is an enable learning method that helps reduce the variance on a noisy dataset.
+
+A noisy data set was our original problem since the other public datasets had no problem with the different architecture we tested them with. Now, the way it is explained begins with the bootstrap function we already had, where we resample our dataset to generate different subsets of datasets, selecting them at random with replacement.
+
+These bootstrap samples are trained independently, to finally average a more accurate estimate. 
+
+Our final results can be seen in the table below:
+
+
