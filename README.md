@@ -1631,5 +1631,9 @@ Lastly, we do a function to pull together the closest pixels to eachother. This 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/vecinos-m1.png)
 *Pull pixels together*
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/vecinossegmented-m1.png)
-*Eliminate farthest pixels*
+*Final segmented image*
 
+
+## Conclusions: 
+
+For this week's work, we tried the EM algorithm for image segmentation. EM algorithm is very helpful when you have missing data on your dataset, but it mentioned that it has some uses in the computer vision area, so that is why we wanted to explore that aspect. In the end, comparing the results and complexity of this algorithm with what we saw with our old KNN implementation, we think the KNN is more efficient and accurate.
