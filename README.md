@@ -10,6 +10,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 6: Kernel smoothing methods](#homework-6-kernel-smoothing-methods)
 + [Chapter 7: Model assesment and selection](#homework-7-model-assesment-and-selection)
 + [Chapter 8: Model inference and averaging](#homework-8-model-inference-and-averaging)
++ [Chapter 9: Additive models, trees and related methods](#homework-9-additive-models-trees-and-related-methods)
 ---
 
 ## **Homework 1: Introduction**
@@ -1665,3 +1666,7 @@ Our final results can be seen in the table below:
 | 5	| 0.02	     | 0.99	 | 0.09     | 0.93    | 0.92	      | 0.94        |
 
 The current results are really good news, since bootstrap with wavelets was a little bit computationally heavy and we wanted to explore results with more complex architectures of CNNs, but we are still in the process of trying to train a model with all the other datasets combined, just to make sure it is not a good result only because is a small dataset.
+
+## **Homework 9: Additive models trees and related methods**
+
+> **Instructions:** Read through the spam example used throughout Chapter 9 and make an effort to replicate the steps for your own data. When something isn't quite applicable, discuss the reasons behind this. Be sure to read Sections 9.6 and 9.7 before getting started.
