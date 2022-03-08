@@ -1670,3 +1670,56 @@ The current results are really good news, since bootstrap with wavelets was a li
 ## **Homework 9: Additive models trees and related methods**
 
 > **Instructions:** Read through the spam example used throughout Chapter 9 and make an effort to replicate the steps for your own data. When something isn't quite applicable, discuss the reasons behind this. Be sure to read Sections 9.6 and 9.7 before getting started.
+
+In this week's homework, we need to follow the example of the book that uses the spam dataset. They mention that the method that they are using is called additive logistic regression. Since it is a linear model and in the example, they mention chapter 3 of this book to look for smoothing procedures that can accept observation weights, we are going to first try this example in the dataset of breast cancer from Kaggle, since the structure of the data matches best with the objective of this weeks assignment.
+
+Same as always, all the data, code and full results can be found [here]().
+
+At the beginning of the example, they mention that this type of model is widely used in medical research for binary data. Following the example with our data, we have our target column as diagnosis, and in this case, we are using the variables of the mean variation, since all the others are variates of them, and seem to cause trouble in coding (we got the error of perfect separation detected, and some people recommended to drop some categories [stackoverflow](https://stackoverflow.com/questions/53041669/error-perfectseparationerror-perfect-separation-detected-results-not-availab).)
+
+
+From python, we found existing libraries that help for this kind of model, such as `pyGAM`. From this library, we import `logisticGAM` and divide our data frame into training and test sets, like we have done before.
+
+```python
+from pygam import LogisticGAM, s, f
+
+df = pd.DataFrame(data.data, columns=data.feature_names)[['mean radius', 'mean texture', 'mean perimeter', 'mean area','mean smoothness', 'mean compactness']]
+target_df = pd.Series(data.target)
+
+X = df[['mean radius', 'mean texture', 'mean perimeter', 'mean area','mean smoothness', 'mean compactness']]
+y = target_df
+```
+Now that we have our training and dataset, we use `LogisticGAM` to fit our model, and with the function `summary` we can see some of our results.
+
+```python
+gam = LogisticGAM().fit(X, y)
+gam.summary()
+
+```
+
+The result of the `summary` funtions is:
+
+```
+LogisticGAM                                                                                               
+=============================================== ==========================================================
+Distribution:                      BinomialDist Effective DoF:                                     19.4476
+Link Function:                        LogitLink Log Likelihood:                                   -54.0256
+Number of Samples:                          569 AIC:                                              146.9464
+                                                AICc:                                             148.5483
+                                                UBRE:                                               2.2856
+                                                Scale:                                                 1.0
+                                                Pseudo R-Squared:                                   0.8562
+==========================================================================================================
+Feature Function                  Lambda               Rank         EDoF         P > x        Sig. Code   
+================================= ==================== ============ ============ ============ ============
+s(0)                              [0.6]                20           5.4          8.90e-10     ***         
+s(1)                              [0.6]                20           5.4          4.67e-03     **          
+s(2)                              [0.6]                20           2.1          9.03e-03     **          
+s(3)                              [0.6]                20           1.5          0.00e+00     ***         
+s(4)                              [0.6]                20           3.1          8.01e-03     **          
+s(5)                              [0.6]                20           2.0          3.01e-02     *           
+intercept                                              1            0.0          1.09e-09     ***         
+==========================================================================================================
+Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+```
