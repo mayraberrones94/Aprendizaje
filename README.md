@@ -1737,8 +1737,51 @@ And here we have the plot from the summary of the fitted model:
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/accuracy_LogisticGAM1.png)
 
+Now, in the last figure, we can not make many assumptions, so we change the plot to an individual one:
+
+```python
+plt.rcParams['figure.figsize'] = (28, 8)
+fig, axs = plt.subplots(1, len(data.feature_names[0:6]))
+titles = data.feature_names
+for i, ax in enumerate(axs):
+    XX = gam.generate_X_grid(term=i)
+    pdep, confi = gam.partial_dependence(term=i, width=.95)
+    ax.plot(XX[:, i], pdep)
+    ax.plot(XX[:, i], confi, c='r', ls='--')
+    ax.set_title(titles[i])
+
+plt.savefig('/Users/MayraBerrones/Documents/VisualCode/LogisticGAM-separated.png')
+plt.show()
+```
+
+
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Logistic-separated.png)
 
+Something to keep in mind is that we used the default options for the `LogisticGAM` function. In the last figure, we can see that some features have a simple relationship with our target variable. For example, from that plot and the results we saw in previous homework, we know that the bigger the radius of the tumor gets, the more likely is to be malignant.
+
+Features like mean texture have a lot more wiggle room, therefor are a bit harder to decide their relationship. A very important feature of the `LogisticGAM` function is that they have a smoothing tool, by using splines. When we apply this parameter, we can see the difference in the three variables that were a little bit more wiggly.
+
+```python
+lambda_ = 0.6
+n_splines = [25, 6, 25, 25, 6, 4] 
+constraints = None
+gam = LogisticGAM(constraints=constraints, 
+          lam=lambda_,
+         n_splines=n_splines).fit(X, y)
+```
+
+
+
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Logistic-smooth.png)
+
+This, however, gave us a lower percentage of accuracy. This means that we need to select the size of the splines more carefully.
+
+```python
+gam.accuracy(X, y)
+```
+
+```
+0.9507908611599297
+```
 
 
