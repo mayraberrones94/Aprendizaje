@@ -1737,7 +1737,7 @@ And here we have the plot from the summary of the fitted model:
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/accuracy_LogisticGAM1.png)
 
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/LogisticGAM-separated.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Logistic-separated.png)
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Logistic-smooth.png)
 
