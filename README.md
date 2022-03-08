@@ -1723,3 +1723,5 @@ intercept                                              1            0.0         
 Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/accuracy_LogisticGAM1.png)
