@@ -1723,5 +1723,22 @@ intercept                                              1            0.0         
 Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ```
+The resulting accuracy of this model is:
+
+```python
+gam.accuracy(X, y)
+```
+
+```
+0.9560632688927944
+```
+
+And here we have the plot from the summary of the fitted model:
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/accuracy_LogisticGAM1.png)
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/LogisticGAM-separated.png)
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/LogisticGAM-sep-smooth.png)
+
+
