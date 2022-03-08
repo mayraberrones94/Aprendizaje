@@ -1847,4 +1847,41 @@ print(classification_report(y_test, y_pred_en))
    macro avg       0.95      0.95      0.95       190
 weighted avg       0.95      0.95      0.95       190
  ```
+ 
+ With the gini feature, it did change the results of our model, mainly our accuracy,
+ 
+ ```python
+ from sklearn.metrics import accuracy_score
+print('Model accuracy score with criterion entropy: {0:0.4f}'. format(accuracy_score(y_test, y_pred_en)))
+ ```
+ 
+ ```
+ Model accuracy score with criterion entropy: 0.8737
+ ```
+ 
+ Our confusion matrix and our classification report:
+ 
+ ```
+ Confusion matrix
+
+ [[101  18]
+ [  6  65]]
+ ```
+ 
+ ```
+               precision    recall  f1-score   support
+
+      benign       0.94      0.85      0.89       119
+   malignant       0.78      0.92      0.84        71
+
+    accuracy                           0.87       190
+   macro avg       0.86      0.88      0.87       190
+weighted avg       0.88      0.87      0.88       190
+```
+
+We also see that the levels of the tree are more when we use gini as our purity feature:
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Tree_cancer-gini.png)
+
+## Conclusions:
+
+It was really interesting to follow another library that plays with a different aspect of logistic regression. In [this](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/#h2_4) blog, we had a few ideas on what to do with the results from the logistic regression and decision trees. We know that we are going to have to combine types of data for it to work, but since we are already looking for ways to translate our findings in the segmentation process (translate it to features like the ones we see in this example dataset we keep using) and enhance our model by using the bagging concept, where we can enable multiple classifiers to our final model.
