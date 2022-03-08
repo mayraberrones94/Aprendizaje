@@ -1784,6 +1784,67 @@ gam.accuracy(X, y)
 0.9507908611599297
 ```
 
+In the book, they also mention the use of trees to perform their models. Decision trees split features based on the variable purity in regards to the target variable. 
+
+From the `sklearn` library we have the `DecisionTreeClassifier` function, where we can choose the criterium for the purity variable. From the things we researched, there are two popular options for this criterium, and that is entropy and gini index.
+
+In the case of the gini index, their goal is to measure how often a randomly chosen element from the set is incorrectly labeled. In the case of entropy, we have a similar idea, but instead of utilizing simple probabilities, this method takes the log base2 of the probabilities. 
+
+While gini goes from 0 to 0.5, and entropy from 0 to 1. In both cases, zero represents maximum purity. We made the experiment with both variables. First with entropy:
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+clf_en = DecisionTreeClassifier(criterion='entropy', max_depth=10, random_state=0)
+clf_en.fit(X_train, y_train)
+
+y_pred_en = clf_en.predict(X_test)
+
+from sklearn.metrics import accuracy_score
+print('Model accuracy score with criterion entropy: {0:0.4f}'. format(accuracy_score(y_test, y_pred_en)))
+```
+
+```
+Model accuracy score with criterion entropy: 0.9526
+```
+
+```python
+import graphviz
+dot_data = tree.export_graphviz(clf_en.fit(X_train, y_train), out_file=None, 
+                                feature_names=data.feature_names,  
+                                class_names=data.target_names,
+                                filled=True)
+
+graph = graphviz.Source(dot_data, format="png") 
+graph
+graph.format = 'png'
+graph.view(filename='Tree_cancer', directory= '/Users/MayraBerrones/Documents/VisualCode')
+```
+
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Tree_cancer-entropy.png)
 
+Results for the confusion matrix,
+
+```
+Confusion matrix
+
+ [[113   6]
+ [  3  68]]
+```
+ and classification report:
+ 
+ ```python
+ from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred_en))
+ ```
+ 
+ ```
+               precision    recall  f1-score   support
+
+      benign       0.97      0.95      0.96       119
+   malignant       0.92      0.96      0.94        71
+
+    accuracy                           0.95       190
+   macro avg       0.95      0.95      0.95       190
+weighted avg       0.95      0.95      0.95       190
+ ```
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Tree_cancer-gini.png)
