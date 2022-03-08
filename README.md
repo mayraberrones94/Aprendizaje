@@ -1784,4 +1784,6 @@ gam.accuracy(X, y)
 0.9507908611599297
 ```
 
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Tree_cancer-entropy.png)
 
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Tree_cancer-gini.png)
