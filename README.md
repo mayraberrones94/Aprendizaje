@@ -1673,7 +1673,7 @@ The current results are really good news, since bootstrap with wavelets was a li
 
 In this week's homework, we need to follow the example of the book that uses the spam dataset. They mention that the method that they are using is called additive logistic regression. Since it is a linear model and in the example, they mention chapter 3 of this book to look for smoothing procedures that can accept observation weights, we are going to first try this example in the dataset of breast cancer from Kaggle, since the structure of the data matches best with the objective of this weeks assignment.
 
-Same as always, all the data, code and full results can be found [here]().
+Same as always, all the data, code and full results can be found [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW9_additive.ipynb).
 
 At the beginning of the example, they mention that this type of model is widely used in medical research for binary data. Following the example with our data, we have our target column as diagnosis, and in this case, we are using the variables of the mean variation, since all the others are variates of them, and seem to cause trouble in coding (we got the error of perfect separation detected, and some people recommended to drop some categories [stackoverflow](https://stackoverflow.com/questions/53041669/error-perfectseparationerror-perfect-separation-detected-results-not-availab).)
 
