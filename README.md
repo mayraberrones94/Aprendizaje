@@ -1982,9 +1982,20 @@ This concept sounded familiar to us since we used bagging in chapter 9, and then
 
 In the previous research, we found out about adaboost and xgboost being used for classification methodologies. So in this case we are only reviewing these two. 
 
-One of the things that immediately caught our attention with the adaboost algorithm is that it is not prone to overfitting, but it also is very sensitive to noise in data. When the input data has many outliers, this algorithm tries to fit each point perfectly, which causes it to have a low performance. It is also more computationally expensive than XGboost.
+One of the things that immediately caught our attention with the adaboost algorithm is that it is not prone to overfitting, but it is also very sensitive to noise in data (which is not good for our target dataset, since it is a bit noisy). When the input data has many outliers, this algorithm tries to fit each point perfectly, which causes it to have a low performance. It is also more computationally expensive than XGboost.
 
 We are particularly interested in implementing XGBoost in our bootstrap algorithm since we found an example (of plain data, not images) that allows using the k-fold methodology alongside XGboost. We are currently trying that, since the way our primary library KERAS stores the weights of our model in a very specific way, and the XGboost library can not use them, we are trying to figure out how can we implement it.
 
+## Conclusions:
+Since the results from the last homework had a very positive outcome for our target dataset, we were curious about the similarities and differences between bagging and boosting methods, and when is recommended to use each.
 
+From what we investigated, if the problem we are having is overfitting, then bagging is a good option, as we read in several pages that bagging is often more effective than boosting (and in my experience, it is easier to implement as well).
+
+We found an article that reads some of the differences between these two methodologies, and the ones we found helpful were:
+Bagging aims to decrease variance, not bias while Boosting aims to decrease bias, not variance
+If the classifier is unstable (high variance), then we should apply Bagging. If the classifier is stable and simple (high bias) then we should apply Boosting
+All the list can be found [here](https://www.kaggle.com/prashant111/bagging-vs-boosting#8.-Selecting-the-best-technique--Bagging-or-Boosting-)
+
+## Extra:
+In process
 
