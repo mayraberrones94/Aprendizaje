@@ -1919,7 +1919,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random
 y_overall_median = np.median(y)
 ```
 
-As always, the whole code can be found [here]().
+As always, the whole code can be found [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/HW10_boosting.ipynb).
 
 Using the example on the `sklearn` library, we calculate the mean absolute error of the optimal constant predictor.
 
@@ -2040,6 +2040,38 @@ def evaluate_model(model, X, y):
  ```
  
  ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/adaboost_param.png)
+ 
+ For the XGBoost, we have to install its own library first, in order to work with it.
+ 
+ ```python
+ import xgboost as xgb
+
+from xgboost import XGBClassifier
+from sklearn.metrics import mean_squared_error
+import pandas as pd
+import numpy as np
+
+data_dmatrix = xgb.DMatrix(data=X,label=y)
+
+model = XGBClassifier()
+model.fit(X_train, y_train)
+print(model)
+
+from sklearn.metrics import accuracy_score
+
+y_pred = model.predict(X_test)
+predictions = [round(value) for value in y_pred]
+
+accuracy = accuracy_score(y_test, predictions)
+print("Accuracy: %.2f%%" % (accuracy * 100.0))
+ ```
+
+```
+Accuracy: 95.61%
+```
+
+As we can see, XGBoost has the better accuracy. The only problem we find is that you have to make some changes to the data at first to feed it to the model. We are figuring out how we can adapt our own data set so it can pass to a XGBoost model.
+
 
 We are particularly interested in implementing XGBoost in our bootstrap algorithm since we found an example (of plain data, not images) that allows using the k-fold methodology alongside XGboost. We are currently trying that, since the way our primary library KERAS stores the weights of our model in a very specific way, and the XGboost library can not use them, we are trying to figure out how can we implement it.
 
@@ -2054,5 +2086,11 @@ If the classifier is unstable (high variance), then we should apply Bagging. If 
 All the list can be found [here](https://www.kaggle.com/prashant111/bagging-vs-boosting#8.-Selecting-the-best-technique--Bagging-or-Boosting-)
 
 ## Extra:
-In process
+Update on the XGBoost, we found a way to implement it to a CNN, but we had to borrow the weights from the VGG16 library from sklearn. We used our Minimias data set, but for this example we needed to have the training and test files separate, so that was a extra code we added and have available [here](https://github.com/mayraberrones94/Ciencia_de_Datos/blob/master/Prueba/split.py). Code to the VGG16_boosting can be seen [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/red_xboost.py), and the results from our console are as follows:
+
+```
+Accuracy =  0.873015873015873
+The prediction for this image is:  ['normal']
+The actual label for this image is:  normal
+```
 
