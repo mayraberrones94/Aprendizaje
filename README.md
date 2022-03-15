@@ -1948,10 +1948,43 @@ cb_reg = CatBoostRegressor(
 ).fit(
     X_train, y_train,
     verbose=False,
-    # include train into eval_set to calculate error curve for it
-    # don't to it when selecting the best model
     eval_set=[(X_train, y_train), (X_test, y_test)]
 )
 ```
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/absolute_error.png)
+
+The plot shows good behavior, and we can see that the test error stabilizes quickly, and the test error keeps going down. Following the steps from the examples, we now organize our features by the level of relative importance.
+
+```python
+importance = np.array(cb_reg.get_feature_importance())
+max_importance = np.max(importance)
+relative_importance = sorted(zip(100*importance/max_importance, features))
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/relative_importance.png)
+
+Opposed to what is shown in the book, our features are not drastically different, but the behavior of the plot is also expected, since we have seen before the importance of concavity mean for diagnosis, where it means the severity of concave portions of the contour, and as we have investigated, the shape of the anomaly greatly affects the outcome of a benign or malignant anomaly.
+
+We then apply partial dependency on the last features and got the following plots.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/partial_dependence.png)
+
+Taking into consideration the results in the book, we conclude that, the dependence on these variables is monotonic increasing when all of the results resemble a linear behavior over the data.
+
+## Boosting algorithms.
+
+As we mentioned before, the title of this chapter caught our attention, since we have heard of boosting algorithms in machine learning for a while. Same as in other homework, we investigated further to get some important concepts.
+
+> **Boosting algorithm** Boosting algorithms combine multiple low accuracy (or weak) models to create a high accuracy (or strong) models.
+
+This concept sounded familiar to us since we used bagging in chapter 9, and then we came to realize that bagging, boosting, and stacking are some ensemble machine learning approaches. Ensemble methods can decrease variance using the bagging approach, bias using a boosting approach, or improve predictions using the stacking approach. In the boosting algorithm they mention Adaboost or adaptive boosting, gradient tree boosting and XGboost.
+
+In the previous research, we found out about adaboost and xgboost being used for classification methodologies. So in this case we are only reviewing these two. 
+
+One of the things that immediately caught our attention with the adaboost algorithm is that it is not prone to overfitting, but it also is very sensitive to noise in data. When the input data has many outliers, this algorithm tries to fit each point perfectly, which causes it to have a low performance. It is also more computationally expensive than XGboost.
+
+We are particularly interested in implementing XGBoost in our bootstrap algorithm since we found an example (of plain data, not images) that allows using the k-fold methodology alongside XGboost. We are currently trying that, since the way our primary library KERAS stores the weights of our model in a very specific way, and the XGboost library can not use them, we are trying to figure out how can we implement it.
+
+
+
