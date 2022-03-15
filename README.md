@@ -1984,6 +1984,63 @@ In the previous research, we found out about adaboost and xgboost being used for
 
 One of the things that immediately caught our attention with the adaboost algorithm is that it is not prone to overfitting, but it is also very sensitive to noise in data (which is not good for our target dataset, since it is a bit noisy). When the input data has many outliers, this algorithm tries to fit each point perfectly, which causes it to have a low performance. It is also more computationally expensive than XGboost.
 
+First we compare them with the data set we used above, using que `sklearn` library, we train both models and compare accuracy.
+
+```python
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.svm import SVC
+
+from sklearn import metrics
+svc=SVC(probability=True, kernel='linear')
+
+abc =AdaBoostClassifier(n_estimators=50, base_estimator=svc,learning_rate=1)
+
+model = abc.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+```
+
+```
+Accuracy: 0.9298245614035088
+```
+ We can also explore the adaboos ensamble tree effect. (This can be done an repeated with several other base models)
+ 
+ ```python
+ # get a list of models to evaluate
+def get_models():
+	models = dict()
+	# explore depths from 1 to 10
+	for i in range(1,11):
+		# define base model
+		base = DecisionTreeClassifier(max_depth=i)
+		# define ensemble model
+		models[str(i)] = AdaBoostClassifier(base_estimator=base)
+	return models
+ 
+# evaluate a given model using cross-validation
+def evaluate_model(model, X, y):
+	# define the evaluation procedure
+	cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
+	# evaluate the model and collect the results
+	scores = cross_val_score(model, X, y, scoring='accuracy', cv=cv, n_jobs=-1)
+	return scores
+ ```
+ 
+ ```
+ >1 0.936 (0.033)
+>2 0.940 (0.033)
+>3 0.943 (0.029)
+>4 0.944 (0.028)
+>5 0.951 (0.028)
+>6 0.943 (0.025)
+>7 0.928 (0.040)
+>8 0.919 (0.037)
+>9 0.914 (0.043)
+>10 0.907 (0.038)
+ ```
+ 
+ ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/adaboost_param.png)
+
 We are particularly interested in implementing XGBoost in our bootstrap algorithm since we found an example (of plain data, not images) that allows using the k-fold methodology alongside XGboost. We are currently trying that, since the way our primary library KERAS stores the weights of our model in a very specific way, and the XGboost library can not use them, we are trying to figure out how can we implement it.
 
 ## Conclusions:
