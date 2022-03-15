@@ -2081,8 +2081,9 @@ Since the results from the last homework had a very positive outcome for our tar
 From what we investigated, if the problem we are having is overfitting, then bagging is a good option, as we read in several pages that bagging is often more effective than boosting (and in my experience, it is easier to implement as well).
 
 We found an article that reads some of the differences between these two methodologies, and the ones we found helpful were:
-Bagging aims to decrease variance, not bias while Boosting aims to decrease bias, not variance
-If the classifier is unstable (high variance), then we should apply Bagging. If the classifier is stable and simple (high bias) then we should apply Boosting
+
+- Bagging aims to decrease variance, not bias while Boosting aims to decrease bias, not variance
+- If the classifier is unstable (high variance), then we should apply Bagging. If the classifier is stable and simple (high bias) then we should apply Boosting
 All the list can be found [here](https://www.kaggle.com/prashant111/bagging-vs-boosting#8.-Selecting-the-best-technique--Bagging-or-Boosting-)
 
 ## Extra:
