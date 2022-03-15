@@ -11,6 +11,8 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 7: Model assesment and selection](#homework-7-model-assesment-and-selection)
 + [Chapter 8: Model inference and averaging](#homework-8-model-inference-and-averaging)
 + [Chapter 9: Additive models, trees and related methods](#homework-9-additive-models-trees-and-related-methods)
++ [Chapter 10: Boosting and additive trees](#homework-10-boosting-and-additive-trees)
+
 ---
 
 ## **Homework 1: Introduction**
@@ -1887,3 +1889,69 @@ We also see that the levels of the tree are more when we use gini as our purity 
 In our case, when working with decision trees, we only ever used gini, since we did not know of the difference between using different criterium. In this case, we even thought gini would perform better because we read that it was the appropriate choice when dealing with binary datasets. However, there are other qualities of this parameter to take into consideration, like its simplicity. In this case, entropy has a little bit more complexity for its use of logarithms.  [Here](https://quantdare.com/decision-trees-gini-vs-entropy/) we found some examples of using one or the other, and the results match our own, where gini takes a lot less time to compute, but it falls behind in accuracy by just a little bit of percentage.
 
 It was really interesting to follow another library that plays with a different aspect of logistic regression. In [this](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/#h2_4) blog, we had a few ideas on what to do with the results from the logistic regression and decision trees. We know that we are going to have to combine types of data for it to work, but since we are already looking for ways to translate our findings in the segmentation process (translate it to features like the ones we see in this example dataset we keep using) and enhance our model by using the bagging concept, where we can enable multiple classifiers to our final model.
+
+## **Homework 10: Boosting and additive trees**
+
+> **Instructions:** Replicate the steps of the California housing example of Section 10.14.1 (with some library implementation) unless you really want to go all-in with this) to explore potential dependencies and interactions in the features of your data.
+
+
+ For this week's assignment, we were excited for this chapter, since it related to boosting algorithms, and we wanted to explore some of those for a while now. So the first part of this homework will be dedicated to replicating the example of the book, and in the second part, we will describe what we found on boosting algorithms.
+
+To begin with this week's assignment, the instructions ask us to replicate the example of the California housing from section 10.14.1. As some other examples we have replicated from the book, we needed to use the dataset with the anomalies features, since we wanted to compare our results, and using images was not optimal. So first we import the data and divide it into training and test sets.
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+import warnings
+warnings.filterwarnings("ignore")
+
+dataset = pd.read_csv('/Users/MayraBerrones/Documents/VisualCode/data_bcw.csv')
+
+target = 'diagnosis'
+
+features = ['radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean',
+       'smoothness_mean', 'compactness_mean', 'concavity_mean',
+       'concave points_mean', 'symmetry_mean', 'fractal_dimension_mean']
+
+X, y = dataset[features].values, dataset[target].values
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=2311)
+y_overall_median = np.median(y)
+```
+
+As always, the whole code can be found [here]().
+
+Using the example on the `sklearn` library, we calculate the mean absolute error of the optimal constant predictor.
+
+```python
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import r2_score
+
+y_train_median = np.median(y_train)
+y_test_hat = np.full(shape=y_test.shape, fill_value=y_train_median)
+const_mae = mean_absolute_error(y_test, y_test_hat)
+print(f'MAE of optimal constant predictor {const_mae:.2f}')
+```
+
+```
+MAE of optimal constant predictor 0.44
+```
+
+Then, with the help of the `catboost` library, we plot the slope it takes of the absolute error on the training and test set as the iterations increase. 
+
+```python
+from catboost import CatBoostRegressor
+
+cb_reg = CatBoostRegressor(
+    iterations=1500,
+    loss_function='MAE'
+).fit(
+    X_train, y_train,
+    verbose=False,
+    # include train into eval_set to calculate error curve for it
+    # don't to it when selecting the best model
+    eval_set=[(X_train, y_train), (X_test, y_test)]
+)
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/absolute_error.png)
