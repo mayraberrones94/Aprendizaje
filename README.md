@@ -2094,7 +2094,7 @@ Accuracy =  0.873015873015873
 The prediction for this image is:  ['normal']
 The actual label for this image is:  normal
 ```
-
+graph TD
     A[Christmas] -->|Get money| B(Go shopping)
     B --> C{Let me think}
     C -->|One| D[Laptop]
