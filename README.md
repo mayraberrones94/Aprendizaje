@@ -2408,3 +2408,8 @@ And for the bootstraping:
 |  5       | 0.641        | 5.324         | 0.580          | 8.393           | 0.58     |
 
 
+## Conclusions:
+
+For this weeks work it was interesting to see different types of layers we had not work with before. It also gave us the oportunity to work with a different type of KERAS api, which we are also exited to explore, since more complex networks like ResNet 50 (which is one of the most mention architecture mentioned in image classification) have this concept of sharing some weights and making modules from different layers.
+
+From the chapter reading we realize that we had a misguided concept in our first experimentation for our masters thesis, since we thought that a smaller and simpler architecture would lead to a better model. What actually gave us was an overfitted model. It is very interesting to see these kind of experimentations, because I feel more and more confident with the parameters and changes I have for my improved model.
