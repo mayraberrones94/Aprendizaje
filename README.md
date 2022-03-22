@@ -2099,3 +2099,50 @@ The actual label for this image is:  normal
 ## **Homework 11: Neural networks**
 
 > **Instructions:** Go over the steps of the ZIP code examples in Chapter 11 and replicate as much as you can with your own project data. Don't forget to read the whole chapter before you start.
+
+In the example shown in the books, they use the character recognition task of classification of written numerals. They mention that the concept of a black box in a neural network is not suited for a pattern recognition task, because the pixel representation of the images lacks invariances, and as a consequence, early attempts with the use of neural networks yielded around 4.5% on misclassification.
+
+For this example they fit different networks to the data:
+
+- **Net-1:** No hidden layer, equivalent to multinomial logistic regression.
+- **Net-2:** One hidden layer, 12 hidden units fully connected.
+- **Net-3:** Two hidden layers locally connected.
+- **Net-4:** Two hidden layers, locally connected with weight sharing.
+- **Net-5:** Two hidden layers, locally connected, two levels of weight sharing.
+
+So for this example to replicate it, we first need to have some considerations. In the book they mention that the input is of 256 for the 16x16 input pixels an 10 output units for each of the digits from 0 to 9. They also mention that all the networks have sigmoidal output units and were fit with the sum-of-squares error function.
+
+We are going to start to build them one by one. 
+
+### Net-1
+
+In the book they mention that this first network has no hidden layer and is nearly equivalent to a linear multinomial regression model. So we are going to use tensorflow and keras to build a simple model, just like the one they describe in the books with the same tools we use to build our own CNN.
+
+```python
+import tensorflow as tf
+
+from tensorflow import keras
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.layers import Dense, Conv2D, Flatten
+from tensorflow.keras.layers import LocallyConnected2D
+from tensorflow.keras.layers import LocallyConnected1D
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Reshape
+from tensorflow.keras.utils import plot_model
+from tensorflow.keras.layers import Input
+from tensorflow.keras.models import Model
+from matplotlib import pyplot as plt
+from random import randint
+```
+
+
+Since in the example they use a text dataset of hand written numbers, we figured it would be easier to use the mnist library. In our case, they describe in the book that they just want to show the effects of the different architectures, so we are going to use only a part of the data set. The whole code can be seen [here](). We see a small example of our dataset.
+
+```python
+for i in range(64):
+    ax = plt.subplot(8, 8, i+1)
+    ax.axis('off')
+    plt.savefig('/Users/MayraBerrones/Documents/VisualCode/minist_test.png')
+    plt.imshow(x_train_drawing[randint(0, x_train.shape[0])], cmap='Greys')
+```
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/minist_test.png)
