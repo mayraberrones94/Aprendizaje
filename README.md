@@ -2365,6 +2365,24 @@ _________________________________________________________________
 Test loss: 0.0829
 Test accuracy: 0.971
 ```
+Testing these models we start on the last 2, because we do not expect any groundbreaking results from the simpler networks. The results are not good at all, specially since we had to downsize the images significantly for the models to work.\
+
+For the Net-4:
+
+| Data set | Accuracy | Loss |
+|----------|----------|------|
+|Training  | 0.513    | 0.69 |
+|Validation| 0.480    | 0.79 |
+|Test      | 0.49    |      |
+
+For the Net-5:
+
+| Data set | Accuracy | Loss |
+|----------|----------|------|
+|Training  | 0.515    | 0.68 |
+|Validation| 0.500    | 0.69 |
+|Test      | 0.50     |      |
+
 
 Now, for our model, what we wanted to apply from what we experimented in this homework is the new way in which we use the shared weights, but with a more complex architecture. Same as before, we use our objective data set, INCAN, since it is the one giving us most trouble. We transform the architecture to one where all layers are connected, and some layers are locally connected. The results where not good, either with the architecture alexnet by it self, neither with applying bootstraping (which was the method that has given us the best performance so far).
 
