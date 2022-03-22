@@ -2365,3 +2365,28 @@ _________________________________________________________________
 Test loss: 0.0829
 Test accuracy: 0.971
 ```
+
+Now, for our model, what we wanted to apply from what we experimented in this homework is the new way in which we use the shared weights, but with a more complex architecture. Same as before, we use our objective data set, INCAN, since it is the one giving us most trouble. We transform the architecture to one where all layers are connected, and some layers are locally connected. The results where not good, either with the architecture alexnet by it self, neither with applying bootstraping (which was the method that has given us the best performance so far).
+
+**NOTE:** Github does not let me upload images at the moment, so I am going to add the table of results, and later I can add the plots.
+
+With weight sharing and local connections:
+
+| Data set | Accuracy | Loss |
+|----------|----------|------|
+|Training  | 0.515    | 5.95 |
+|Validation| 0.560    | 4.39 |
+|Test      | 0.520    |      |
+
+
+And for the bootstraping:
+
+|Iteration | Training acc | Training loss | Validation acc | Validation loss | Test acc |
+|----------|--------------|---------------|----------------|-----------------|----------|
+|  1       | 0.537        | 6.275         | 0.600          | 4.488           | 0.62     |
+|  2       | 0.546        | 6.715         | 0.550          | 6.270           | 0.56     | 
+|  3       | 0.601        | 5.965         | 0.530          | 7.200           | 0.58     |
+|  4       | 0.641        | 5.367         | 0.580          | 6.486           | 0.58     |
+|  5       | 0.641        | 5.324         | 0.580          | 8.393           | 0.58     |
+
+
