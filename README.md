@@ -2146,3 +2146,222 @@ for i in range(64):
     plt.imshow(x_train_drawing[randint(0, x_train.shape[0])], cmap='Greys')
 ```
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/minist_test.png)
+
+For the Net-1 we have the following architecture:
+
+```python
+model = Sequential()
+model.add(Dense(units=num_classes, activation='sigmoid', input_shape=(image_size,)))
+model.summary()
+```
+
+```
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense (Dense)                (None, 10)                7850      
+=================================================================
+Total params: 7,850
+Trainable params: 7,850
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+We compile our model and assign the test and train sets. For all the experiments we are going to use adam as an optimizer, categorical crossentropy as loss function and accuracy as metric.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/model_1plot.png)
+
+```
+Test loss: 1.19e-07
+Test accuracy: 0.0903
+```
+
+As we can see from the plot, the accuracy of the model is not very good. 
+
+### Net-2
+
+In the book they describe this architecture as one hidden layer, 12 hidden units fully connected. For Net-2 we have the following parameters:
+
+```python
+model_2 = Sequential()
+model_2.add(Dense(units=12, activation='sigmoid', input_shape=(image_size,) ))
+model_2.add(Dense(units=num_classes, activation='sigmoid'))
+model_2.summary()
+```
+
+```
+Model: "sequential_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_1 (Dense)              (None, 12)                9420      
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                130       
+=================================================================
+Total params: 9,550
+Trainable params: 9,550
+Non-trainable params: 0
+_________________________________________________________________
+```
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/model_2plot.png)
+
+```
+Test loss: 0.757
+Test accuracy: 0.764
+```
+
+Despite only adding one hidden layer, we can see in our results that the accuracy improves significantly. 
+
+### Net-3
+
+For this architecture, we start to see a bit more additional features to a neural network. In this case, the book indicates two hidden layers locally connected. For our part, we had never considered the locally connected layers. In the book, they mention that the local connectivity refers to each hidden unit, and how is connected to a small patch of units in the layer below. Local connectivity then makes each unit responsible for extracting local features from the layer below, reducing the number of weights. 
+
+Net-3 presented more changes in the code, where we had to go for a different Keras API. So far we only had been using the sequential mode, and now we change to a Functional API.
+
+```python
+import numpy as np
+
+def modelo_3():
+    input_dim = (28, 28,1)
+    input_ = Input(input_dim, name = 'the_input')
+    layer1 = LocallyConnected2D(1, 2, strides= 2, activation= 'sigmoid', name = 'layer1')(input_)
+    layer2 = LocallyConnected2D(1, 5, activation='sigmoid', name = 'layer2')(layer1)
+    layer3 = Flatten(name='layer3')(layer2) 
+    output = Dense(units=num_classes, activation='sigmoid', name = 'output')(layer3)
+
+    model = Model(inputs = input_, outputs = output)
+    model.summary()
+    input_dim = np.expand_dims(input_dim, axis=0)
+
+    return model
+
+model = modelo_3()
+```
+
+```
+Model: "model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+the_input (InputLayer)       [(None, 28, 28, 1)]       0         
+_________________________________________________________________
+layer1 (LocallyConnected2D)  (None, 14, 14, 1)         980       
+_________________________________________________________________
+layer2 (LocallyConnected2D)  (None, 10, 10, 1)         2600      
+_________________________________________________________________
+layer3 (Flatten)             (None, 100)               0         
+_________________________________________________________________
+output (Dense)               (None, 10)                1010      
+=================================================================
+Total params: 4,590
+Trainable params: 4,590
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/model_3plot.png)
+
+```
+Test loss: 0.0994
+Test accuracy: 0.965
+```
+
+One of the biggest headaches from this experimentation was to figure out one persistent error messages, where the input size did not match when we wanted to compile the model. Finally, we found the answer [here](https://github.com/keras-team/keras/issues/10053) and the changes can be seen in the full code.
+
+## Net-4 and Net-5
+
+For these last architectures we did not see much change. In the book they mention that we now implement local connectivity and shared weights. It took a little bit more time for them to train compared to the other three, but overall they have a very good accuray performance.
+
+```python
+def modelo_4():
+    input_dim = (28, 28, 1)
+    input_ = Input(input_dim, name = 'the_input')
+    layer1 = Conv2D(2, 2, strides= 2, activation= 'sigmoid', name = 'layer1')(input_)
+    layer2 = LocallyConnected2D(1, 5, activation='sigmoid', name = 'layer2')(layer1)
+    layer3 = Flatten(name='layer3')(layer2) 
+    output = Dense(units=num_classes, activation='sigmoid', name = 'output')(layer3)
+
+    model = Model(inputs = input_, outputs = output)
+    model.summary()
+    input_dim = np.expand_dims(input_dim, axis=0)
+
+    return model
+
+model = modelo_4()
+```
+
+```
+Model: "model_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+the_input (InputLayer)       [(None, 28, 28, 1)]       0         
+_________________________________________________________________
+layer1 (Conv2D)              (None, 14, 14, 2)         10        
+_________________________________________________________________
+layer2 (LocallyConnected2D)  (None, 10, 10, 1)         5100      
+_________________________________________________________________
+layer3 (Flatten)             (None, 100)               0         
+_________________________________________________________________
+output (Dense)               (None, 10)                1010      
+=================================================================
+Total params: 6,120
+Trainable params: 6,120
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/model_4plot.png)
+
+```
+Test loss: 0.0959
+Test accuracy: 0.966
+```
+
+```python
+def modelo_5():
+    input_dim = (28, 28, 1)
+    input_ = Input(input_dim, name = 'the_input')
+    layer1 = Conv2D(2, 2, strides= 2, activation= 'sigmoid', name = 'layer1')(input_)
+    layer2 = Conv2D(4, 5, activation='sigmoid', name = 'layer2')(layer1)
+    layer3 = Flatten(name='layer3')(layer2) 
+    output = Dense(units=num_classes, activation='sigmoid', name = 'output')(layer3)
+
+    model = Model(inputs = input_, outputs = output)
+    model.summary()
+    input_dim = np.expand_dims(input_dim, axis=0)
+
+    return model
+
+model = modelo_5()
+```
+
+```
+Model: "model_2"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+the_input (InputLayer)       [(None, 28, 28, 1)]       0         
+_________________________________________________________________
+layer1 (Conv2D)              (None, 14, 14, 2)         10        
+_________________________________________________________________
+layer2 (Conv2D)              (None, 10, 10, 4)         204       
+_________________________________________________________________
+layer3 (Flatten)             (None, 400)               0         
+_________________________________________________________________
+output (Dense)               (None, 10)                4010      
+=================================================================
+Total params: 4,224
+Trainable params: 4,224
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/model_5plot.png)
+
+```
+Test loss: 0.0829
+Test accuracy: 0.971
+```
