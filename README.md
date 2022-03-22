@@ -2365,7 +2365,10 @@ _________________________________________________________________
 Test loss: 0.0829
 Test accuracy: 0.971
 ```
-Testing these models we start on the last 2, because we do not expect any groundbreaking results from the simpler networks. The results are not good at all, specially since we had to downsize the images significantly for the models to work.\
+
+### Using our own data 
+
+Testing these models we start on the last 2, because we do not expect any groundbreaking results from the simpler networks. The results are not good at all, specially since we had to downsize the images significantly for the models to work, since the regular image size we use, the model would not start at all.
 
 For the Net-4:
 
