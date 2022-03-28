@@ -13,6 +13,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 9: Additive models, trees and related methods](#homework-9-additive-models-trees-and-related-methods)
 + [Chapter 10: Boosting and additive trees](#homework-10-boosting-and-additive-trees)
 + [Chapter 11: Neural networks](#homework-11-neural-networks)
++ [Chapter 12: Support vector machines and flexible discriminants](#Homework-12-support-vector-machines-and-flexible-discriminants)
 
 ---
 
@@ -2416,3 +2417,8 @@ And for the bootstraping:
 For this weeks work it was interesting to see different types of layers we had not work with before. It also gave us the oportunity to work with a different type of KERAS api, which we are also exited to explore, since more complex networks like ResNet 50 (which is one of the most mention architecture mentioned in image classification) have this concept of sharing some weights and making modules from different layers.
 
 From the chapter reading we realize that we had a misguided concept in our first experimentation for our masters thesis, since we thought that a smaller and simpler architecture would lead to a better model. What actually gave us was an overfitted model. It is very interesting to see these kind of experimentations, because I feel more and more confident with the parameters and changes I have for my improved model.
+
+
+## **Homework 12: Support vector machines and flexible discriminants**
+
+> **Instructions:** Pick either (a variant of) SVM or a generalization of LDA and apply it on your project data. Remember to analyze properly the effects of parameters and design choices in the prediction error.
