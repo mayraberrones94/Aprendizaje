@@ -2558,6 +2558,14 @@ Like last time, we used 5 iteration of bootstrap, and added the hinge function.
 
 ## Conclusions
 
+After reading the whole chapter, we realized that we had a misconception about the support vector machine method. What it was and for what type of data it was for. We were certain that we would not be able to use it to classify images since the few examples we found for our master's thesis only had datasets with a structure similar to the one we use in the first part of this homework. Moreover, we found several examples where they recommended we remove some of the data to make the SVM model less time-consuming and less complex. 
 
+SVM is often described as not suitable for large datasets because of its high training time and it also takes more time in training compared to other classification methods. 
+
+We never considered other loss functions other than binary cross-entropy for a very long time. Now, looking a bit more into the hinge loss function we understand how it makes the bootstrap method work better. As a concept, we have the hinge function as:
+
+> A specific type of cost function that incorporates a margin or distance from the classification boundary into the cost calculation. Even if new observations are classified correctly, they can incur a penalty if the margin from the decision boundary is not large enough.
+
+Associating this concept with the concept of hyperplanes of the SVM that we already knew, we can conclude that they use the margins and distances to the resulting predictions to aim closer to a true prediction.
 
 
