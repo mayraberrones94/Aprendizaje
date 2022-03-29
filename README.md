@@ -2536,3 +2536,28 @@ And as a result for the mini-Mias dataset we have:
 | Training  | 0.7817 | 0.4609 |
 | Validation| 0.6774 |  0.5995 |
 | Test      | 0.68 | |
+
+We then tested it with our target dataset, Incan. This one betrayed me in the last iteration, because it was consistently improving, and in the last one, the accuracy went down from 0.80 to 0.57.
+
+|           | Accuracy | Loss |
+|-----------|----------|------|
+| Training  | 0.7276 | 0.5696 |
+| Validation| 0.5750 | 0.8768 |
+
+Now, something that we did see in both datasets, was that the accuracy started at about 0.5 and the loss function at 1.0, and it consistently got better with each iteration. The only problem was that it took too much time to run each iteration. So lastly, the other thing we wanted to try, was to pair this method with the bootstrap method, which was the last successful method we used for our noisy dataset.
+
+Like last time, we used 5 iteration of bootstrap, and added the hinge function.
+
+|Iteration | Training acc | Training loss | Validation acc | Validation loss | Test acc |
+|----------|--------------|---------------|----------------|-----------------|----------|
+|  1       | 0.930        | 0.188         | 0.620          | 1.399           | 0.62     |
+|  2       | 0.971        | 0.082         | 0.840          | 0.390           | 0.84     | 
+|  3       | 0.978        | 0.065         | 0.860          | 1.193           | 0.86     |
+|  4       | 0.983        | 0.050         | 0.920          | 0.413           | 0.92     |
+|  5       | 0.989        | 0.035         | 0.960          | 0.156           | 0.96     |
+
+## Conclusions
+
+
+
+
