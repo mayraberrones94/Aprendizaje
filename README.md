@@ -2429,4 +2429,110 @@ The first thing they mention is the support vector machine, which they describe 
 
 > **Support vector machine (SVM):** This is an algorithm that, when it is used as a classifier, separates the data points using a hyperplane with the largest amount of margin. It can handle easily multiple continuous and categorical variables.
 
-From the concept that we found, the first dataset that comes to mind is the one we take from Kaggle and that we have used in other different homework (including homework 4). We wanted to use this dataset first, because we had already experimented a little bit with it, but never with SVM. Sklearn has some libraries that can help us build the model, and also give us a variety of options we can change to improve our results. 
+From the concept that we found, the first dataset that comes to mind is the one we take from Kaggle and that we have used in other different homework (including homework 4). We wanted to use this dataset first, because we had already experimented a little bit with it, but never with SVM. Sklearn has some libraries that can help us build the model, and also give us a variety of options we can change to improve our results. (To see the whole code, go [here]())
+
+```python
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+cancer = datasets.load_breast_cancer()
+X, y = cancer.data, cancer.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3,random_state=109) 
+
+from sklearn import svm
+from sklearn import metrics
+from sklearn.metrics import classification_report
+
+model = svm.SVC(kernel='linear') # Linear Kernel
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+```
+
+ ```
+ Accuracy: 0.9649122807017544
+ ```
+ 
+ As a result, we have very good accuracy. Here we used the example that appears on the sklearn page, where they use the Support vector classifier class and have the kernel feature as linear. Reading more into what does it mean, the kernel function is to transform our data into the required form. There are different features we can use other than linear, such as polynomial, and radial basis. 
+
+We can also assign different regularization parameters. In the sklearn documentation, they use it as a penalty parameter represented by C, which represents the misclassification term (how much error is bearable in the SVM).
+
+In the examples that we have we first experiment with the penalization, where C = 1.0. 
+
+```python
+model = svm.LinearSVC(C=1.0, max_iter=10000) # Linear Kernel
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+```
+
+```
+Accuracy: 0.9473684210526315
+```
+
+The accuracy decreases in this case, and it is worth noting that the number of iterations we chose gave out a warning in the code, saying there was not enough to converge. We opted not to give it more, because it already took up so much time.
+
+In the next one, we change the kernel to a radial basis function, specifying the regularization again at 1.0, and adding the gamma feature at 0.7. The gamma value is something that we need to be careful while choosing because a low value will likely give us underfitting, while a higher value can cause overfitting. (Similar to the decision of how many epochs and iterations to have when training a CNN).
+
+```python
+model = svm.SVC(kernel="rbf", gamma=0.7, C=1.0) # Linear Kernel
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+```
+
+```
+Accuracy: 0.631578947368421
+```
+
+So here in the results of the radial basis function, we have very poor results. We tried to use the polynomial feature, but after 15 min without an output, we terminated the run.
+
+## SVM as a penalization method
+
+Further reading into the chapter, we arrived at point 12.3.2, where they described the SVM as a penalization method. The way they are described in the book shows how they can be used as a loss function, especially for two-class classification. They describe it as the `hinge` loss function.
+
+We looked into this concept of hinge function, and we found that, for it to work on a CNN, we need to use the output layer, and change the activation function to 'Linear'.
+
+NOTE: In case someone wants to replicate my experiment with different data, we found that for multiclass classification, the last activation function of the CNN must be softmax, and the loss function changes names to squared_hinge.
+
+To make sure it works on images, we first used the mini-MIAS dataset, since our target dataset is very noisy. 
+
+```python
+import tensorflow as tf
+from tensorflow import keras
+
+import os
+import cv2
+from imutils import paths
+from sklearn.preprocessing import LabelEncoder
+from tensorflow.python.keras.utils import np_utils
+```
+
+The structure of our CNN remains similar to the one we have been using (alex-net).
+
+```python
+model = Sequential()
+model.add(Conv2D(filters = 6, kernel_size = 5, strides = 1, activation = 'relu', 
+                 input_shape = (Lng, Hg, 3)))
+model.add(MaxPooling2D(pool_size = 2, strides = 2))
+
+model.add(Conv2D(filters = 16, kernel_size = 5,strides = 1,activation = 'relu',
+                 input_shape = (Lng, Hg, 3)))
+model.add(MaxPooling2D(pool_size = 2, strides = 2))
+model.add(Flatten())
+model.add(Dense(units = 120, activation = 'relu'))
+model.add(Dense(units = 84, activation = 'relu'))
+model.add(Dense(units = 2, activation = 'linear'))
+model.summary()
+```
+
+And as a result for the mini-Mias dataset we have:
+
+|           | Accuracy | Loss |
+|-----------|----------|------|
+| Training  | 0.7817 | 0.4609 |
+| Validation| 0.6774 |  0.5995 |
+| Test      | 0.68 | |
