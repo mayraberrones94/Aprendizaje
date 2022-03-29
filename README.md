@@ -2566,6 +2566,6 @@ We never considered other loss functions other than binary cross-entropy for a v
 
 > A specific type of cost function that incorporates a margin or distance from the classification boundary into the cost calculation. Even if new observations are classified correctly, they can incur a penalty if the margin from the decision boundary is not large enough.
 
-Associating this concept with the concept of hyperplanes of the SVM that we already knew, we can conclude that they use the margins and distances to the resulting predictions to aim closer to a true prediction.
+Associating this concept with the concept of hyperplanes of the SVM that we already knew, we can conclude that they use the margins and distances to the resulting predictions to aim closer to a true prediction. We want to explore a little bit further the pros and cons of changing from binary cross-entropy to hinge loss function, but we are optimistic with our results.
 
 
