@@ -2422,3 +2422,11 @@ From the chapter reading we realize that we had a misguided concept in our first
 ## **Homework 12: Support vector machines and flexible discriminants**
 
 > **Instructions:** Pick either (a variant of) SVM or a generalization of LDA and apply it on your project data. Remember to analyze properly the effects of parameters and design choices in the prediction error.
+
+In this chapter, they describe generalizations of linear decision boundaries for classification. They mention the examples we saw in chapter 4, and how we can deal with the classification problems where we have many classes that overlap with each other, which makes the classification task more difficult.
+
+The first thing they mention is the support vector machine, which they describe as a generalization of all the techniques we are going to see in this chapter. Just to understand better, we searched for the concept of SVM.
+
+> **Support vector machine (SVM):** This is an algorithm that, when it is used as a classifier, separates the data points using a hyperplane with the largest amount of margin. It can handle easily multiple continuous and categorical variables.
+
+From the concept that we found, the first dataset that comes to mind is the one we take from Kaggle and that we have used in other different homework (including homework 4). We wanted to use this dataset first, because we had already experimented a little bit with it, but never with SVM. Sklearn has some libraries that can help us build the model, and also give us a variety of options we can change to improve our results. 
