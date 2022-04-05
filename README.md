@@ -2590,3 +2590,32 @@ This was a very good time to begin our experiments with the segmentation process
 In a previous homework we already used our code for the KNN, so to change it up a bit, we used one of the difficult images (they describe it that way in the repository) of mammography with the anomaly. Here is the image with the area of interest already pointed (manually made).
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/131065%2C%2028.02.13%2C%20RCC%20(2).png)
+
+Starting with k-means, there are some libraries like cv2, that help us, read the image, change its color channels, and finally, prepare the criteria for the k points. Complete code [here]()
+
+```python
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+import cv2
+
+image = cv2.imread('/Users/MayraBerrones/Documents/VisualCode/anomalia3.png', 1) 
+img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+vectorized = img.reshape((-1,3))
+vectorized = np.float32(vectorized)
+criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+```
+
+
+For this experimentation we used small k points, starting at 2, and ending at 6. Six was the last one because we are alternating the use of k means and the filter on edges to see how each k affects the segmentation and the edge drawing process (ground truth). We show 2, 4, and 6, to see the difference. The rest of the results can be seen in the complete code.
+
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_kmeans_k2.png)
+
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_kmeans_k4.png)
+
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_kmeans_k6.png)
