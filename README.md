@@ -2619,3 +2619,159 @@ For this experimentation we used small k points, starting at 2, and ending at 6.
 
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_kmeans_k6.png)
+
+The library of sklearn also has a library that helps us with this, and it is called minibatchkmeans, where we select a variable for kmeans to recolor our image. In this case, seeing our previous results, we chose a variable of 4.
+
+```python
+from sklearn.cluster import MiniBatchKMeans
+kmeans = MiniBatchKMeans(4)
+kmeans.fit(data)
+new_colors = kmeans.cluster_centers_[kmeans.predict(data)]
+
+recolored = new_colors.reshape(image.shape)
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_kmeans_recolored.png)
+
+### Learnign vector quantization (LVQ)
+
+For the LVQ algorithm, since we knew nothing about it, we explored some concepts. The most prominent one was the use of this algorithm to learn a codebook of vectors from the training data. By testing the vectors of this codebook, we can find the best configuration of our training set.
+
+This sounds similar to what we tried to do in our masters' thesis, but we went about it in a different more brute force way. 
+
+Since we wanted to focus on images, and the segmentation process, we searched how this technique could be used for images. We found that vector quantization is used also as a compression technique, which allows us to model the probability density function by distributing the prototype vectors.
+
+We use similar libraries like sklearn, scipy and numpy. We first have a similar basis of k-means to deploy our example. 
+
+```python
+import numpy as np
+from PIL import Image,  ImageOps
+import scipy as sp
+from sklearn import cluster
+
+X=inarray.reshape((-1,1))
+k_means = cluster.KMeans(n_clusters=n_clusters, n_init=4)
+k_means.fit(X)
+values = k_means.cluster_centers_.squeeze()
+labels = k_means.labels_
+
+ # create an array from labels and values
+img_compressed = np.choose(labels, values)
+img_compressed.shape = gray.shape
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_lvq_compressed.png)
+
+Next, we will quantize the face variable with equal bins. For this, since our highest value for the pixels is 256, we will divide into 5 equal parts and choose the middle values as labels of the 5 clusters.
+
+```python
+regular_values = np.linspace(0, 256, n_clusters + 1)
+regular_labels = np.searchsorted(regular_values, gray) - 1
+regular_values = 0.5 * (regular_values[1:] + regular_values[:-1])  # mean
+regular_face = np.choose(regular_labels.ravel(), regular_values, mode="clip")
+regular_face.shape = gray.shape
+plt.figure(figsize=(figure_size,figure_size))
+plt.xticks([]), plt.yticks([])
+plt.imshow(regular_face, cmap=plt.cm.gray, vmin=vmin, vmax=vmax)
+plt.savefig('/Users/MayraBerrones/Documents/VisualCode/h13_lvq1.png')
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_lvq1.png)
+
+Same as before, we add the edgre detection tool, to see how this color compression afects it:
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_lvq_edge.png)
+
+
+### Gaussian mixture
+
+Next, for the Gaussian mixture models, the concept that we found is that it assumes there are a certain number of Gaussian distributions, and each one of them represents a cluster, so this model tends to group data points belonging to a single distribution together.
+
+The examples that we found usually gravitate to data that generates points in a plane. In our case, for the segmentation process, we can use it in a different way. 
+
+For a normal image, we saw that it divides the different shades of colors into a different distribution. The larger the value we give it, the more separation it has between colors (for example on a beach, the sea is a different shade of blues than the sky if we have a large enough value. If we use a smaller one, it all blends into one).
+
+Our images are channel RGB, but use mostly shades of black and grey, so we decided a small number for this deciding variable was going to be enough. For this we also used a library in sklearn. 
+
+```python
+import numpy as np
+from scipy import ndimage
+import matplotlib.pyplot as plt
+from sklearn.mixture import GaussianMixture
+
+n = 10
+l = 256
+im = np.zeros((l, l))
+points = l*np.random.random((2, n**2))
+im[(points[0]).astype(np.int), (points[1]).astype(np.int)] = 1
+im = ndimage.gaussian_filter(im, sigma=l/(4.*n))
+
+mask = (im > im.mean()).astype(np.float)
+
+hist, bin_edges = np.histogram(gray, bins=70)
+bin_centers = 0.5*(bin_edges[:-1] + bin_edges[1:])
+
+classif = GaussianMixture(n_components=2)
+classif.fit(gray.reshape((gray.size, 1)))
+
+threshold = np.mean(classif.means_)
+binary_img = gray > threshold
+
+
+plt.figure(figsize=(11,4))
+```
+
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_gm.png)
+
+Here it already gives the segmentation and edge detection, but the result (if we compare it to the first image where it was done manually) the edge is to broad.
+
+### KNN
+
+
+
+This finally leads us to the KNN model. As we mentioned before, this is the code we already had in mind, since we made a similar experiment in our master's courses. In this case, we use several pillow image filters to first deconstruct the image.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_rgb-m1.png)
+
+The using the nearest neighbor approach, we start to eliminate and clean the points we are not interested in. We accomplish that by turning our image completely into a gray channel of the color. The pixels that are not clustered together enough (depending on our variables) are going to be eliminated.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_pixeles-m1.png)
+
+Then, changing our image back to RGB, we make a similar move, where we cluster similar pixels together. Here we have different results if we focus on the dark area (black pixels) or if we focus on the white area.
+
+```python
+from PIL import Image, ImageDraw
+if getattr(ssl, '_create_unverified_context', None):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+negro = (0, 0, 0)
+blanco = (255, 255, 255)
+umbral = 5 #90 era el primero
+n = Image.open("/Users/MayraBerrones/Documents/VisualCode/h13_detail-m1.png") 
+w, h = n.size
+P = n.load()
+for f in range(h): # bordes verticales
+    if P[0, f] == blanco:
+        ImageDraw.floodfill(n, (0, f), negro)
+    if P[w - 1, f] == blanco:
+        ImageDraw.floodfill(n, (w - 1, f), negro)
+for c in range(w): # bordes horizontales
+    if P[c, 0] == blanco:
+        ImageDraw.floodfill(n, (c, 0), negro)
+    if P[c, h - 1] == blanco:
+        ImageDraw.floodfill(n, (c, h - 1), negro) 
+for f in range(h): 
+    for c in range(w):
+        rgb = P[c, f]
+        if max(rgb) - min(rgb) > umbral: # tiene un color que no es gris 
+            P[c, f] = negro
+b = n.convert('1') # binaricemos lo que queda
+b.save('/Users/MayraBerrones/Documents/VisualCode/h13_rgb-m1.png')
+b
+```
+
+
+
+
+
