@@ -14,6 +14,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 10: Boosting and additive trees](#homework-10-boosting-and-additive-trees)
 + [Chapter 11: Neural networks](#homework-11-neural-networks)
 + [Chapter 12: Support vector machines and flexible discriminants](#Homework-12-support-vector-machines-and-flexible-discriminants)
++ [Chapter 13: Prototype methods and nearest neighbors](#homework-13-prototype-methods-and-nearest-neighbors)
 
 ---
 
@@ -2568,4 +2569,6 @@ We never considered other loss functions other than binary cross-entropy for a v
 
 Associating this concept with the concept of hyperplanes of the SVM that we already knew, we can conclude that they use the margins and distances to the resulting predictions to aim closer to a true prediction. We want to explore a little bit further the pros and cons of changing from binary cross-entropy to hinge loss function, but we are optimistic with our results.
 
+## **Homework 13: Prototype methods and nearest-neighbor**
 
+> **Instructions:** After a complete read-through of Chapter 13, make a comparison between (some variants) of k-means, LVQ, Gaussian mixtures, and KNN for your project data. Since these models are pretty simple, implement at least one of them fully from scratch without using a library that already does it for you.
