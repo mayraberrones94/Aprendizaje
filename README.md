@@ -2682,6 +2682,7 @@ Same as before, we add the edgre detection tool, to see how this color compressi
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_lvq_edge.png)
 
+As we can see, the edge detection is too noisy for us to see clearly the groun truth.
 
 ### Gaussian mixture
 
@@ -2784,7 +2785,7 @@ However, if we focus on the black pixels, the area is a lot cleaner than the fir
 
 ## Conclusions
 
-K means and Gaussian mixture proved to be good tools to perform the segmentation process of our experimentation. KNN remains the more truthful to the end results, even in an image that was considered noisy in the original dataset.
+K means and Gaussian mixture proved to be good tools to perform the segmentation process of our experimentation. KNN remains the more truthful to the end results, even in an image that was considered noisy in the original dataset. The next step for us here would be to check all the ground truth images, and compare them with the results from these models, to messure the overall accuracy of them.
 
 For the LVQ we found something very interesting in league with the library Keras that we are using. There are some experiments made with the MNIST dataset, in which they use the codebooks and prototypes of this model to build a different set of images. Similar to NN, they first have to train to a large dataset. Comparing the MNIST dataset with ours, we seem to have low data. But we found another dataset of only lesions (patches of images with only cancerous anomalies) which we are trying to convert to a dataset format similar to MNIST. 
 
