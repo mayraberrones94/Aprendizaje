@@ -2591,7 +2591,7 @@ In a previous homework we already used our code for the KNN, so to change it up 
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/131065%2C%2028.02.13%2C%20RCC%20(2).png)
 
-Starting with k-means, there are some libraries like cv2, that help us, read the image, change its color channels, and finally, prepare the criteria for the k points. Complete code [here]()
+Starting with k-means, there are some libraries like cv2, that help us, read the image, change its color channels, and finally, prepare the criteria for the k points. Complete code [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/H13_prototypes.ipynb)
 
 ```python
 import matplotlib.pyplot as plt
