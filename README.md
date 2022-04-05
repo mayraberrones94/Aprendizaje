@@ -2572,3 +2572,21 @@ Associating this concept with the concept of hyperplanes of the SVM that we alre
 ## **Homework 13: Prototype methods and nearest neighbors**
 
 > **Instructions:** After a complete read-through of Chapter 13, make a comparison between (some variants) of k-means, LVQ, Gaussian mixtures, and KNN for your project data. Since these models are pretty simple, implement at least one of them fully from scratch without using a library that already does it for you.
+
+After reading Chapter 13, K-means and k-NN models are familiar to us, in the fact that we have been looking at them to complete one of the steps of our project, which is the segmentation part.
+
+Gaussian sounded familiar as well, where one of our colleagues in Deusto tried to use it to improve the ground truth of smaller (and more difficult to spot) anomalies. LVQ was a completely grey area for us.
+
+So in these experiments, we are going to be focusing on the segmentation process.
+
+### K-means 
+
+We begin with the k-means algorithm. Same as before, we looked into some concepts for this area (even though we had a general idea), so we have:
+
+> **k-Means** is an unsupervised algorithm that is used to segment the interest area from the background. In this case, it clusters or partitions areas depending on the K-centroids. The goal is to find certain groups based on the similarity in the data with the number of groups represented by K.
+
+This was a very good time to begin our experiments with the segmentation process because we realized that much of the data we shared with the hospital is very badly misplaced, so we had the opportunity to sort some things out.
+
+In a previous homework we already used our code for the KNN, so to change it up a bit, we used one of the difficult images (they describe it that way in the repository) of mammography with the anomaly. Here is the image with the area of interest already pointed (manually made).
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/131065%2C%2028.02.13%2C%20RCC%20(2).png)
