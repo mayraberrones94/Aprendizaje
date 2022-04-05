@@ -2772,6 +2772,7 @@ b
 ```
 
 
-
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_vecinos-m1.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_knn_edgeimage.png)
 
 
