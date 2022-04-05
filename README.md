@@ -2771,8 +2771,26 @@ b.save('/Users/MayraBerrones/Documents/VisualCode/h13_rgb-m1.png')
 b
 ```
 
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_vecinos-m1-blanco.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_knn_edgeimageblanco.png)
+
+When we focus on the white pixels, the final filtered KNN image has a space that resembles the circled area of the ground truth image, but if we see it from the edge perspective, it is still too noisy, and the area is not precise enough.
+
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_vecinos-m1.png)
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h13_knn_edgeimage.png)
 
+However, if we focus on the black pixels, the area is a lot cleaner than the first one, and when we see the edge detection, we see how it resembles the ground truth.
+
+## Conclusions
+
+K means and Gaussian mixture proved to be good tools to perform the segmentation process of our experimentation. KNN remains the more truthful to the end results, even in an image that was considered noisy in the original dataset.
+
+For the LVQ we found something very interesting in league with the library Keras that we are using. There are some experiments made with the MNIST dataset, in which they use the codebooks and prototypes of this model to build a different set of images. Similar to NN, they first have to train to a large dataset. Comparing the MNIST dataset with ours, we seem to have low data. But we found another dataset of only lesions (patches of images with only cancerous anomalies) which we are trying to convert to a dataset format similar to MNIST. 
+
+We want to try with this dataset instead of ours because the resolution for the images that the model asks for must be very low since the complexity of the problem for the MNIST (28x28 pixels) is already really high.
+
+We found very little in the literature about this type of data augmentation for medical imaging, but we assume is because it is very computationally expensive, and in our case, we have no immediate feedback to see if the images generated are true to the label (normal or abnormal) where they originated.
+
+One last use we like to explore is the use of LVQ to have pre-trained weights from those codebooks. So far we only found one post and about three articles that work with this model, and the reports show that the complexity of the known CNN architectures lowered substantially, allowing even normal computers to run complex nets like VGG-16. (This is no longer a problem for us since we upgraded our computer, but it would be interesting to know the alternative we did not see before).
 
