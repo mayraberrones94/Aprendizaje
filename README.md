@@ -2798,7 +2798,7 @@ One last use we like to explore is the use of LVQ to have pre-trained weights fr
 
 
 
-## **Homework 1: Introduction**
+## **Homework 14: Unsupervised learning**
 
 > **Instructions:** After reading the whole chapter, pick any three techniques introduced in it and apply them to your data. Make use of as many libraries as you please in this occasion. Discuss the drawbacks and advantages of each of the chosen techniques.
 
@@ -2839,7 +2839,7 @@ We then tried with 20 components to see if they were enough for our image as wel
 
 Finally we kept moving the number of the components up, to see if we reached a number where the image looked as close to the original, so we took it up to a 100. It was until the last number of components that the image was fully reconstructed, which lead us to believe our image is very noisy. We note that the data set we are using is the INCAN one.
 
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img1.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img.png)
 
 
 
