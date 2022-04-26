@@ -2852,8 +2852,18 @@ The results from the training and testing adding this layer were:
 |-------------|------------|---------|-----------|--------|
 | MIAS_Cancer |      0.72   |   0.52 |     0.60  |      25|
 | MIAS_Normal  |     0.73   |   0.86  |    0.79   |     37|
-|--------------|-------------|-------|-----------|--------|
  |   accuracy   |           |         |    0.73   |     62|
 |   macro avg    |   0.72    |  0.69  |    0.70   |     62|
 |weighted avg    |   0.73   |   0.73 |     0.72   |     62|
 
+Comparing these results with the results of our last experimentation:
+
+|             | precision|    recall | f1-score   |support|
+|-------------|-----------|----------|-----------|--------|
+| MIAS_Cancer  |     0.69  |    0.36 |     0.47 |       25|
+| MIAS_Normal   |    0.67  |    0.89 |     0.77 |      37|
+ |   accuracy    |          |        |     0.68|        62|
+|   macro avg     |  0.68     | 0.63    |  0.62    |    62|
+|weighted avg    |   0.68    |  0.68  |    0.65  |      62|
+
+As we can see, the accuracy of our model improved five percent. 
