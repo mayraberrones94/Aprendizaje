@@ -2884,6 +2884,39 @@ And finally a Gaussian highpass
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_gausianhigh.png)
 
+As we can see from the results, there is a significant amount of less noise in the images, but it also gives little detail to the main anomaly that we want to detect. 
+
 ### Cluster analysis
 
+Finally for cluster analysis, k-means is one of the most mentioned in various works we investigated, and in particular, the combination of dimension reduction and k-means is an experiment that could help the edge detection at the end of the processing.
+
+```python
+img = cv2.imread('/Users/MayraBerrones/Documents/VisualCode/anomalia3.png')/255
+img = img.astype(np.float32)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+scale_percent = 20 
+width = int(img.shape[1] * scale_percent / 100)
+height = int(img.shape[0] * scale_percent / 100)
+dim = (width, height)  
+
+resized = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+```
+For this experiment, we are using similar libraries than before. In this case, we first have the decomposition of the image, before we use the k points, and start the centroid points at random.
+
+Now for the centroids, this time they are going to start at random. It changes from computer to computer, but it is recomended in this step to be careful on how many iterations and k points you choose, because it takes quite a while to compute.
+
+We choose 5 k points, and after several minutes, the centroids are as follows:
+
+```
+[[0.00102685 0.00102685 0.00102685]
+ [0.14989868 0.14989868 0.14989868]
+ [0.2592914  0.2592914  0.2592914 ]
+ [0.6513111  0.6513111  0.6513111 ]
+ [0.43936622 0.43936622 0.43936622]]
+
+```
+And finally, we have the segmented image, with the edge detection:
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_kmeans5_edge.png)
 
