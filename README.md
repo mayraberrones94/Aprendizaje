@@ -2866,4 +2866,24 @@ Comparing these results with the results of our last experimentation:
 |   macro avg     |  0.68     | 0.63    |  0.62    |    62|
 |weighted avg    |   0.68    |  0.68  |    0.65  |      62|
 
-As we can see, the accuracy of our model improved five percent. 
+As we can see, the accuracy of our model improved five percent.
+
+### Gaussian mixtures
+
+For the next technique, we had seen some examples of the use of gaussian mixtures to help detect edges on images. In our case, we took the example of Figure 14.9 where they use an image and pass it through different filters and matrixes. In our case, we pass the image used in last week's homework to compare if these filters help the edge detection process.
+
+We start with a pass of a 3x3 matrix.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_3x3.png)
+
+Then a 5x5.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_5x5.png)
+
+And finally a Gaussian highpass
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_gausianhigh.png)
+
+### Cluster analysis
+
+
