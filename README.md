@@ -2837,7 +2837,7 @@ We then tried with 20 components to see if they were enough for our image as wel
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img_20.png)
 
-Finally we kept moving the number of the components up, to see if we reached a number where the image looked as close to the original, so we took it up to a 100. It was until the last number of components that the image was fully reconstructed, which lead us to believe our image is very noisy. We note that the data set we are using is the INCAN one.
+Finally we kept moving the number of the components up, to see if we reached a number where the image looked as close to the original, so we took it up to a 100. It was until the last number of components that the image was more or less reconstructed, which lead us to believe our image is very noisy. We note that the data set we are using is the INCAN one. We wanted to keep upping the components, but over the number 150 we got an error message which read that the number of components was not enough to converge. We tried many things recommended to us to solve this problem, but it kept popping up, so we stopped.
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img.png)
 
