@@ -2920,3 +2920,11 @@ And finally, we have the segmented image, with the edge detection:
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_kmeans5_edge.png)
 
+### Conclusions
+
+For the ICA there was just so much information about it, and we struggled to put it into the perspective of our project, so we are very lucky to have found an application that serves both in the preprocessing and CNN architecture. The decomposition of the image in this first part, made us realize that maybe we needed to add so many components because our image was noisy. This is based on the example that we saw, where only 20 components were necessary.
+
+The Gaussian mixture was a filter that we had seen before been used by one of our colleagues at the University of Deusto, where he tried to use these filters to help with the segmentation and ground truth process. In the end, I spoiled myself with the results, because I knew he had difficulties implementing it, and in my case, the edge segmentation did not improve.
+
+And finally, with the cluster analysis, we had already seen that the k-means yielded some good results, how ever, there was still too much noise when we wanted to apply the edge detection, as we saw in our previous homework. Using the image decomposition before this process proved to be a good experiment since the last image with the edge detection seems to have a lot more resemblance to the ground truth we had for that image. (The edges look a lot cleaner as well).
+
