@@ -2842,6 +2842,18 @@ Finally we kept moving the number of the components up, to see if we reached a n
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img.png)
 
 
+Another use that we found for the ICA library was an implementation in KERAS, where we could add a layer that acted like the ICA method. It was instructed that it had to be placed between two dense layers, and preferably before the last one, so we implemented it to the same code we had from previous homework, where we used the mini MIAS data set so we could compare it to our last results where we implemented the hinge function.
 
+The class and the functions to implement this layer can be found [here](https://github.com/luca-parisi/m-arcsinh_scikit-learn_TensorFlow_Keras)
 
+The results from the training and testing adding this layer were:
+
+|             | precision  |  recall | f1-score  | support|
+|-------------|------------|---------|-----------|--------|
+| MIAS_Cancer |      0.72   |   0.52 |     0.60  |      25|
+| MIAS_Normal  |     0.73   |   0.86  |    0.79   |     37|
+|--------------|-------------|-------|-----------|--------|
+ |   accuracy   |           |         |    0.73   |     62|
+|   macro avg    |   0.72    |  0.69  |    0.70   |     62|
+|weighted avg    |   0.73   |   0.73 |     0.72   |     62|
 
