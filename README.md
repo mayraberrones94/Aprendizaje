@@ -15,6 +15,7 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 11: Neural networks](#homework-11-neural-networks)
 + [Chapter 12: Support vector machines and flexible discriminants](#Homework-12-support-vector-machines-and-flexible-discriminants)
 + [Chapter 13: Prototype methods and nearest neighbors](#homework-13-prototype-methods-and-nearest-neighbors)
++ [Chapter 14: Unsupervised learning](#homework-14-unsupervised-learning)
 
 ---
 
@@ -2794,4 +2795,53 @@ We want to try with this dataset instead of ours because the resolution for the 
 We found very little in the literature about this type of data augmentation for medical imaging, but we assume is because it is very computationally expensive, and in our case, we have no immediate feedback to see if the images generated are true to the label (normal or abnormal) where they originated.
 
 One last use we like to explore is the use of LVQ to have pre-trained weights from those codebooks. So far we only found one post and about three articles that work with this model, and the reports show that the complexity of the known CNN architectures lowered substantially, allowing even normal computers to run complex nets like VGG-16. (This is no longer a problem for us since we upgraded our computer, but it would be interesting to know the alternative we did not see before).
+
+
+
+## **Homework 1: Introduction**
+
+> **Instructions:** After reading the whole chapter, pick any three techniques introduced in it and apply them to your data. Make use of as many libraries as you please in this occasion. Discuss the drawbacks and advantages of each of the chosen techniques.
+
+
+### Independent component analysis
+
+For this homework, we are starting with Independent Component Analysis (ICA). From our research, we know that ICA is a dimensionality reduction algorithm that transforms a set of variables into a new set of components. This is very similar to PCA (principal component analysis) where we map the collection of variables to statistically uncorrelated components, but in the case of ICA, it goes a step further by maximizing the statistical independence.
+
+By the nature of this algorithm, ICA is often used to extract independent components from the images, so it helps to find the edges of it. In our case, we are going to be using ICA to see how well can it isolate the features of our images.
+
+For this technique, the library of Sklearn has a function called FastICA from the decomposition library. This library allows us to play a little bit with the dimensionality of the image because one of the parameters is the number of components on the image. If we go too low, the image would be very blurry, and the higher you go the more computationally expensive it gets. First we import the libraries, and using the FastICA library, we test the number of components.
+
+```python
+from sklearn.decomposition import FastICA
+from pylab import *
+from skimage import data, io, color
+
+from matplotlib import pyplot as plt
+import numpy as np
+import cv2
+
+ica = FastICA(n_components= 100)
+ica.fit(data)
+
+image_ica = ica.fit_transform(data)
+img_restored = ica.inverse_transform(image_ica)
+```
+This is the result with 10 components.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img1.png)
+
+In our case, we took the example from the library, and in that example, 5 components were enough for the example image to be recognizable, and 20 components to look exactly like the original image.
+
+
+We then tried with 20 components to see if they were enough for our image as well.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img_20.png)
+
+Finally we kept moving the number of the components up, to see if we reached a number where the image looked as close to the original, so we took it up to a 100. It was until the last number of components that the image was fully reconstructed, which lead us to believe our image is very noisy. We note that the data set we are using is the INCAN one.
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h14_restored_img1.png)
+
+
+
+
 
