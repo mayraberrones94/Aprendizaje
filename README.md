@@ -2998,3 +2998,22 @@ print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 ```
 Accuracy: 0.9766081871345029
 ```
+
+This result is similar to the one we obtained before. Since this chapter is focused explicitly on Random forests, there are other things we can do with this library. One of them is to take the variable importance of each feature.
+
+```python
+import pandas as pd
+feature_imp = pd.Series(clf.feature_importances_,index=cancer.feature_names).sort_values(ascending=False)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+
+sns.barplot(x=feature_imp, y=feature_imp.index)
+plt.xlabel('Feature Importance Score')
+plt.ylabel('Features')
+plt.title("Visualizing Important Features")
+plt.legend()
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h15_imp-var.png)
