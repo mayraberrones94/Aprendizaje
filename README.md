@@ -2962,10 +2962,24 @@ The classification report for the CNN:
 
 |             | precision |   recall | f1-score  | support|
 |-------------|-----------|----------|-----------|--------|
-|    Anomalia  |     0.80  |    0.59 |     0.68   |     27|
-|      Normal  |     0.63  |    0.83 |     0.72  |      23|
-|    accuracy  |           |         |     0.70  |      50|
-|   macro avg  |     0.72  |    0.71 |     0.70  |      50|
-|weighted avg  |     0.72  |    0.70 |     0.70  |      50|
+|    Anomalia  |     0.76  |    0.81 |     0.79   |     27|
+|      Normal  |     0.76  |    0.70 |     0.73  |      23|
+|    accuracy  |           |         |     0.76  |      50|
+|   macro avg  |     0.76  |    0.76 |     0.76  |      50|
+|weighted avg  |     0.76  |    0.76 |     0.76  |      50|
 
 And the classification report for the random forest after that:
+
+|             | precision  |  recall | f1-score  | support|
+|-------------|------------|---------|-----------|--------|
+|    Anomalia |      0.89  |    0.59 |     0.71  |      27|
+|      Normal |      0.66  |    0.91 |     0.76  |      23|
+|    accuracy |            |         |     0.74  |      50|
+|   macro avg |      0.77  |    0.75 |     0.74  |      50|
+|weighted avg |      0.78  |    0.74 |     0.74  |      50|
+
+As we can see the overall accuracy is lower on the random forest, but the same thing happened in this experiment than the one we found, because here it improves the accuracy in the most difficult images, which are the ones with anomaly. It does not improve our accuracy as much as we would like, so for the use in CNN, we can deprecate it.
+
+Now, since one of our goals was also to apply other tools to create a dataset similar to the one in Kaggle, where we have very specific features of the anomaly (which helps us better determine if it is a benign or malignant anomaly) we can try the random forest approach on this dataset as well.
+
+Like the homework we did before, we use Sklearn as the library to use the random forest classifier. 
