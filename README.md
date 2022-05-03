@@ -3016,4 +3016,4 @@ plt.title("Visualizing Important Features")
 plt.legend()
 ```
 
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h15_imp-var.png)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h15_imp-variable.png)
