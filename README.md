@@ -2983,3 +2983,18 @@ As we can see the overall accuracy is lower on the random forest, but the same t
 Now, since one of our goals was also to apply other tools to create a dataset similar to the one in Kaggle, where we have very specific features of the anomaly (which helps us better determine if it is a benign or malignant anomaly) we can try the random forest approach on this dataset as well.
 
 Like the homework we did before, we use Sklearn as the library to use the random forest classifier. 
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+
+clf=RandomForestClassifier(n_estimators=100)
+clf.fit(X_train,y_train)
+
+y_pred=clf.predict(X_test)
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+```
+
+```
+Accuracy: 0.9766081871345029
+```
