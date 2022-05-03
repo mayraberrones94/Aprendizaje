@@ -2931,5 +2931,41 @@ And finally, with the cluster analysis, we had already seen that the k-means yie
 
 ## **Homework 15: Random forest**
 
-> **Instructions:** After carefully reading all of Chapter 15 (regardless of how much of Section 15.4 results comprehensible), train (and evaluate) a random forest on your project data and compute also the variable importance and the proximity matrix corresponding to the forest..
+> **Instructions:** After carefully reading all of Chapter 15 (regardless of how much of Section 15.4 results comprehensible), train (and evaluate) a random forest on your project data and compute also the variable importance and the proximity matrix corresponding to the forest.
 
+For this week's homework, we touch more on a subject we saw in previous work. In this case, we are asked to train and evaluate a random forest in our project data and complete the variable of importance and the proximity matrix. 
+
+In the first instance, we wanted to try something different with our CNN structure, since we saw previously some way to implement it at the end of the training process, and we wanted to try it out. For this, we use the same architecture of the AlexNet CNN, which we have used before. Since we have been very happy with our current results, we try to change as little as possible from our previous changes, which means we are going to use the hinge loss function and the linear activation function for our dense layers.
+
+As always, the entire code is going to be available here, and since we repeat many lines from previous work, we are only going to explain the added random forest ones.
+
+
+```python
+x_for_rf = model.predict(trainX, batch_size=BS)
+
+from sklearn.ensemble import RandomForestClassifier
+
+RF_model = RandomForestClassifier(n_estimators = 100, random_state = 42)
+
+RF_model.fit(x_for_rf, trainY) 
+X_test_feature = model.predict(testX)
+prediction_RF = RF_model.predict(X_test_feature)
+#prediction_RF = le.inverse_transform(prediction_RF)
+
+from sklearn import metrics
+print(classification_report(testY.argmax(axis=1), prediction_RF.argmax(axis=1), target_names=le.classes_))
+```
+
+For this part, we saw in our investigation that the random forest needs to feed slightly different information than the CNN. We take the trained parameters and put them through the prediction function. Then we feed that to the random forest. The results of the CNN took about 30 minutes to complete, while the random forest took about a minute.
+
+The classification report for the CNN:
+
+|             | precision |   recall | f1-score  | support|
+|-------------|-----------|----------|-----------|--------|
+|    Anomalia  |     0.80  |    0.59 |     0.68   |     27|
+|      Normal  |     0.63  |    0.83 |     0.72  |      23|
+|    accuracy  |           |         |     0.70  |      50|
+|   macro avg  |     0.72  |    0.71 |     0.70  |      50|
+|weighted avg  |     0.72  |    0.70 |     0.70  |      50|
+
+And the classification report for the random forest after that:
