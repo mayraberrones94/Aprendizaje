@@ -3017,3 +3017,38 @@ plt.legend()
 ```
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h15_imp-variable.png)
+
+And now, if we use only the variable importance to determine which variables we are going to use for the random forest, we take as threshold the value of 0.01 of importance.
+
+```python
+clf=RandomForestClassifier(n_estimators=100)
+clf.fit(X_train,y_train)
+
+y_pred=clf.predict(X_test)
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+```
+
+```
+Accuracy: 0.9298245614035088
+```
+
+In this case, the accuracy decreased. 
+
+
+The sklearn library also has the repeated stratified k fold as one of the model selection features. With that we will evaluate our model with 3 repeats and 10 folds. In our case, the random forest ensamble with default hyperparameters has a classification accuracy of 0.96, which is closer to our first accuracy.
+
+```python
+model = RandomForestClassifier()
+
+cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
+n_scores = cross_val_score(model, X, y, scoring='accuracy', cv=cv, n_jobs=-1, error_score='raise')
+
+print('Accuracy: %.3f (%.3f)' % (mean(n_scores), std(n_scores)))
+```
+```
+Accuracy: 0.961 (0.026)
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h15_kfolds.png)
+
+
