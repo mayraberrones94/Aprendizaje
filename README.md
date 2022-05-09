@@ -3068,5 +3068,38 @@ Accuracy: 0.961 (0.026)
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h15_kfolds.png)
 
+Finally, something we were curious about since the last time we worked with random forest, was a library that printed our forest with the library of dtreeviz. We could not make it work on our home computer, but we could print it in our Colab.
+
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.ensemble import RandomForestClassifier
+from dtreeviz.trees import dtreeviz
+
+cancer = load_breast_cancer()
+X = cancer.data
+y = cancer.target
+
+rf = RandomForestClassifier(n_estimators=100,
+                            max_depth=10,
+                            max_features='auto',
+                            min_samples_leaf=4,
+                            bootstrap=True,
+                            n_jobs=-1,
+                            random_state=0)
+rf.fit(X, y)
+
+viz = dtreeviz(rf.estimators_[99], X, y,
+               target_name="diagnosis",
+               feature_names=cancer.feature_names,
+               class_names=list(cancer.target_names),
+               title="100th decision tree - Breast cancer")
+
+viz.save("breastcancer.svg")
+
+from google.colab import files
+files.download("breastcancer.svg")
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breastcancer%20(2).pdf)
 
 
