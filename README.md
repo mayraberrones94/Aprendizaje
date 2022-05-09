@@ -2937,7 +2937,7 @@ For this week's homework, we touch more on a subject we saw in previous work. In
 
 In the first instance, we wanted to try something different with our CNN structure, since we saw previously some way to implement it at the end of the training process, and we wanted to try it out. For this, we use the same architecture of the AlexNet CNN, which we have used before. Since we have been very happy with our current results, we try to change as little as possible from our previous changes, which means we are going to use the hinge loss function and the linear activation function for our dense layers.
 
-As always, the entire code is going to be available here, and since we repeat many lines from previous work, we are only going to explain the added random forest ones.
+As always, the entire code is going to be available [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/h15_part2.ipynb) aditional code [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/hw15.py), and since we repeat many lines from previous work, we are only going to explain the added random forest ones. 
 
 
 ```python
@@ -3068,7 +3068,7 @@ Accuracy: 0.961 (0.026)
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/h15_kfolds.png)
 
-Finally, something we were curious about since the last time we worked with random forest, was a library that printed our forest with the library of dtreeviz. We could not make it work on our home computer, but we could print it in our Colab.
+Finally, something we were curious about since the last time we worked with random forest, was a library that printed our forest with the library of dtreeviz. We could not make it work on our home computer, but we could print it in our Colab. Code [here](https://github.com/mayraberrones94/Aprendizaje/blob/main/Notebooks/Untitled6.ipynb)
 
 ```python
 from sklearn.datasets import load_breast_cancer
