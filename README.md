@@ -3102,4 +3102,8 @@ files.download("breastcancer.svg")
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Screenshot%20(37).png)
 
+## Conclusions
 
+Since we had already worked with random forest in previous homework we wanted to try something different with the CNN and added Random forest in the end, but the results are way better than our previous finding with bootstraping and the changes on the loss function. 
+
+We still have not searched properly for the way we can transform our images with anomalies to the data we have been working with (for the methods that require features), but it is very interesting to see that with random forest, PCA and ICA, we can have near-perfect results to determine if the anomaly is malignant or benign.
