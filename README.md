@@ -3100,6 +3100,6 @@ from google.colab import files
 files.download("breastcancer.svg")
 ```
 
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/breastcancer%20(2).pdf)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/Screenshot%20(37).png)
 
 
