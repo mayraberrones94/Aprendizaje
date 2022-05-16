@@ -17,6 +17,8 @@ Repository for my automated learning's course. The course description and activi
 + [Chapter 13: Prototype methods and nearest neighbors](#homework-13-prototype-methods-and-nearest-neighbors)
 + [Chapter 14: Unsupervised learning](#homework-14-unsupervised-learning)
 + [Chapter 15: Random forest](#homework-15-random-forest)
++ [Chapter 16: Ensemble learning](#homework-16-ensemble-learning)
++ [Chapter 17: Undirected graphical models](#homework-17-undirected-graphical-models)
 
 ---
 
@@ -3107,3 +3109,11 @@ files.download("breastcancer.svg")
 Since we had already worked with random forest in previous homework we wanted to try something different with the CNN and added Random forest in the end, but the results are way better than our previous finding with bootstraping and the changes on the loss function. 
 
 We still have not searched properly for the way we can transform our images with anomalies to the data we have been working with (for the methods that require features), but it is very interesting to see that with random forest, PCA and ICA, we can have near-perfect results to determine if the anomaly is malignant or benign.
+
+## **Homework 16: Ensemble learnign**
+
+> **Instructions:** Two things: examine how increasing the length of the binary string to identify each class in a multi-class problem affects the performance and carry out some sort of pruning on an ensemble method of your choice, both with the project data.
+
+## **Homework 17: Undirected graphical models**
+
+> **Instructions:** Using either an existing graph-based model or one of your own creation, build a graph of the features (possibly with transformations, kernels or the like to expand the vertex set) and the variables of interest for your project data. Draw this graph using color and size to emphasize the relative importance of the variables (vertices) and their dependencies (edges).
