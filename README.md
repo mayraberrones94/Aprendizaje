@@ -3114,6 +3114,16 @@ We still have not searched properly for the way we can transform our images with
 
 > **Instructions:** Two things: examine how increasing the length of the binary string to identify each class in a multi-class problem affects the performance and carry out some sort of pruning on an ensemble method of your choice, both with the project data.
 
+Ensemble learning is something we have seen before in previous homework, and it is one of the methods that worked best with our dataset and the improvement of the accuracy of our CNN model. In this case, we worked with bagging, but there are other types of ensembles that we did not consider.
+
+Looking more into what made our ensemble work so well with our data, we investigated that ensembles of classifiers are usually more accurate than individual models. In our case, we already proved the efficiency of bagging, but for the sake of this homework, we are going to see what other ensemble strategies we could try.
+
+- **Bagging:** This was our best-performing methodology for the type of model we were using, which is CNN. Bagging or bootstrap aggregation are ensembles that achieve diversity in estimators by training random bootstrap resamples of the data. In the end, the aggregation of the outputs of these estimators is achieved by averaging or majority voting.
+
+- **Boosting:** Here we also tried this methodology on other homework but realized that this was not the best performing one. In this case, while the bagging process is more effective in being trained independently, boosting the estimators' performance determines their contribution to the aggregation process. Gradient and ADA boosting were the ones we tried, but it was slower and the accuracy was not as good as bootstrapping.
+
+- **Heterogeneous ensembles:** From what we could perceive in our investigation this type of ensembles have not received so much attention in the literature. Here it is considered that we need our models to have the most diversity between them in the ensemble. 
+
 ## **Homework 17: Undirected graphical models**
 
 > **Instructions:** Using either an existing graph-based model or one of your own creation, build a graph of the features (possibly with transformations, kernels or the like to expand the vertex set) and the variables of interest for your project data. Draw this graph using color and size to emphasize the relative importance of the variables (vertices) and their dependencies (edges).
