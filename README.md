@@ -3120,9 +3120,19 @@ Looking more into what made our ensemble work so well with our data, we investig
 
 - **Bagging:** This was our best-performing methodology for the type of model we were using, which is CNN. Bagging or bootstrap aggregation are ensembles that achieve diversity in estimators by training random bootstrap resamples of the data. In the end, the aggregation of the outputs of these estimators is achieved by averaging or majority voting.
 
+For bootstrapping we are trying different architectures and loss and optimization functions within our CNN, (which we are going to discuss in-depth in our final project), to see if we can further improve our accuracy.
+
 - **Boosting:** Here we also tried this methodology on other homework but realized that this was not the best performing one. In this case, while the bagging process is more effective in being trained independently, boosting the estimators' performance determines their contribution to the aggregation process. Gradient and ADA boosting were the ones we tried, but it was slower and the accuracy was not as good as bootstrapping.
 
+For boosting we tried already the use of gradient and ADA boosting, but unfortunately, the problem we initially had was with noise in our images, and neither of the boosting algorithms helped us improve it.
+
 - **Heterogeneous ensembles:** From what we could perceive in our investigation this type of ensembles have not received so much attention in the literature. Here it is considered that we need our models to have the most diversity between them in the ensemble. 
+
+For heterogeneous ensembles, we had not heard before so we looked over what it was for. It is established that ensemble methods work best when there is more diversity in the models, so to achieve this diversity we use different models, that in theory would help fill the gaps in the performance of the other models.
+
+We are using the dataset of breast cancer from Kaggle because there are more models we can use with that type of data. For this ensemble, we are going to use KNN, decision tree, naive Bayes, support vector machine, logistic regression, and quadratic discrimination.
+
+Same as other examples before, we divide our dataset into training and test sets and prepare each model to fit into our data.
 
 ## **Homework 17: Undirected graphical models**
 
