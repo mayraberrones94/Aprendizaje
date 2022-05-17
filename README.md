@@ -3196,6 +3196,17 @@ f.savefig('HeteroCM.pdf')
 
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/HeteroCM.png)
 
+- **Stacking:** Finally we have stacking as an ensemble method. Moving forward between all the other methodologies of an ensemble, stacking brings us to a reasonable conclusion, where we treat this last step as a supervised learning task or a final estimator to help optimize the aggregation process. In this case, the base for this stacking method is to separate some of the data to test alone the predictions of the model. This is a practice that we already do with our current dataset, so the last step is to test the predictions of each model and generate a meaningful result out of all of them.
+
+In this case, it would be helpful if by the time we got to this stage we already trimmed out the models that do not help improve our accuracy.
+
+## Conclusions:
+
+Since we already used bagging as an ensemble methodology and found it helpful, we used this homework mainly to investigate a bit more ensemble learning to be able to justify its use in our upcoming paper (why did it work with our type of data, and why is it necessary in the overall process). 
+
+Something else that we found interesting in this work was the last implementation of stacking in aggregation to the bagging process. It is a modified version of what we already do when we are testing our CNN models, so it will be interesting to try it out with all of the rest of the experiments we have in mind since we want to try different architectures of CNN with different parameters, and also different datasets (as individual datasets and combined ones). 
+
+The work made in the heterogeneous ensemble where we compare the disagreements on predictions can help us trim out the models we do not need and make our predictions more robust by passing them through the stacking process.
 
 ## **Homework 17: Undirected graphical models**
 
