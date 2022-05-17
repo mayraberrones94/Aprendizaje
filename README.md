@@ -3132,7 +3132,70 @@ For heterogeneous ensembles, we had not heard before so we looked over what it w
 
 We are using the dataset of breast cancer from Kaggle because there are more models we can use with that type of data. For this ensemble, we are going to use KNN, decision tree, naive Bayes, support vector machine, logistic regression, and quadratic discrimination.
 
-Same as other examples before, we divide our dataset into training and test sets and prepare each model to fit into our data.
+Same as other examples before, we divide our dataset into training and test sets and prepare each model to fit into our data. For the way some of the models we are using work, we need to scale our dataset (we have done this before with the `sklearn` pre-processing library.
+
+```python
+scaler = StandardScaler()
+ann = make_pipeline(scaler, MLPClassifier(solver='lbfgs'))
+lr = make_pipeline(scaler, LogisticRegression())
+kNN = make_pipeline(scaler, KNeighborsClassifier(n_neighbors=3))
+dtree = DecisionTreeClassifier(criterion='entropy')
+gnb = make_pipeline(scaler, GaussianNB())
+svc = make_pipeline(scaler, SVC(probability=True))
+qda = make_pipeline(scaler, QuadraticDiscriminantAnalysis())
+```
+
+Once we fit them and test them, the results for each model are:
+
+```python
+model_acc = []
+for m in model_names:
+    acc = accuracy_score(res_df['Actual'],res_df[m])
+    model_acc.append(acc)
+    print(m, '%4.3f' % acc)
+    
+c_acc = accuracy_score(res_df['Actual'],res_df['Voting'])
+model_acc.append(c_acc)
+print('Voting %4.3f' % c_acc)
+```
+
+```
+k-NN	Tree	Naive Bayes	Ann	Logistic	SVC	QDA	Actual	Voting
+0	1	1	1	1	1	1	1	1	1
+1	1	1	1	1	1	1	1	1	1
+2	0	0	0	0	0	0	0	0	0
+3	1	1	1	1	1	1	1	1	1
+4	0	0	0	0	0	0	0	0	0
+...	...	...	...	...	...	...	...	...	...
+109	0	0	0	0	0	0	0	0	0
+110	0	0	0	0	0	0	0	1	0
+111	0	0	0	1	0	0	0	1	0
+112	1	1	0	1	1	0	1	1	1
+113	0	0	0	0	0	0	0	0	0
+114 rows × 9 columns
+
+k-NN 0.939
+Tree 0.939
+Naive Bayes 0.912
+Ann 0.947
+Logistic 0.939
+SVC 0.921
+QDA 0.947
+Voting 0.939
+```
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/HeteroBars.pdf)
+
+
+We also found this disagreement plot, that tells us how much the models disagree with one another regarding the results of the predictions. As we can see some models are better than others in accuracy and performance, and one way to get rid of the models we don't need, is to see which ones disagree more with the others.
+
+```python
+f = do_colourmap(plain_dis_arr, model_names, 
+             title = 'Heterogeneous ensemble disagreement', vmx = maxv)
+f.savefig('HeteroCM.pdf')
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/HeteroCM.pdf)
+
 
 ## **Homework 17: Undirected graphical models**
 
