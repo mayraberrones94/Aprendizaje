@@ -3204,7 +3204,7 @@ In this case, it would be helpful if by the time we got to this stage we already
 
 Since we already used bagging as an ensemble methodology and found it helpful, we used this homework mainly to investigate a bit more ensemble learning to be able to justify its use in our upcoming paper (why did it work with our type of data, and why is it necessary in the overall process). 
 
-Something else that we found interesting in this work was the last implementation of stacking in aggregation to the bagging process. It is a modified version of what we already do when we are testing our CNN models, so it will be interesting to try it out with all of the rest of the experiments we have in mind since we want to try different architectures of CNN with different parameters, and also different datasets (as individual datasets and combined ones). 
+Something else that we found interesting in this work was the last implementation of stacking in aggregation to the bagging process. It is a modified version of what we already do when we are testing our CNN models, so it will be interesting to try it out with all of the rest of the experiments we have in mind since we want to try different architectures of CNN with different parameters, and also different datasets (as individual datasets and combined ones). Since we need to save all of our models anyway, it could be a fun experiment.
 
 The work made in the heterogeneous ensemble where we compare the disagreements on predictions can help us trim out the models we do not need and make our predictions more robust by passing them through the stacking process.
 
