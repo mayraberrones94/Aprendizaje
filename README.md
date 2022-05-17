@@ -3183,7 +3183,7 @@ SVC 0.921
 QDA 0.947
 Voting 0.939
 ```
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/HeteroBars.pdf)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/HeteroBars.png)
 
 
 We also found this disagreement plot, that tells us how much the models disagree with one another regarding the results of the predictions. As we can see some models are better than others in accuracy and performance, and one way to get rid of the models we don't need, is to see which ones disagree more with the others.
@@ -3194,7 +3194,7 @@ f = do_colourmap(plain_dis_arr, model_names,
 f.savefig('HeteroCM.pdf')
 ```
 
-![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/HeteroCM.pdf)
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/HeteroCM.png)
 
 
 ## **Homework 17: Undirected graphical models**
