@@ -3211,3 +3211,19 @@ The work made in the heterogeneous ensemble where we compare the disagreements o
 ## **Homework 17: Undirected graphical models**
 
 > **Instructions:** Using either an existing graph-based model or one of your own creation, build a graph of the features (possibly with transformations, kernels or the like to expand the vertex set) and the variables of interest for your project data. Draw this graph using color and size to emphasize the relative importance of the variables (vertices) and their dependencies (edges).
+
+For this week's assignment, we had many ideas in mind, and all of them related to our course in network flow, so we had a little bit of trouble relating them to our problems and data. But then we started reading a little bit more in-depth about Boltzmann machines and realized that (duh) convolutional neural networks are just a very convoluted and complicated graph. 
+
+For the first part of this work, we wanted to find a way to represent our CNN model as a graph but realized that the convolutions, dense and other layers were a bit complex to plot. That is why, when we train there is a way to see just how many parameters our network. The simplest one we use has over 00 parameters.
+
+Note: A colleague of ours made a presentation about Ant colony optimization, and made us realize that some behaviors (which are used in graph theory) apply to CNN, like the Dropout parameter, where we intend to eliminate the paths or connections that are not used enough to remove some of the complexity of our training.
+
+Another thing that we remembered we used in a previous work was the KNN for edge detection. So in this homework, we wanted to try other graph models to see if we could improve our previous results.
+
+The first one that caught our eye was Felzenszwalb’s Algorithm. This algorithm was developed in the paper Efficient graph-based image segmentation, where they tried to overcome the problem most low-level computer vision techniques present. This algorithm took the methodology of:
+
+"Let G = (V, E) be an undirected graph with vertices vi ∈ V, the set of elements to be segmented, and edges
+(vi, vj ) ∈ E corresponds to pairs of neighboring vertices. Each edge (vi, vj ) ∈ E has a corresponding weight w((vi, vj )), which is a non-negative measure of the dissimilarity between neighboring elements vi and vj
+. "
+
+In the case of our images, the pixels represent the elements V and the weight is the measure of dissimilarity it had between two pixels connected. They have a few key components
