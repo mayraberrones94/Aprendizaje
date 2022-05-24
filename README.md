@@ -3321,7 +3321,7 @@ This could be an interesting concept once we get to the feature extraction and o
 
 ## Conclusions
 
-We are really excited about this new algorithm we found for edge detection because the one we used before with the KNN was much slower to compute, and it needed a certain amount of image pre-processing (sharpening, and pixel conversions), which we were concerned would take a long time to translate to a code that did it for all the images.
+Because of the complexity of our preferred model we opted to show it as the summary of its parameters. Tensorboard was an alternative we considered to see the flow of information from the CNN as a graph, but we had a conflict of libraries in our computer, and decided to leave it be. We are really excited about this new algorithm we found for edge detection because the one we used before with the KNN was much slower to compute, and it needed a certain amount of image pre-processing (sharpening, and pixel conversions), which we were concerned would take a long time to translate to a code that did it for all the images.
 
 As we mentioned before, the restricted Boltzmann machine gives a very good example of how we can start with the feature extraction once we classify our images. We tried with smaller images from another dataset of only patches of lesions, but it was taking us a fair amount of time to solve the conversion to a single CSV (since it's a large dataset) so, it could be an interesting project we have on standby.
 
