@@ -3245,6 +3245,8 @@ _________________________________________________________________
 
 Note: A colleague of ours made a presentation about Ant colony optimization, and made us realize that some behaviors (which are used in graph theory) apply to CNN, like the Dropout parameter, where we intend to eliminate the paths or connections that are not used enough to remove some of the complexity of our training.
 
+## Felzenszwalb’s Algorithm 
+
 Another thing that we remembered we used in a previous work was the KNN for edge detection. So in this homework, we wanted to try other graph models to see if we could improve our previous results.
 
 The first one that caught our eye was Felzenszwalb’s Algorithm. This algorithm was developed in the paper [Efficient graph-based image segmentation](http://cs.brown.edu/people/pfelzens/papers/seg-ijcv.pdf), where they tried to overcome the problem most low-level computer vision techniques present. This algorithm took the methodology of:
