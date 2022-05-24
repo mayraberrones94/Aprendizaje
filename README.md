@@ -3226,4 +3226,10 @@ The first one that caught our eye was Felzenszwalb’s Algorithm. This algorithm
 (vi, vj ) ∈ E corresponds to pairs of neighboring vertices. Each edge (vi, vj ) ∈ E has a corresponding weight w((vi, vj )), which is a non-negative measure of the dissimilarity between neighboring elements vi and vj
 . "
 
-In the case of our images, the pixels represent the elements V and the weight is the measure of dissimilarity it had between two pixels connected. They have a few key components
+In the case of our images, the pixels represent the elements V and the weight is the measure of dissimilarity it had between two pixels connected. They have a few key criteria that we need to modulate to our data. 
+
+- **Internal difference:** Is the maximum edge weight that connects two nodes of the same component.
+
+- **Difference between two components:** Is the minimum weight the edge that connects a node vi in component C1 to node vj in C2.
+
+- **Minimum internal difference:** This is the internal difference between C1 y C2, which is directed by the factor k (which we decide).
