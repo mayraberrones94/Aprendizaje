@@ -3279,3 +3279,34 @@ ax.imshow(img2, cmap='gray')
 plt.show()
 ```
 ![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/hw17_flitz_segm.png)
+
+The results of the segmentation are not that good, so we tried with the edge detection tool, to see if we could improve the one we had in KNN.
+
+```python
+import numpy as np
+from glob import glob
+from PIL import Image
+from matplotlib import pyplot as plt
+from felzenszwalb_segmentation import segment
+
+from skimage.segmentation import mark_boundaries
+from skimage.data import camera
+from skimage.util import img_as_float
+
+img = img_as_float(img1[::2, ::2])
+res3 = skimage.segmentation.felzenszwalb(img, scale=100)
+res4 = skimage.segmentation.felzenszwalb(img, scale=200)
+fig = plt.figure(figsize=(12, 5))
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
+ax1.imshow(mark_boundaries(img, res3)); ax1.set_xlabel("With k=100")
+ax2.imshow(mark_boundaries(img, res4)); ax2.set_xlabel("With k=200")
+plt.savefig('/Users/MayraBerrones/Documents/VisualCode/hw17_100_200.png')
+plt.show()
+```
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/hw17_100_200.png)
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/hw17_300_400.png)
+
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/hw17_500_600.png)
