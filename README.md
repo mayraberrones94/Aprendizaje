@@ -3214,7 +3214,34 @@ The work made in the heterogeneous ensemble where we compare the disagreements o
 
 For this week's assignment, we had many ideas in mind, and all of them related to our course in network flow, so we had a little bit of trouble relating them to our problems and data. But then we started reading a little bit more in-depth about Boltzmann machines and realized that (duh) convolutional neural networks are just a very convoluted and complicated graph. 
 
-For the first part of this work, we wanted to find a way to represent our CNN model as a graph but realized that the convolutions, dense and other layers were a bit complex to plot. That is why, when we train there is a way to see just how many parameters our network. The simplest one we use has over 00 parameters.
+For the first part of this work, we wanted to find a way to represent our CNN model as a graph but realized that the convolutions, dense and other layers were a bit complex to plot. That is why, when we train there is a way to see just how many parameters our network with the summary function. The simplest one we used as an experiment for the hinge function has over 6,904,206 parameters.
+
+```
+Model: "sequential_4"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_8 (Conv2D)            (None, 156, 396, 6)       456       
+_________________________________________________________________
+max_pooling2d_8 (MaxPooling2 (None, 78, 198, 6)        0         
+_________________________________________________________________
+conv2d_9 (Conv2D)            (None, 74, 194, 16)       2416      
+_________________________________________________________________
+max_pooling2d_9 (MaxPooling2 (None, 37, 97, 16)        0         
+_________________________________________________________________
+flatten_4 (Flatten)          (None, 57424)             0         
+_________________________________________________________________
+dense_12 (Dense)             (None, 120)               6891000   
+_________________________________________________________________
+dense_13 (Dense)             (None, 84)                10164     
+_________________________________________________________________
+dense_14 (Dense)             (None, 2)                 170       
+=================================================================
+Total params: 6,904,206
+Trainable params: 6,904,206
+Non-trainable params: 0
+_________________________________________________________________
+```
 
 Note: A colleague of ours made a presentation about Ant colony optimization, and made us realize that some behaviors (which are used in graph theory) apply to CNN, like the Dropout parameter, where we intend to eliminate the paths or connections that are not used enough to remove some of the complexity of our training.
 
@@ -3233,3 +3260,22 @@ In the case of our images, the pixels represent the elements V and the weight is
 - **Difference between two components:** Is the minimum weight the edge that connects a node vi in component C1 to node vj in C2.
 
 - **Minimum internal difference:** This is the internal difference between C1 y C2, which is directed by the factor k (which we decide).
+
+Now that we know our parameters, we start with the segmentation process. For this experiment, we tried different values for k, but at the number 6, the running time went from a few seconds to a few minutes. 
+
+```python
+import skimage.segmentation
+from matplotlib import pyplot as plt
+import numpy as np
+import imageio
+
+img1 = imageio.imread("/Users/MayraBerrones/Documents/VisualCode/Incan/Anomalia/130019, 17.12.12, RMLO.png", pilmode = 'RGB')
+img2 = imageio.imread("/Users/MayraBerrones/Documents/VisualCode/Incan/Anomalia/130019, 17.12.12, RMLO.png", pilmode = 'L')
+segment_mask1 = skimage.segmentation.felzenszwalb(img2, scale=100)
+segment_mask2 = skimage.segmentation.felzenszwalb(img2, scale=500)
+
+fig, ax = plt.subplots()
+ax.imshow(img2, cmap='gray')
+plt.show()
+```
+![alt_text](https://github.com/mayraberrones94/Aprendizaje/blob/main/Images/hw17_flitz_segm.png)
